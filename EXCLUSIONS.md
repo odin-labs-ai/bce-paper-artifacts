@@ -9,7 +9,7 @@ provenance header, and nothing verdict-bearing was removed.
 
 | Item | Reason class |
 |---|---|
-| The engine itself — schema, extractors, evaluator, gate, CLI, built bundles, tests | Open-core release-timing gate: the verifier publishes ~late Oct 2026 as its own repository; shipping engine bytes here would bypass that decision. Available to reviewers on request. |
+| The engine itself — schema, extractors, evaluator, gate, CLI, built bundles, tests | Open-core release-timing gate: the verifier publishes as its own repository following this preprint; shipping engine bytes here would bypass that decision. Available to reviewers on request. |
 | The steward/self-revision loop, fleet wiring, served-runtime probe, approval spine, attestation/signing, hosted surfaces | Closed surface per the open-core decision record — commercially closed, not required for any paper result. |
 | `fixtures/portfolio/` + `control-tower-ontology.engineering-blueprint.json` (from the source fixture tree) | Name real private repositories throughout; not referenced by the seeded corpus. |
 | `fixtures/gateway-refusals-synthetic.jsonl` | Belongs to the closed harvest surface. |
@@ -39,6 +39,15 @@ provenance header, and nothing verdict-bearing was removed.
   would destroy hash-verifiability. Reviewed and assessed as organization-name-flavored only (no tenant,
   credential, host, or person data).
 - The committed fleet score series name the five member repositories and sweep run IDs — same class.
+- Internal **subsystem codenames** (e.g. `dark-factory-signal-surface`) and **planning-cycle identifiers**
+  (e.g. `vp-substance-conformance`; one `rule-40` reference survives inside a recorded CI test name) appear
+  in the frozen production evidence records, the fleet score series, one fixture's `intentRef` field, and the
+  verbatim CI transcripts. Byte-identity of the evidence outweighs vocabulary hygiene: every one of these
+  strings sits inside a content-hashed record, a verdict-parity-validated fixture, or a verbatim CI log,
+  where §2's governing rule applies — whole-record inclusion or whole-record exclusion, never field editing.
+  Editing them would destroy the hash-verifiability, fixture verdict-parity, or transcript fidelity that is
+  this package's entire reason to exist. Reviewed and assessed as internal-vocabulary only: they name
+  subsystems and work cycles, and carry **no tenant, credential, host, or person data**.
 - `odin.ai/v1alpha1` (`apiVersion`) and the `odin-extension` profile / `odinExtension` component type are
   deliberately KEPT in fixtures per the open-core decision record (behavior-bearing names; the public engine
   will dual-accept a generic alias).

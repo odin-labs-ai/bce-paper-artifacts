@@ -8,18 +8,20 @@ This repository carries the **evidence a reviewer can inspect and verify without
 seeded-defect corpus and fixture trees, the corpus manifest, recorded CI transcripts of the cited red and green
 gate runs, sample hash-chained evidence records, and a zero-dependency chain verifier.
 
-**Status**: private during paper preparation and review. It becomes public at paper posting; an archival
-deposit (Zenodo, version DOI) is made at that time.
+**Status**: public, released alongside the preprint. An archival deposit (Zenodo, version DOI) is minted at
+the posting-day deposit; until that deposit lands, `CITATION.cff` carries no resolvable archival DOI and
+this repository's own launch-readiness gate reports that one outstanding item by design.
 
 ---
 
 ## What is (and is not) here
 
 **The engine is not in this repository.** The verifier engine (`bce` — schema, extractors, evaluator, gate,
-CLI) is a self-contained package (15 published versions, 0.2.0–0.14.0; 0.14.0 latest as of 2026-08-14) currently on a private,
-access-restricted registry. A public open-core release of the verifier under Apache-2.0 is **planned for
-approximately late October 2026, after the preprint**. Until then the engine is available to reviewers on
-request. Nothing in this repository contains engine source or built engine code.
+CLI) is a self-contained package (18 published versions, 0.2.0–0.17.1 — fifteen minor releases plus three
+patches, 0.2.1, 0.12.1 and 0.17.1, the 0.16.x minor never published; 0.17.1 latest as of 2026-08-31)
+currently on a private, access-restricted registry. A public open-core release of the verifier under
+Apache-2.0 is **prepared and planned to follow this preprint**. Until then the engine is available to
+reviewers on request. Nothing in this repository contains engine source or built engine code.
 
 ## Capability scope — what re-derives TODAY vs at engine release
 
