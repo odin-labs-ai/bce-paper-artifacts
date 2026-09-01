@@ -1,0 +1,354 @@
+[EXCERPT NOTICE: 474 git-fetch branch/tag enumeration lines omitted (they name unrelated internal work branches); 2 registry-auth boilerplate lines replaced inline. Nothing from the gate/probe/sweep execution or its verdict was removed. 3 registry-config boilerplate lines also replaced inline. Full raw log available to reviewers on request.]
+
+﻿2026-07-30T21:48:06.1835682Z Current runner version: '2.336.0'
+2026-07-30T21:48:06.1871948Z ##[group]Runner Image Provisioner
+2026-07-30T21:48:06.1873694Z Hosted Compute Agent
+2026-07-30T21:48:06.1874748Z Version: 20260707.563
+2026-07-30T21:48:06.1876059Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+2026-07-30T21:48:06.1877396Z Build Date: 2026-07-07T19:33:50Z
+2026-07-30T21:48:06.1878605Z Worker ID: {f705adef-1d54-41ea-8d25-fdfac62a6188}
+2026-07-30T21:48:06.1880325Z Azure Region: westus
+2026-07-30T21:48:06.1881370Z ##[endgroup]
+2026-07-30T21:48:06.1883985Z ##[group]Operating System
+2026-07-30T21:48:06.1885181Z Ubuntu
+2026-07-30T21:48:06.1886095Z 24.04.4
+2026-07-30T21:48:06.1887211Z LTS
+2026-07-30T21:48:06.1888137Z ##[endgroup]
+2026-07-30T21:48:06.1889265Z ##[group]Runner Image
+2026-07-30T21:48:06.1890777Z Image: ubuntu-24.04
+2026-07-30T21:48:06.1891862Z Version: 20260720.247.2
+2026-07-30T21:48:06.1894161Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+2026-07-30T21:48:06.1897000Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+2026-07-30T21:48:06.1898756Z ##[endgroup]
+2026-07-30T21:48:06.1900868Z ##[group]GITHUB_TOKEN Permissions
+2026-07-30T21:48:06.1904020Z Contents: read
+2026-07-30T21:48:06.1905091Z Metadata: read
+2026-07-30T21:48:06.1906229Z ##[endgroup]
+2026-07-30T21:48:06.1909658Z Secret source: Actions
+2026-07-30T21:48:06.1911570Z Prepare workflow directory
+2026-07-30T21:48:06.2521926Z Prepare all required actions
+2026-07-30T21:48:06.2597064Z Getting action download info
+2026-07-30T21:48:06.7175737Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-07-30T21:48:07.1822905Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+2026-07-30T21:48:07.6997558Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-07-30T21:48:07.9134477Z Complete job name: blueprint-behavioral-odin-agent
+2026-07-30T21:48:08.0086011Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T21:48:08.0097896Z ##[group]Run actions/checkout@v4
+2026-07-30T21:48:08.0099177Z with:
+2026-07-30T21:48:08.0100204Z   fetch-depth: 0
+2026-07-30T21:48:08.0101129Z   repository: odin-labs-ai/odin-suite
+2026-07-30T21:48:08.0110352Z   token: ***
+2026-07-30T21:48:08.0111220Z   ssh-strict: true
+2026-07-30T21:48:08.0112081Z   ssh-user: git
+2026-07-30T21:48:08.0112962Z   persist-credentials: true
+2026-07-30T21:48:08.0113950Z   clean: true
+2026-07-30T21:48:08.0114839Z   sparse-checkout-cone-mode: true
+2026-07-30T21:48:08.0115908Z   fetch-tags: false
+2026-07-30T21:48:08.0116811Z   show-progress: true
+2026-07-30T21:48:08.0117729Z   lfs: false
+2026-07-30T21:48:08.0118617Z   submodules: false
+2026-07-30T21:48:08.0119649Z   set-safe-directory: true
+2026-07-30T21:48:08.0120669Z   allow-unsafe-pr-checkout: false
+2026-07-30T21:48:08.0122086Z ##[endgroup]
+2026-07-30T21:48:08.1260439Z Syncing repository: odin-labs-ai/odin-suite
+2026-07-30T21:48:08.1264550Z ##[group]Getting Git version info
+2026-07-30T21:48:08.1271177Z Working directory is '/home/runner/work/odin-suite/odin-suite'
+2026-07-30T21:48:08.1275395Z [command]/usr/bin/git version
+2026-07-30T21:48:08.1342677Z git version 2.54.0
+2026-07-30T21:48:08.1535946Z ##[endgroup]
+2026-07-30T21:48:08.1544733Z Temporarily overriding HOME='/home/runner/work/_temp/3a891c96-3144-4d1f-a2f0-4a06b2244173' before making global git config changes
+2026-07-30T21:48:08.1549259Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-30T21:48:08.1553058Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-suite/odin-suite
+2026-07-30T21:48:08.1559907Z Deleting the contents of '/home/runner/work/odin-suite/odin-suite'
+2026-07-30T21:48:08.1563506Z ##[group]Initializing the repository
+2026-07-30T21:48:08.1565739Z [command]/usr/bin/git init /home/runner/work/odin-suite/odin-suite
+2026-07-30T21:48:08.1631145Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-07-30T21:48:08.1634285Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-07-30T21:48:08.1649782Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-07-30T21:48:08.1653069Z hint: call:
+2026-07-30T21:48:08.1655428Z hint:
+2026-07-30T21:48:08.1657755Z hint: 	git config --global init.defaultBranch <name>
+2026-07-30T21:48:08.1661012Z hint:
+2026-07-30T21:48:08.1663309Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-07-30T21:48:08.1667767Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-07-30T21:48:08.1671054Z hint:
+2026-07-30T21:48:08.1673501Z hint: 	git branch -m <name>
+2026-07-30T21:48:08.1675611Z hint:
+2026-07-30T21:48:08.1678642Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-07-30T21:48:08.1683565Z Initialized empty Git repository in /home/runner/work/odin-suite/odin-suite/.git/
+2026-07-30T21:48:08.1689951Z [command]/usr/bin/git remote add origin https://github.com/odin-labs-ai/odin-suite
+2026-07-30T21:48:08.1715330Z ##[endgroup]
+2026-07-30T21:48:08.1719283Z ##[group]Disabling automatic garbage collection
+2026-07-30T21:48:08.1723965Z [command]/usr/bin/git config --local gc.auto 0
+2026-07-30T21:48:08.1750754Z ##[endgroup]
+2026-07-30T21:48:08.1753039Z ##[group]Setting up auth
+2026-07-30T21:48:08.1757276Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-30T21:48:08.1806254Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-30T21:48:08.2160326Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-30T21:48:08.2196302Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-30T21:48:08.3266333Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-30T21:48:08.3272154Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-30T21:48:08.3277698Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-07-30T21:48:08.3282991Z ##[endgroup]
+2026-07-30T21:48:08.3285002Z ##[group]Fetching the repository
+2026-07-30T21:48:08.3288606Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +f5937d26f4bf85806a9e8f33b5648c93217ceb55:refs/remotes/pull/1004/merge
+2026-07-30T21:48:10.9219111Z From https://github.com/odin-labs-ai/odin-suite
+2026-07-30T21:48:11.0228240Z  * [new ref]           f5937d26f4bf85806a9e8f33b5648c93217ceb55 -> pull/1004/merge
+2026-07-30T21:48:11.0231913Z ##[endgroup]
+2026-07-30T21:48:11.0232977Z ##[group]Determining the checkout info
+2026-07-30T21:48:11.0234011Z ##[endgroup]
+2026-07-30T21:48:11.0234736Z [command]/usr/bin/git sparse-checkout disable
+2026-07-30T21:48:11.0236920Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-07-30T21:48:11.0265497Z ##[group]Checking out the ref
+2026-07-30T21:48:11.0266469Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1004/merge
+2026-07-30T21:48:11.4461119Z Note: switching to 'refs/remotes/pull/1004/merge'.
+2026-07-30T21:48:11.4461896Z 
+2026-07-30T21:48:11.4462490Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-07-30T21:48:11.4463489Z changes and commit them, and you can discard any commits you make in this
+2026-07-30T21:48:11.4464422Z state without impacting any branches by switching back to a branch.
+2026-07-30T21:48:11.4464980Z 
+2026-07-30T21:48:11.4465430Z If you want to create a new branch to retain commits you create, you may
+2026-07-30T21:48:11.4466418Z do so (now or later) by using -c with the switch command. Example:
+2026-07-30T21:48:11.4466968Z 
+2026-07-30T21:48:11.4467245Z   git switch -c <new-branch-name>
+2026-07-30T21:48:11.4467659Z 
+2026-07-30T21:48:11.4467955Z Or undo this operation with:
+2026-07-30T21:48:11.4468341Z 
+2026-07-30T21:48:11.4468582Z   git switch -
+2026-07-30T21:48:11.4468896Z 
+2026-07-30T21:48:11.4469343Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-07-30T21:48:11.4470318Z 
+2026-07-30T21:48:11.4471102Z HEAD is now at f5937d26 Merge e575feff88730ba3e6962d3ad4778cba3bd3f5d2 into 0963350e8483b8fdd3360db20656231efe13d4ee
+2026-07-30T21:48:11.4474836Z ##[endgroup]
+2026-07-30T21:48:11.4517434Z [command]/usr/bin/git log -1 --format=%H
+2026-07-30T21:48:11.4544897Z f5937d26f4bf85806a9e8f33b5648c93217ceb55
+2026-07-30T21:48:11.4811740Z ##[group]Run set -euo pipefail
+2026-07-30T21:48:11.4812123Z set -euo pipefail
+2026-07-30T21:48:11.4812468Z # schedule / dispatch = full sweep, always run.
+2026-07-30T21:48:11.4812839Z if [ "pull_request" != "pull_request" ]; then
+2026-07-30T21:48:11.4813184Z   echo "mode=sweep" >> "$GITHUB_OUTPUT"
+2026-07-30T21:48:11.4813467Z   exit 0
+2026-07-30T21:48:11.4813662Z fi
+2026-07-30T21:48:11.4813907Z BASE="921a26bb81ecf0f5151a4f46cf8578aecc0701f3"
+2026-07-30T21:48:11.4814272Z HEAD="e575feff88730ba3e6962d3ad4778cba3bd3f5d2"
+2026-07-30T21:48:11.4814771Z # Path-scope derived from the probe's REAL seam imports + the gate's own machinery.
+2026-07-30T21:48:11.4815368Z # (Deliberately broader than the blueprint's scope.paths of src/tui/** — see header.)
+2026-07-30T21:48:11.4815879Z MATCH=$(git diff --name-only "$BASE" "$HEAD" | grep -E \
+2026-07-30T21:48:11.4817032Z   '^odin-agent/src/tui/|^odin-agent/src/rpc/prompt-frame-dispatch\.ts$|^odin-agent/src/blueprint/served-runtime-probe\.ts$|^odin-agent/\.ai/blueprints/agent-tui-cockpit\.served-runtime\.json$|^\.github/workflows/blueprint-behavioral-gate-odin-agent\.yml$' \
+2026-07-30T21:48:11.4818087Z   || true)
+2026-07-30T21:48:11.4818301Z if [ -z "$MATCH" ]; then
+2026-07-30T21:48:11.4818575Z   echo "mode=skip" >> "$GITHUB_OUTPUT"
+2026-07-30T21:48:11.4819018Z   echo "This PR touches no probed seam — behavioral gate out of scope; skip-green."
+2026-07-30T21:48:11.4819807Z else
+2026-07-30T21:48:11.4820104Z   echo "mode=run" >> "$GITHUB_OUTPUT"
+2026-07-30T21:48:11.4820438Z   printf 'Probed seams touched:\n%s\n' "$MATCH"
+2026-07-30T21:48:11.4820737Z fi
+2026-07-30T21:48:11.4871973Z shell: /usr/bin/bash -e {0}
+2026-07-30T21:48:11.4872251Z ##[endgroup]
+2026-07-30T21:48:11.5002204Z Probed seams touched:
+2026-07-30T21:48:11.5003154Z .github/workflows/blueprint-behavioral-gate-odin-agent.yml
+2026-07-30T21:48:11.5015716Z odin-agent/src/tui/session-attach.ts
+2026-07-30T21:48:11.5149334Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T21:48:11.5151245Z ##[group]Run pnpm/action-setup@v4
+2026-07-30T21:48:11.5151494Z with:
+2026-07-30T21:48:11.5151683Z   dest: ~/setup-pnpm
+2026-07-30T21:48:11.5151895Z   run_install: null
+2026-07-30T21:48:11.5152094Z   cache: false
+2026-07-30T21:48:11.5152301Z   cache_dependency_path: pnpm-lock.yaml
+2026-07-30T21:48:11.5152577Z   package_json_file: package.json
+2026-07-30T21:48:11.5152815Z   standalone: false
+2026-07-30T21:48:11.5153007Z ##[endgroup]
+2026-07-30T21:48:11.6901156Z ##[group]Running self-installer...
+2026-07-30T21:48:12.2005517Z (node:2045) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-07-30T21:48:12.2009654Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-30T21:48:12.3824143Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-07-30T21:48:12.3921191Z Packages: +1
+2026-07-30T21:48:12.3921562Z +
+2026-07-30T21:48:12.8261371Z Progress: resolved 1, reused 0, downloaded 1, added 1, done
+2026-07-30T21:48:12.8561985Z 
+2026-07-30T21:48:12.8562638Z dependencies:
+2026-07-30T21:48:12.8563600Z + pnpm 10.11.1 (11.18.0 is available)
+2026-07-30T21:48:12.8564317Z 
+2026-07-30T21:48:12.8598001Z Done in 901ms
+2026-07-30T21:48:12.8750478Z ##[endgroup]
+2026-07-30T21:48:12.8751242Z Installation Completed!
+2026-07-30T21:48:12.8930872Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T21:48:12.8932180Z ##[group]Run actions/setup-node@v4
+2026-07-30T21:48:12.8932452Z with:
+2026-07-30T21:48:12.8932641Z   node-version: 22
+2026-07-30T21:48:12.8932849Z   cache: pnpm
+2026-07-30T21:48:12.8933044Z   always-auth: false
+2026-07-30T21:48:12.8933259Z   check-latest: false
+2026-07-30T21:48:12.8935667Z   token: ***
+2026-07-30T21:48:12.8935863Z env:
+2026-07-30T21:48:12.8936104Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-07-30T21:48:12.8936408Z ##[endgroup]
+2026-07-30T21:48:13.0561301Z (node:2058) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-30T21:48:13.0562755Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-30T21:48:13.0565036Z Found in cache @ /opt/hostedtoolcache/node/22.23.1/x64
+2026-07-30T21:48:13.0566760Z ##[group]Environment details
+2026-07-30T21:48:16.5851497Z node: v22.23.1
+2026-07-30T21:48:16.5852321Z npm: 10.9.8
+2026-07-30T21:48:16.5855425Z yarn: 1.22.22
+2026-07-30T21:48:16.5856684Z ##[endgroup]
+2026-07-30T21:48:16.5874332Z [command]/home/runner/setup-pnpm/node_modules/.bin/pnpm store path --silent
+2026-07-30T21:48:17.2550560Z /home/runner/setup-pnpm/node_modules/.bin/store/v10
+2026-07-30T21:48:17.5477400Z Cache hit for: node-cache-Linux-x64-pnpm-9b81199878071e6f1fc0fb62d12cd7ed50ef9b2e1a9e8245948840d95b20ffab
+2026-07-30T21:48:17.5637157Z (node:2058) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-07-30T21:48:18.8517905Z Received 0 of 153451472 (0.0%), 0.0 MBs/sec
+2026-07-30T21:48:19.8533610Z Received 88080384 of 153451472 (57.4%), 42.0 MBs/sec
+2026-07-30T21:48:20.6012705Z Received 153451472 of 153451472 (100.0%), 53.2 MBs/sec
+2026-07-30T21:48:20.6014163Z Cache Size: ~146 MB (153451472 B)
+2026-07-30T21:48:20.6061328Z [command]/usr/bin/tar -xf /home/runner/work/_temp/19daa9c5-46ef-4031-b0fe-e179d1ded322/cache.tzst -P -C /home/runner/work/odin-suite/odin-suite --use-compress-program unzstd
+2026-07-30T21:48:23.5225063Z Cache restored successfully
+2026-07-30T21:48:23.5330984Z Cache restored from key: node-cache-Linux-x64-pnpm-9b81199878071e6f1fc0fb62d12cd7ed50ef9b2e1a9e8245948840d95b20ffab
+[EXCERPT: registry-config boilerplate line omitted (registry hostname wiring; no verdict content)]
+[EXCERPT: registry-config boilerplate line omitted (registry hostname wiring; no verdict content)]
+[EXCERPT: registry-auth boilerplate line omitted (token value was CI-masked; the auth-wiring pattern is internal lore per the release ADR)]
+2026-07-30T21:48:23.5827861Z shell: /usr/bin/bash -e {0}
+2026-07-30T21:48:23.5828152Z env:
+2026-07-30T21:48:23.5828422Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-07-30T21:48:23.5828762Z ##[endgroup]
+2026-07-30T21:48:23.6245171Z ##[group]Run pnpm install --frozen-lockfile --ignore-workspace
+2026-07-30T21:48:23.6245959Z pnpm install --frozen-lockfile --ignore-workspace
+2026-07-30T21:48:23.6307667Z shell: /usr/bin/bash -e {0}
+2026-07-30T21:48:23.6308095Z env:
+2026-07-30T21:48:23.6308527Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-07-30T21:48:23.6309630Z   NODE_AUTH_TOKEN: ***
+2026-07-30T21:48:23.6310022Z ##[endgroup]
+2026-07-30T21:48:24.1954426Z Lockfile is up to date, resolution step is skipped
+2026-07-30T21:48:24.3081121Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-07-30T21:48:24.5330958Z Packages: +704
+2026-07-30T21:48:24.5345446Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-07-30T21:48:25.3091444Z Progress: resolved 704, reused 116, downloaded 0, added 0
+2026-07-30T21:48:26.3096459Z Progress: resolved 704, reused 694, downloaded 5, added 10
+2026-07-30T21:48:27.3098557Z Progress: resolved 704, reused 694, downloaded 10, added 312
+2026-07-30T21:48:28.1881092Z Progress: resolved 704, reused 694, downloaded 10, added 704, done
+2026-07-30T21:48:28.7921501Z 
+2026-07-30T21:48:28.7930939Z dependencies:
+2026-07-30T21:48:28.7931691Z + @homebridge/node-pty-prebuilt-multiarch 0.13.1
+2026-07-30T21:48:28.7932529Z + @mariozechner/pi-agent-core 0.67.68
+2026-07-30T21:48:28.7935040Z + @mariozechner/pi-ai 0.67.68
+2026-07-30T21:48:28.7935946Z + @mariozechner/pi-coding-agent 0.67.68
+2026-07-30T21:48:28.7945694Z + @mariozechner/pi-tui 0.67.68
+2026-07-30T21:48:28.7949854Z + @odinlabs-ai/ai-session 1.0.3
+2026-07-30T21:48:28.7952220Z + @odinlabs-ai/audit 1.8.0
+2026-07-30T21:48:28.7954411Z + @odinlabs-ai/autonomous-executor 1.6.1
+2026-07-30T21:48:28.7955933Z + @odinlabs-ai/blueprint-contracts 0.3.0
+2026-07-30T21:48:28.7957171Z + @odinlabs-ai/brain 1.10.1
+2026-07-30T21:48:28.7960241Z + @odinlabs-ai/circuit-breaker 1.0.1
+2026-07-30T21:48:28.7961068Z + @odinlabs-ai/doctrine-injection 0.3.0
+2026-07-30T21:48:28.7961842Z + @odinlabs-ai/hub-contracts 1.7.0
+2026-07-30T21:48:28.7962572Z + @odinlabs-ai/oac-sdk 1.1.0
+2026-07-30T21:48:28.7963279Z + @odinlabs-ai/orchestrator 1.2.3
+2026-07-30T21:48:28.7964011Z + @odinlabs-ai/prose-quality 0.1.0
+2026-07-30T21:48:28.7964745Z + @odinlabs-ai/readability 0.1.0
+2026-07-30T21:48:28.7965528Z + @odinlabs-ai/research 1.3.1
+2026-07-30T21:48:28.7987524Z + @odinlabs-ai/skill-contracts 0.6.1
+2026-07-30T21:48:28.7988367Z + @odinlabs-ai/swarm-factory 2.0.0
+2026-07-30T21:48:28.7997737Z + @odinlabs-ai/visual-intent 0.1.0
+2026-07-30T21:48:28.7998614Z + @odinlabs-ai/web-search 0.1.0
+2026-07-30T21:48:28.7999767Z + @odinlabs-ai/wo-generator 1.0.4
+2026-07-30T21:48:28.8000564Z + @sinclair/typebox 0.34.49
+2026-07-30T21:48:28.8022564Z + @xterm/headless 6.0.0
+2026-07-30T21:48:28.8023558Z + ink 5.2.1
+2026-07-30T21:48:28.8024266Z + ink-spinner 5.0.0
+2026-07-30T21:48:28.8024875Z + react 18.3.1
+2026-07-30T21:48:28.8025425Z + zod 3.25.76
+2026-07-30T21:48:28.8025884Z 
+2026-07-30T21:48:28.8026278Z devDependencies:
+2026-07-30T21:48:28.8027065Z + @odinlabs-ai/checkpoint-resume 1.0.2
+2026-07-30T21:48:28.8028444Z + @odinlabs-ai/droid-runner 1.0.1
+2026-07-30T21:48:28.8033671Z + @odinlabs-ai/governance 1.3.1
+2026-07-30T21:48:28.8035222Z + @odinlabs-ai/model-router 3.0.0
+2026-07-30T21:48:28.8036699Z + @types/node 20.19.43
+2026-07-30T21:48:28.8037628Z + @types/react 18.3.31
+2026-07-30T21:48:28.8038584Z + ink-testing-library 4.0.0
+2026-07-30T21:48:28.8039293Z + rimraf 5.0.10
+2026-07-30T21:48:28.8040370Z + tsup 8.5.1
+2026-07-30T21:48:28.8041229Z + tsx 4.23.1
+2026-07-30T21:48:28.8045976Z + typescript 5.9.3
+2026-07-30T21:48:28.8046608Z + uuid 14.0.0
+2026-07-30T21:48:28.8047095Z + vitest 4.1.9
+2026-07-30T21:48:28.8047439Z 
+2026-07-30T21:48:28.8049140Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-07-30T21:48:28.8053012Z │                                                                              │
+2026-07-30T21:48:28.8055755Z │   Ignored build scripts: @google/genai,                                      │
+2026-07-30T21:48:28.8060345Z │   @homebridge/node-pty-prebuilt-multiarch, bcrypt, better-sqlite3,           │
+2026-07-30T21:48:28.8061958Z │   esbuild, koffi, nx.                                                        │
+2026-07-30T21:48:28.8063308Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-07-30T21:48:28.8080634Z │   to run scripts.                                                            │
+2026-07-30T21:48:28.8086096Z │                                                                              │
+2026-07-30T21:48:28.8087442Z ╰──────────────────────────────────────────────────────────────────────────────╯
+2026-07-30T21:48:28.8088106Z 
+2026-07-30T21:48:28.8166219Z 
+2026-07-30T21:48:28.8167392Z > @odinlabs-ai/odin-agent@6.58.0 postinstall /home/runner/work/odin-suite/odin-suite/odin-agent
+2026-07-30T21:48:28.8169055Z > node scripts/patch-oauth-redirect.mjs
+2026-07-30T21:48:28.8189856Z 
+2026-07-30T21:48:28.8500631Z [patch-oauth-redirect] Patched /home/runner/work/odin-suite/odin-suite/odin-agent/node_modules/@mariozechner/pi-ai/dist/utils/oauth/anthropic.js
+2026-07-30T21:48:28.8502653Z [patch-oauth-redirect]   Auth URL redirect_uri: 1 occurrence(s)
+2026-07-30T21:48:28.8503982Z [patch-oauth-redirect]   redirectUriForExchange: 3 occurrence(s)
+2026-07-30T21:48:28.8505477Z [patch-oauth-redirect] OAuth now uses platform.claude.com redirect for code-server compatibility
+2026-07-30T21:48:28.8641584Z Done in 5.1s using pnpm v10.11.1
+2026-07-30T21:48:28.8942675Z ##[group]Run set -euo pipefail
+2026-07-30T21:48:28.8943030Z set -euo pipefail
+2026-07-30T21:48:28.8943321Z mkdir -p "$RUNNER_TEMP/bce-engine"
+2026-07-30T21:48:28.8943627Z cd "$RUNNER_TEMP/bce-engine"
+[EXCERPT: registry-config boilerplate line omitted (registry hostname wiring; no verdict content)]
+[EXCERPT: registry-auth boilerplate line omitted (token value was CI-masked; the auth-wiring pattern is internal lore per the release ADR)]
+2026-07-30T21:48:28.8945435Z npm install --no-save @odinlabs-ai/engineering-blueprint@0.11.0
+2026-07-30T21:48:28.8988129Z shell: /usr/bin/bash -e {0}
+2026-07-30T21:48:28.8988386Z env:
+2026-07-30T21:48:28.8988640Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-07-30T21:48:28.8988968Z ##[endgroup]
+2026-07-30T21:48:32.7605111Z 
+2026-07-30T21:48:32.7605917Z added 28 packages in 4s
+2026-07-30T21:48:32.7606851Z 
+2026-07-30T21:48:32.7607425Z 6 packages are looking for funding
+2026-07-30T21:48:32.7608244Z   run `npm fund` for details
+2026-07-30T21:48:32.8097987Z ##[group]Run npx tsx src/blueprint/served-runtime-probe.ts --out /tmp/served-runtime-sidecar.json
+2026-07-30T21:48:32.8099296Z npx tsx src/blueprint/served-runtime-probe.ts --out /tmp/served-runtime-sidecar.json
+2026-07-30T21:48:32.8163630Z shell: /usr/bin/bash -e {0}
+2026-07-30T21:48:32.8164082Z env:
+2026-07-30T21:48:32.8164537Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-07-30T21:48:32.8165133Z ##[endgroup]
+2026-07-30T21:48:34.4704095Z served-runtime-probe → /tmp/served-runtime-sidecar.json
+2026-07-30T21:48:34.4710645Z {
+2026-07-30T21:48:34.4711217Z   "behaviorRefs": [
+2026-07-30T21:48:34.4711872Z     "attach-render-styled-passthrough",
+2026-07-30T21:48:34.4712962Z     "attach-steer-during-run",
+2026-07-30T21:48:34.4713660Z     "bare-text-intent-consumed",
+2026-07-30T21:48:34.4714315Z     "create-many-list",
+2026-07-30T21:48:34.4714925Z     "detach-remount-once",
+2026-07-30T21:48:34.4715535Z     "inspect-no-attach",
+2026-07-30T21:48:34.4716307Z     "multi-session-independent-steer"
+2026-07-30T21:48:34.4716970Z   ],
+2026-07-30T21:48:34.4717444Z   "nodeCount": 17,
+2026-07-30T21:48:34.4717989Z   "problems": [
+2026-07-30T21:48:34.4718790Z     "attach-render-styled-passthrough: 1 oracle(s) violated (flag=0)"
+2026-07-30T21:48:34.4719816Z   ]
+2026-07-30T21:48:34.4720299Z }
+2026-07-30T21:48:34.4720618Z 
+2026-07-30T21:48:34.4721275Z [probe FAILED SELF-GUARD] the sidecar would not honestly pass the reader:
+2026-07-30T21:48:34.4722310Z   - attach-render-styled-passthrough: 1 oracle(s) violated (flag=0)
+2026-07-30T21:48:34.5000976Z ##[error]Process completed with exit code 1.
+2026-07-30T21:48:34.5098960Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T21:48:34.5100521Z Post job cleanup.
+2026-07-30T21:48:34.6666225Z Pruning is unnecessary.
+2026-07-30T21:48:34.6813780Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T21:48:34.6815026Z Post job cleanup.
+2026-07-30T21:48:34.7950304Z [command]/usr/bin/git version
+2026-07-30T21:48:34.7992570Z git version 2.54.0
+2026-07-30T21:48:34.8034895Z Temporarily overriding HOME='/home/runner/work/_temp/794f84f0-8990-4647-89ea-f10dcc6afbdf' before making global git config changes
+2026-07-30T21:48:34.8038500Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-30T21:48:34.8041680Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-suite/odin-suite
+2026-07-30T21:48:34.8083388Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-30T21:48:34.8124782Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-30T21:48:34.8380843Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-30T21:48:34.8407008Z http.https://github.com/.extraheader
+2026-07-30T21:48:34.8430649Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-07-30T21:48:34.8460485Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-30T21:48:34.8702310Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-30T21:48:34.8738525Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-30T21:48:34.9123906Z Cleaning up orphan processes
+2026-07-30T21:48:34.9386440Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, pnpm/action-setup@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

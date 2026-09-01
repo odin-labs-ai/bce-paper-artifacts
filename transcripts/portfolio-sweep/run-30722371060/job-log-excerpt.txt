@@ -1,0 +1,743 @@
+[EXCERPT NOTICE: 1 git-fetch branch/tag enumeration lines omitted (they name unrelated internal work branches); 0 registry-auth boilerplate lines replaced inline. Nothing from the gate/probe/sweep execution or its verdict was removed. Full raw log available to reviewers on request.]
+
+﻿2026-08-01T22:57:53.3336959Z Current runner version: '2.336.0'
+2026-08-01T22:57:53.3372609Z ##[group]Runner Image Provisioner
+2026-08-01T22:57:53.3374223Z Hosted Compute Agent
+2026-08-01T22:57:53.3375136Z Version: 20260707.563
+2026-08-01T22:57:53.3376309Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+2026-08-01T22:57:53.3377486Z Build Date: 2026-07-07T19:33:50Z
+2026-08-01T22:57:53.3378570Z Worker ID: {534706cb-a34b-4448-b320-252b9b8aa93f}
+2026-08-01T22:57:53.3379640Z Azure Region: eastus2
+2026-08-01T22:57:53.3380509Z ##[endgroup]
+2026-08-01T22:57:53.3382860Z ##[group]Operating System
+2026-08-01T22:57:53.3384121Z Ubuntu
+2026-08-01T22:57:53.3384901Z 24.04.4
+2026-08-01T22:57:53.3385766Z LTS
+2026-08-01T22:57:53.3386594Z ##[endgroup]
+2026-08-01T22:57:53.3387479Z ##[group]Runner Image
+2026-08-01T22:57:53.3388496Z Image: ubuntu-24.04
+2026-08-01T22:57:53.3389360Z Version: 20260720.247.2
+2026-08-01T22:57:53.3391504Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+2026-08-01T22:57:53.3394469Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+2026-08-01T22:57:53.3396109Z ##[endgroup]
+2026-08-01T22:57:53.3397828Z ##[group]GITHUB_TOKEN Permissions
+2026-08-01T22:57:53.3400876Z Actions: read
+2026-08-01T22:57:53.3401836Z Contents: read
+2026-08-01T22:57:53.3402809Z Metadata: read
+2026-08-01T22:57:53.3403995Z ##[endgroup]
+2026-08-01T22:57:53.3406949Z Secret source: Actions
+2026-08-01T22:57:53.3408991Z Prepare workflow directory
+2026-08-01T22:57:53.3869003Z Prepare all required actions
+2026-08-01T22:57:53.3937871Z Getting action download info
+2026-08-01T22:57:53.6971248Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-08-01T22:57:53.9820733Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-08-01T22:57:54.1823796Z Complete job name: hermetic-self-test (verdict + pin-extract negative paths)
+2026-08-01T22:57:54.2525696Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:57:54.2534617Z ##[group]Run actions/checkout@v4
+2026-08-01T22:57:54.2535333Z with:
+2026-08-01T22:57:54.2535780Z   repository: odin-labs-ai/odin-labs
+2026-08-01T22:57:54.2539958Z   token: ***
+2026-08-01T22:57:54.2540390Z   ssh-strict: true
+2026-08-01T22:57:54.2540818Z   ssh-user: git
+2026-08-01T22:57:54.2541259Z   persist-credentials: true
+2026-08-01T22:57:54.2541734Z   clean: true
+2026-08-01T22:57:54.2542169Z   sparse-checkout-cone-mode: true
+2026-08-01T22:57:54.2542682Z   fetch-depth: 1
+2026-08-01T22:57:54.2543097Z   fetch-tags: false
+2026-08-01T22:57:54.2543528Z   show-progress: true
+2026-08-01T22:57:54.2544351Z   lfs: false
+2026-08-01T22:57:54.2544819Z   submodules: false
+2026-08-01T22:57:54.2545268Z   set-safe-directory: true
+2026-08-01T22:57:54.2545759Z   allow-unsafe-pr-checkout: false
+2026-08-01T22:57:54.2546548Z ##[endgroup]
+2026-08-01T22:57:54.4651987Z Syncing repository: odin-labs-ai/odin-labs
+2026-08-01T22:57:54.4657107Z ##[group]Getting Git version info
+2026-08-01T22:57:54.4661415Z Working directory is '/home/runner/work/odin-labs/odin-labs'
+2026-08-01T22:57:54.4662978Z [command]/usr/bin/git version
+2026-08-01T22:57:54.5407941Z git version 2.54.0
+2026-08-01T22:57:54.5430832Z ##[endgroup]
+2026-08-01T22:57:54.5438493Z Temporarily overriding HOME='/home/runner/work/_temp/0bc89fa5-f4f2-46e7-9619-3ddaf62bcef0' before making global git config changes
+2026-08-01T22:57:54.5440719Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-01T22:57:54.5442581Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-labs/odin-labs
+2026-08-01T22:57:54.5832250Z Deleting the contents of '/home/runner/work/odin-labs/odin-labs'
+2026-08-01T22:57:54.5834770Z ##[group]Initializing the repository
+2026-08-01T22:57:54.5836070Z [command]/usr/bin/git init /home/runner/work/odin-labs/odin-labs
+2026-08-01T22:57:54.8828438Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-08-01T22:57:54.8845075Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-08-01T22:57:54.8849940Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-08-01T22:57:54.8876803Z hint: call:
+2026-08-01T22:57:54.8894673Z hint:
+2026-08-01T22:57:54.8914869Z hint: 	git config --global init.defaultBranch <name>
+2026-08-01T22:57:54.8934733Z hint:
+2026-08-01T22:57:54.8936050Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-08-01T22:57:54.8937758Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-08-01T22:57:54.8939133Z hint:
+2026-08-01T22:57:54.8939932Z hint: 	git branch -m <name>
+2026-08-01T22:57:54.8940925Z hint:
+2026-08-01T22:57:54.8942187Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-08-01T22:57:54.8944557Z Initialized empty Git repository in /home/runner/work/odin-labs/odin-labs/.git/
+2026-08-01T22:57:54.8948211Z [command]/usr/bin/git remote add origin https://github.com/odin-labs-ai/odin-labs
+2026-08-01T22:57:54.9299019Z ##[endgroup]
+2026-08-01T22:57:54.9301524Z ##[group]Disabling automatic garbage collection
+2026-08-01T22:57:54.9303787Z [command]/usr/bin/git config --local gc.auto 0
+2026-08-01T22:57:54.9351020Z ##[endgroup]
+2026-08-01T22:57:54.9353498Z ##[group]Setting up auth
+2026-08-01T22:57:54.9356486Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-01T22:57:54.9745706Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-01T22:57:55.4497646Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-01T22:57:55.4503539Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-01T22:57:55.4751941Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-01T22:57:55.4787093Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-01T22:57:55.5039481Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-08-01T22:57:55.5076581Z ##[endgroup]
+2026-08-01T22:57:55.5077888Z ##[group]Fetching the repository
+2026-08-01T22:57:55.5087384Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d0359102aa005943642b9830fd15e00b4acc2e03:refs/remotes/origin/main
+2026-08-01T22:58:01.1412523Z From https://github.com/odin-labs-ai/odin-labs
+2026-08-01T22:58:01.1474099Z ##[endgroup]
+2026-08-01T22:58:01.1476094Z ##[group]Determining the checkout info
+2026-08-01T22:58:01.1477017Z ##[endgroup]
+2026-08-01T22:58:01.1477696Z [command]/usr/bin/git sparse-checkout disable
+2026-08-01T22:58:01.1511209Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-08-01T22:58:01.1579821Z ##[group]Checking out the ref
+2026-08-01T22:58:01.1594887Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-08-01T22:58:02.2918975Z Updating files:  87% (5507/6304)
+2026-08-01T22:58:02.2984563Z Updating files:  88% (5548/6304)
+2026-08-01T22:58:02.3033822Z Updating files:  89% (5611/6304)
+2026-08-01T22:58:02.3095678Z Updating files:  90% (5674/6304)
+2026-08-01T22:58:02.3160413Z Updating files:  91% (5737/6304)
+2026-08-01T22:58:02.3216162Z Updating files:  92% (5800/6304)
+2026-08-01T22:58:02.3277961Z Updating files:  93% (5863/6304)
+2026-08-01T22:58:02.3339182Z Updating files:  94% (5926/6304)
+2026-08-01T22:58:02.3402210Z Updating files:  95% (5989/6304)
+2026-08-01T22:58:02.3460485Z Updating files:  96% (6052/6304)
+2026-08-01T22:58:02.3520973Z Updating files:  97% (6115/6304)
+2026-08-01T22:58:02.3565365Z Updating files:  98% (6178/6304)
+2026-08-01T22:58:02.3618723Z Updating files:  99% (6241/6304)
+2026-08-01T22:58:02.3620310Z Updating files: 100% (6304/6304)
+2026-08-01T22:58:02.3631956Z Updating files: 100% (6304/6304), done.
+2026-08-01T22:58:02.3705132Z Switched to a new branch 'main'
+2026-08-01T22:58:02.3708188Z branch 'main' set up to track 'origin/main'.
+2026-08-01T22:58:02.3807639Z ##[endgroup]
+2026-08-01T22:58:02.3879515Z [command]/usr/bin/git log -1 --format=%H
+2026-08-01T22:58:02.3899621Z d0359102aa005943642b9830fd15e00b4acc2e03
+2026-08-01T22:58:02.4175502Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:58:02.4177527Z ##[group]Run actions/setup-node@v4
+2026-08-01T22:58:02.4177788Z with:
+2026-08-01T22:58:02.4177992Z   node-version: 22
+2026-08-01T22:58:02.4178214Z   always-auth: false
+2026-08-01T22:58:02.4178433Z   check-latest: false
+2026-08-01T22:58:02.4181080Z   token: ***
+2026-08-01T22:58:02.4181285Z ##[endgroup]
+2026-08-01T22:58:02.5722280Z Found in cache @ /opt/hostedtoolcache/node/22.23.1/x64
+2026-08-01T22:58:02.5727484Z (node:2006) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-01T22:58:02.5728776Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-01T22:58:02.5731069Z ##[group]Environment details
+2026-08-01T22:58:03.0189139Z node: v22.23.1
+2026-08-01T22:58:03.0191626Z npm: 10.9.8
+2026-08-01T22:58:03.0192448Z yarn: 1.22.22
+2026-08-01T22:58:03.0197545Z ##[endgroup]
+2026-08-01T22:58:03.0346236Z ##[group]Run node --test .claude/scripts/__tests__/portfolio-sweep-verdict.test.mjs .claude/scripts/__tests__/portfolio-pin-extract.test.mjs .claude/scripts/__tests__/portfolio-overlay-rule-sha.test.mjs .claude/scripts/__tests__/portfolio-remediation-emit.test.mjs .claude/scripts/__tests__/portfolio-pin-reconcile.test.mjs .claude/scripts/__tests__/architecture-score-rollup.test.mjs .claude/scripts/__tests__/portfolio-compile-overlays.test.mjs
+2026-08-01T22:58:03.0349296Z node --test .claude/scripts/__tests__/portfolio-sweep-verdict.test.mjs .claude/scripts/__tests__/portfolio-pin-extract.test.mjs .claude/scripts/__tests__/portfolio-overlay-rule-sha.test.mjs .claude/scripts/__tests__/portfolio-remediation-emit.test.mjs .claude/scripts/__tests__/portfolio-pin-reconcile.test.mjs .claude/scripts/__tests__/architecture-score-rollup.test.mjs .claude/scripts/__tests__/portfolio-compile-overlays.test.mjs
+2026-08-01T22:58:03.0410546Z shell: /usr/bin/bash -e {0}
+2026-08-01T22:58:03.0410883Z ##[endgroup]
+2026-08-01T22:58:03.1029730Z TAP version 13
+2026-08-01T22:58:03.1599961Z # Subtest: all-pass: every member evaluable at 100 via the engine pass-identity, fleet mean 100
+2026-08-01T22:58:03.1626062Z ok 1 - all-pass: every member evaluable at 100 via the engine pass-identity, fleet mean 100
+2026-08-01T22:58:03.1644020Z   ---
+2026-08-01T22:58:03.1801124Z   duration_ms: 1.253137
+2026-08-01T22:58:03.1804748Z   type: 'test'
+2026-08-01T22:58:03.1805310Z   ...
+2026-08-01T22:58:03.1806641Z # Subtest: one-missing: excluded from the mean AND disclosed — never counted as 0 or 100
+2026-08-01T22:58:03.1808091Z ok 2 - one-missing: excluded from the mean AND disclosed — never counted as 0 or 100
+2026-08-01T22:58:03.1808920Z   ---
+2026-08-01T22:58:03.1809325Z   duration_ms: 1.414764
+2026-08-01T22:58:03.1809886Z   type: 'test'
+2026-08-01T22:58:03.1810298Z   ...
+2026-08-01T22:58:03.1811470Z # Subtest: FAIL row (gate red) is excluded-and-disclosed, not scored 0 — the numeric was never recorded
+2026-08-01T22:58:03.1814372Z ok 3 - FAIL row (gate red) is excluded-and-disclosed, not scored 0 — the numeric was never recorded
+2026-08-01T22:58:03.1815320Z   ---
+2026-08-01T22:58:03.1815774Z   duration_ms: 0.186404
+2026-08-01T22:58:03.1816231Z   type: 'test'
+2026-08-01T22:58:03.1816642Z   ...
+2026-08-01T22:58:03.1817767Z # Subtest: zero evaluable members → fleetScore null (mean undefined), never a fabricated 0 or 100
+2026-08-01T22:58:03.1819219Z ok 4 - zero evaluable members → fleetScore null (mean undefined), never a fabricated 0 or 100
+2026-08-01T22:58:03.1820015Z   ---
+2026-08-01T22:58:03.1820421Z   duration_ms: 0.156279
+2026-08-01T22:58:03.1820885Z   type: 'test'
+2026-08-01T22:58:03.1821281Z   ...
+2026-08-01T22:58:03.1822216Z # Subtest: empty rows (the sweep UNVERIFIABLE-fallback record) → honest null, denominator 0
+2026-08-01T22:58:03.1823538Z ok 5 - empty rows (the sweep UNVERIFIABLE-fallback record) → honest null, denominator 0
+2026-08-01T22:58:03.1824662Z   ---
+2026-08-01T22:58:03.1825072Z   duration_ms: 0.121018
+2026-08-01T22:58:03.1825770Z   type: 'test'
+2026-08-01T22:58:03.1826424Z   ...
+2026-08-01T22:58:03.1827631Z # Subtest: denominator-change (3→5 members) is marked, NEVER reported as regression/improvement
+2026-08-01T22:58:03.1828955Z ok 6 - denominator-change (3→5 members) is marked, NEVER reported as regression/improvement
+2026-08-01T22:58:03.1829616Z   ---
+2026-08-01T22:58:03.1829994Z   duration_ms: 0.480735
+2026-08-01T22:58:03.1830441Z   type: 'test'
+2026-08-01T22:58:03.1830834Z   ...
+2026-08-01T22:58:03.1831815Z # Subtest: same member set but different evaluable subset → evaluable-set-change, not a delta
+2026-08-01T22:58:03.1833133Z ok 7 - same member set but different evaluable subset → evaluable-set-change, not a delta
+2026-08-01T22:58:03.1834152Z   ---
+2026-08-01T22:58:03.1834586Z   duration_ms: 0.262395
+2026-08-01T22:58:03.1835046Z   type: 'test'
+2026-08-01T22:58:03.1835452Z   ...
+2026-08-01T22:58:03.1836325Z # Subtest: comparable runs (same member + evaluable sets) → a plain delta
+2026-08-01T22:58:03.1837922Z ok 8 - comparable runs (same member + evaluable sets) → a plain delta
+2026-08-01T22:58:03.1838675Z   ---
+2026-08-01T22:58:03.1839077Z   duration_ms: 0.16396
+2026-08-01T22:58:03.1839534Z   type: 'test'
+2026-08-01T22:58:03.1839945Z   ...
+2026-08-01T22:58:03.1840820Z # Subtest: series line carries the excluded set + denominator-change flag vs the prior line
+2026-08-01T22:58:03.1842059Z ok 9 - series line carries the excluded set + denominator-change flag vs the prior line
+2026-08-01T22:58:03.1842832Z   ---
+2026-08-01T22:58:03.1843266Z   duration_ms: 0.983902
+2026-08-01T22:58:03.1843973Z   type: 'test'
+2026-08-01T22:58:03.1844397Z   ...
+2026-08-01T22:58:03.1845483Z # Subtest: loadVerdictRuns: unparseable verdict file becomes a disclosed UNVERIFIABLE run, never skipped
+2026-08-01T22:58:03.1846887Z ok 10 - loadVerdictRuns: unparseable verdict file becomes a disclosed UNVERIFIABLE run, never skipped
+2026-08-01T22:58:03.1847732Z   ---
+2026-08-01T22:58:03.1848193Z   duration_ms: 1.124128
+2026-08-01T22:58:03.1848668Z   type: 'test'
+2026-08-01T22:58:03.1849061Z   ...
+2026-08-01T22:58:03.1849936Z # Subtest: self-hash mirror agrees with a REAL engine-emitted record (recipe pinned, not invented)
+2026-08-01T22:58:03.1851163Z ok 11 - self-hash mirror agrees with a REAL engine-emitted record (recipe pinned, not invented)
+2026-08-01T22:58:03.1851905Z   ---
+2026-08-01T22:58:03.1852279Z   duration_ms: 1.046745
+2026-08-01T22:58:03.1852709Z   type: 'test'
+2026-08-01T22:58:03.1853088Z   ...
+2026-08-01T22:58:03.1854195Z # Subtest: tamper-evidence: flipping ONE recorded field makes the self-hash re-derivation FAIL
+2026-08-01T22:58:03.1855457Z ok 12 - tamper-evidence: flipping ONE recorded field makes the self-hash re-derivation FAIL
+2026-08-01T22:58:03.1856240Z   ---
+2026-08-01T22:58:03.1856633Z   duration_ms: 0.181987
+2026-08-01T22:58:03.1857081Z   type: 'test'
+2026-08-01T22:58:03.1857463Z   ...
+2026-08-01T22:58:03.1858499Z # Subtest: chain linkage: genesis previousHash → depth exactly 1; non-genesis → disclosed >=2
+2026-08-01T22:58:03.1860189Z ok 13 - chain linkage: genesis previousHash → depth exactly 1; non-genesis → disclosed >=2
+2026-08-01T22:58:03.1860970Z   ---
+2026-08-01T22:58:03.1861354Z   duration_ms: 0.146945
+2026-08-01T22:58:03.1861784Z   type: 'test'
+2026-08-01T22:58:03.1862161Z   ...
+2026-08-01T22:58:03.1863133Z # Subtest: evidenceIntegrityForTree: VERIFIED on a real record, MISMATCH on a tampered one, WITHHELD when empty
+2026-08-01T22:58:03.1864820Z ok 14 - evidenceIntegrityForTree: VERIFIED on a real record, MISMATCH on a tampered one, WITHHELD when empty
+2026-08-01T22:58:03.1865699Z   ---
+2026-08-01T22:58:03.1866090Z   duration_ms: 1.075246
+2026-08-01T22:58:03.1866566Z   type: 'test'
+2026-08-01T22:58:03.1866939Z   ...
+2026-08-01T22:58:03.1868027Z # Subtest: driftMonitorForMember: non-self member → monitor none; self member claims only committed legs
+2026-08-01T22:58:03.1869553Z ok 15 - driftMonitorForMember: non-self member → monitor none; self member claims only committed legs
+2026-08-01T22:58:03.1870465Z   ---
+2026-08-01T22:58:03.1870863Z   duration_ms: 0.498832
+2026-08-01T22:58:03.1871301Z   type: 'test'
+2026-08-01T22:58:03.1871687Z   ...
+2026-08-01T22:58:03.1872829Z # Subtest: buildTrustRollup: honest member rows — true non-PASS state, WITHHELD everywhere unsourced, deterministic
+2026-08-01T22:58:03.1874837Z ok 16 - buildTrustRollup: honest member rows — true non-PASS state, WITHHELD everywhere unsourced, deterministic
+2026-08-01T22:58:03.1875795Z   ---
+2026-08-01T22:58:03.1876187Z   duration_ms: 0.874642
+2026-08-01T22:58:03.1876631Z   type: 'test'
+2026-08-01T22:58:03.1877016Z   ...
+2026-08-01T22:58:03.1877946Z # Subtest: buildTrustRollup degrades honestly: missing heartbeat → WITHHELD, never guessed
+2026-08-01T22:58:03.1879314Z ok 17 - buildTrustRollup degrades honestly: missing heartbeat → WITHHELD, never guessed
+2026-08-01T22:58:03.1880123Z   ---
+2026-08-01T22:58:03.1880513Z   duration_ms: 0.162989
+2026-08-01T22:58:03.1880942Z   type: 'test'
+2026-08-01T22:58:03.1881365Z   ...
+2026-08-01T22:58:03.2322924Z # Subtest: readMemberWidenMap: absent map → empty (plain engine compile for every member)
+2026-08-01T22:58:03.2325799Z ok 18 - readMemberWidenMap: absent map → empty (plain engine compile for every member)
+2026-08-01T22:58:03.2326795Z   ---
+2026-08-01T22:58:03.2327307Z   duration_ms: 1.462293
+2026-08-01T22:58:03.2327816Z   type: 'test'
+2026-08-01T22:58:03.2328255Z   ...
+2026-08-01T22:58:03.2333879Z # Subtest: readMemberWidenMap: valid additionalPaths accepted; _doc key ignored
+2026-08-01T22:58:03.2338306Z ok 19 - readMemberWidenMap: valid additionalPaths accepted; _doc key ignored
+2026-08-01T22:58:03.2344094Z   ---
+2026-08-01T22:58:03.2344541Z   duration_ms: 0.380137
+2026-08-01T22:58:03.2345007Z   type: 'test'
+2026-08-01T22:58:03.2345414Z   ...
+2026-08-01T22:58:03.2364741Z # Subtest: readMemberWidenMap: REFUSES an override for an undeclared member (fail closed)
+2026-08-01T22:58:03.2378630Z ok 20 - readMemberWidenMap: REFUSES an override for an undeclared member (fail closed)
+2026-08-01T22:58:03.2379525Z   ---
+2026-08-01T22:58:03.2379961Z   duration_ms: 0.438393
+2026-08-01T22:58:03.2380406Z   type: 'test'
+2026-08-01T22:58:03.2380802Z   ...
+2026-08-01T22:58:03.2381900Z # Subtest: readMemberWidenMap: REFUSES non-widen keys — minFiles is not reachable from this seam
+2026-08-01T22:58:03.2383353Z ok 21 - readMemberWidenMap: REFUSES non-widen keys — minFiles is not reachable from this seam
+2026-08-01T22:58:03.2384547Z   ---
+2026-08-01T22:58:03.2384986Z   duration_ms: 0.179113
+2026-08-01T22:58:03.2385468Z   type: 'test'
+2026-08-01T22:58:03.2385895Z   ...
+2026-08-01T22:58:03.2386819Z # Subtest: readMemberWidenMap: REFUSES constraint/forbiddenImports/paths-replacement keys
+2026-08-01T22:58:03.2388166Z ok 22 - readMemberWidenMap: REFUSES constraint/forbiddenImports/paths-replacement keys
+2026-08-01T22:58:03.2389008Z   ---
+2026-08-01T22:58:03.2389435Z   duration_ms: 0.336043
+2026-08-01T22:58:03.2389909Z   type: 'test'
+2026-08-01T22:58:03.2390338Z   ...
+2026-08-01T22:58:03.2391601Z # Subtest: readMemberWidenMap: REFUSES empty / non-string additionalPaths
+2026-08-01T22:58:03.2392698Z ok 23 - readMemberWidenMap: REFUSES empty / non-string additionalPaths
+2026-08-01T22:58:03.2393411Z   ---
+2026-08-01T22:58:03.2394177Z   duration_ms: 0.298828
+2026-08-01T22:58:03.2394644Z   type: 'test'
+2026-08-01T22:58:03.2395068Z   ...
+2026-08-01T22:58:03.2396257Z # Subtest: applyMemberWiden: APPENDS to extraction.paths + scope.paths — every original path survives
+2026-08-01T22:58:03.2397904Z ok 24 - applyMemberWiden: APPENDS to extraction.paths + scope.paths — every original path survives
+2026-08-01T22:58:03.2398830Z   ---
+2026-08-01T22:58:03.2399253Z   duration_ms: 0.354279
+2026-08-01T22:58:03.2399718Z   type: 'test'
+2026-08-01T22:58:03.2400134Z   ...
+2026-08-01T22:58:03.2401223Z # Subtest: applyMemberWiden: touches NOTHING except the two paths arrays (constraints/floor/imports byte-equal)
+2026-08-01T22:58:03.2403887Z ok 25 - applyMemberWiden: touches NOTHING except the two paths arrays (constraints/floor/imports byte-equal)
+2026-08-01T22:58:03.2404958Z   ---
+2026-08-01T22:58:03.2405395Z   duration_ms: 0.459985
+2026-08-01T22:58:03.2405888Z   type: 'test'
+2026-08-01T22:58:03.2406320Z   ...
+2026-08-01T22:58:03.2407277Z # Subtest: applyMemberWiden: input overlay is NOT mutated; duplicate appends are deduped
+2026-08-01T22:58:03.2408588Z ok 26 - applyMemberWiden: input overlay is NOT mutated; duplicate appends are deduped
+2026-08-01T22:58:03.2409461Z   ---
+2026-08-01T22:58:03.2410011Z   duration_ms: 0.399125
+2026-08-01T22:58:03.2410505Z   type: 'test'
+2026-08-01T22:58:03.2410932Z   ...
+2026-08-01T22:58:03.2411993Z # Subtest: applyMemberWiden: refuses an overlay without extraction.paths (fail closed, never a silent no-op)
+2026-08-01T22:58:03.2413777Z ok 27 - applyMemberWiden: refuses an overlay without extraction.paths (fail closed, never a silent no-op)
+2026-08-01T22:58:03.2414780Z   ---
+2026-08-01T22:58:03.2415228Z   duration_ms: 0.464711
+2026-08-01T22:58:03.2415724Z   type: 'test'
+2026-08-01T22:58:03.2416186Z   ...
+2026-08-01T22:58:03.3060759Z # Subtest: identical enforced rule → identical sha (baseline determinism)
+2026-08-01T22:58:03.3085141Z ok 28 - identical enforced rule → identical sha (baseline determinism)
+2026-08-01T22:58:03.3085902Z   ---
+2026-08-01T22:58:03.3086320Z   duration_ms: 1.664971
+2026-08-01T22:58:03.3086735Z   type: 'test'
+2026-08-01T22:58:03.3087121Z   ...
+2026-08-01T22:58:03.3088062Z # Subtest: COSMETIC change (metadata.id / scope.repositories / architecture) → SAME sha
+2026-08-01T22:58:03.3089361Z ok 29 - COSMETIC change (metadata.id / scope.repositories / architecture) → SAME sha
+2026-08-01T22:58:03.3090096Z   ---
+2026-08-01T22:58:03.3090491Z   duration_ms: 0.30018
+2026-08-01T22:58:03.3090911Z   type: 'test'
+2026-08-01T22:58:03.3091316Z   ...
+2026-08-01T22:58:03.3092000Z # Subtest: KEY/ARRAY ORDER independence → SAME sha
+2026-08-01T22:58:03.3092859Z ok 30 - KEY/ARRAY ORDER independence → SAME sha
+2026-08-01T22:58:03.3093422Z   ---
+2026-08-01T22:58:03.3094036Z   duration_ms: 0.24565
+2026-08-01T22:58:03.3094567Z   type: 'test'
+2026-08-01T22:58:03.3095025Z   ...
+2026-08-01T22:58:03.3096088Z # Subtest: changed CONSTRAINT (added / removed / retargeted) → DIFFERENT sha (real teeth)
+2026-08-01T22:58:03.3097518Z ok 31 - changed CONSTRAINT (added / removed / retargeted) → DIFFERENT sha (real teeth)
+2026-08-01T22:58:03.3098342Z   ---
+2026-08-01T22:58:03.3098774Z   duration_ms: 0.434507
+2026-08-01T22:58:03.3099253Z   type: 'test'
+2026-08-01T22:58:03.3099674Z   ...
+2026-08-01T22:58:03.3100475Z # Subtest: changed EXTRACTION forbiddenImports → DIFFERENT sha
+2026-08-01T22:58:03.3101528Z ok 32 - changed EXTRACTION forbiddenImports → DIFFERENT sha
+2026-08-01T22:58:03.3102181Z   ---
+2026-08-01T22:58:03.3102575Z   duration_ms: 0.206042
+2026-08-01T22:58:03.3103026Z   type: 'test'
+2026-08-01T22:58:03.3103410Z   ...
+2026-08-01T22:58:03.3133343Z # Subtest: MF-1: a PASSTHROUGH enforced field the projection does not name (forbiddenEgressHosts / governedModules / guardSymbols) → DIFFERENT sha (no silent drop)
+2026-08-01T22:58:03.3136457Z ok 33 - MF-1: a PASSTHROUGH enforced field the projection does not name (forbiddenEgressHosts / governedModules / guardSymbols) → DIFFERENT sha (no silent drop)
+2026-08-01T22:58:03.3137580Z   ---
+2026-08-01T22:58:03.3137912Z   duration_ms: 1.200881
+2026-08-01T22:58:03.3138282Z   type: 'test'
+2026-08-01T22:58:03.3138602Z   ...
+2026-08-01T22:58:03.3139760Z # Subtest: MF-1: a passthrough enforced field on a CONSTRAINT (egressCallees / governedHosts) → DIFFERENT sha
+2026-08-01T22:58:03.3141366Z ok 34 - MF-1: a passthrough enforced field on a CONSTRAINT (egressCallees / governedHosts) → DIFFERENT sha
+2026-08-01T22:58:03.3142161Z   ---
+2026-08-01T22:58:03.3142483Z   duration_ms: 0.260772
+2026-08-01T22:58:03.3142862Z   type: 'test'
+2026-08-01T22:58:03.3144436Z   ...
+2026-08-01T22:58:03.3145333Z # Subtest: projectEnforcedRule strips cosmetic top-level keys but keeps constraints + extraction
+2026-08-01T22:58:03.3157584Z ok 35 - projectEnforcedRule strips cosmetic top-level keys but keeps constraints + extraction
+2026-08-01T22:58:03.3158123Z   ---
+2026-08-01T22:58:03.3158339Z   duration_ms: 0.183429
+2026-08-01T22:58:03.3158572Z   type: 'test'
+2026-08-01T22:58:03.3158778Z   ...
+2026-08-01T22:58:03.3159425Z # Subtest: projectEnforcedRule throws on a blueprint with no enforced-rule fields (fail-closed, never an empty-hash pass)
+2026-08-01T22:58:03.3160379Z ok 36 - projectEnforcedRule throws on a blueprint with no enforced-rule fields (fail-closed, never an empty-hash pass)
+2026-08-01T22:58:03.3160889Z   ---
+2026-08-01T22:58:03.3161090Z   duration_ms: 0.630874
+2026-08-01T22:58:03.3161316Z   type: 'test'
+2026-08-01T22:58:03.3161512Z   ...
+2026-08-01T22:58:03.3161893Z # Subtest: canonicalize sorts arrays-of-{id} by id deterministically
+2026-08-01T22:58:03.3162424Z ok 37 - canonicalize sorts arrays-of-{id} by id deterministically
+2026-08-01T22:58:03.3162763Z   ---
+2026-08-01T22:58:03.3162955Z   duration_ms: 0.950564
+2026-08-01T22:58:03.3163174Z   type: 'test'
+2026-08-01T22:58:03.3163364Z   ...
+2026-08-01T22:58:03.3775704Z # Subtest: workflow-literal: single pin extracted (the odin-labs/odin-suite shape)
+2026-08-01T22:58:03.3795235Z ok 38 - workflow-literal: single pin extracted (the odin-labs/odin-suite shape)
+2026-08-01T22:58:03.3844225Z   ---
+2026-08-01T22:58:03.3844946Z   duration_ms: 3.26081
+2026-08-01T22:58:03.3847142Z   type: 'test'
+2026-08-01T22:58:03.3847766Z   ...
+2026-08-01T22:58:03.3848815Z # Subtest: workflow-literal: SAME pin in two workflows is still unambiguous
+2026-08-01T22:58:03.3850048Z ok 39 - workflow-literal: SAME pin in two workflows is still unambiguous
+2026-08-01T22:58:03.3850805Z   ---
+2026-08-01T22:58:03.3851297Z   duration_ms: 0.602192
+2026-08-01T22:58:03.3851899Z   type: 'test'
+2026-08-01T22:58:03.3852460Z   ...
+2026-08-01T22:58:03.3854234Z # Subtest: workflow-literal: CONFLICTING pins across workflows → null (fail closed, never a guess)
+2026-08-01T22:58:03.3866581Z ok 40 - workflow-literal: CONFLICTING pins across workflows → null (fail closed, never a guess)
+2026-08-01T22:58:03.3867697Z   ---
+2026-08-01T22:58:03.3868256Z   duration_ms: 0.446946
+2026-08-01T22:58:03.3868949Z   type: 'test'
+2026-08-01T22:58:03.3869501Z   ...
+2026-08-01T22:58:03.3870592Z # Subtest: workflow-literal: no workflows dir / no literal → null
+2026-08-01T22:58:03.3871847Z ok 41 - workflow-literal: no workflows dir / no literal → null
+2026-08-01T22:58:03.3872639Z   ---
+2026-08-01T22:58:03.3873209Z   duration_ms: 0.574893
+2026-08-01T22:58:03.3874094Z   type: 'test'
+2026-08-01T22:58:03.3874637Z   ...
+2026-08-01T22:58:03.3875657Z # Subtest: lockfile: pnpm-lock pin extracted, package.json agreeing (the CT shape)
+2026-08-01T22:58:03.3877008Z ok 42 - lockfile: pnpm-lock pin extracted, package.json agreeing (the CT shape)
+2026-08-01T22:58:03.3877874Z   ---
+2026-08-01T22:58:03.3878405Z   duration_ms: 0.690292
+2026-08-01T22:58:03.3878930Z   type: 'test'
+2026-08-01T22:58:03.3879529Z   ...
+2026-08-01T22:58:03.3882502Z # Subtest: lockfile: lock/manifest DISAGREEMENT → null (ambiguity fails closed)
+2026-08-01T22:58:03.3884348Z ok 43 - lockfile: lock/manifest DISAGREEMENT → null (ambiguity fails closed)
+2026-08-01T22:58:03.3887299Z   ---
+2026-08-01T22:58:03.3888035Z   duration_ms: 0.426435
+2026-08-01T22:58:03.3888499Z   type: 'test'
+2026-08-01T22:58:03.3888917Z   ...
+2026-08-01T22:58:03.3889759Z # Subtest: lockfile: caret range in manifest strips to compare (^0.2.0 vs lock 0.2.0 agrees)
+2026-08-01T22:58:03.3904732Z ok 44 - lockfile: caret range in manifest strips to compare (^0.2.0 vs lock 0.2.0 agrees)
+2026-08-01T22:58:03.3905412Z   ---
+2026-08-01T22:58:03.3905704Z   duration_ms: 0.419215
+2026-08-01T22:58:03.3906040Z   type: 'test'
+2026-08-01T22:58:03.3906329Z   ...
+2026-08-01T22:58:03.3906922Z # Subtest: lockfile: missing pnpm-lock.yaml → null
+2026-08-01T22:58:03.3907630Z ok 45 - lockfile: missing pnpm-lock.yaml → null
+2026-08-01T22:58:03.3908082Z   ---
+2026-08-01T22:58:03.3908374Z   duration_ms: 0.254583
+2026-08-01T22:58:03.3908713Z   type: 'test'
+2026-08-01T22:58:03.3908998Z   ...
+2026-08-01T22:58:03.3909573Z # Subtest: lockfile: two distinct locked versions → null
+2026-08-01T22:58:03.3910435Z ok 46 - lockfile: two distinct locked versions → null
+2026-08-01T22:58:03.3910886Z   ---
+2026-08-01T22:58:03.3911205Z   duration_ms: 0.473174
+2026-08-01T22:58:03.3911535Z   type: 'test'
+2026-08-01T22:58:03.3912010Z   ...
+2026-08-01T22:58:03.3912469Z # Subtest: unknown encoding → null (fail closed)
+2026-08-01T22:58:03.3912889Z ok 47 - unknown encoding → null (fail closed)
+2026-08-01T22:58:03.3913161Z   ---
+2026-08-01T22:58:03.3913357Z   duration_ms: 0.500955
+2026-08-01T22:58:03.3924247Z   type: 'test'
+2026-08-01T22:58:03.3924703Z   ...
+2026-08-01T22:58:03.4524902Z # Subtest: semverGt basic ordering
+2026-08-01T22:58:03.4546220Z ok 48 - semverGt basic ordering
+2026-08-01T22:58:03.4558674Z   ---
+2026-08-01T22:58:03.4574322Z   duration_ms: 1.5487
+2026-08-01T22:58:03.4584373Z   type: 'test'
+2026-08-01T22:58:03.4604267Z   ...
+2026-08-01T22:58:03.4624879Z # Subtest: catch-up ELIGIBLE only with forward semver + convergence + published (the \#755 shape)
+2026-08-01T22:58:03.4644031Z ok 49 - catch-up ELIGIBLE only with forward semver + convergence + published (the \#755 shape)
+2026-08-01T22:58:03.4645122Z   ---
+2026-08-01T22:58:03.4664360Z   duration_ms: 0.570606
+2026-08-01T22:58:03.4684167Z   type: 'test'
+2026-08-01T22:58:03.4694311Z   ...
+2026-08-01T22:58:03.4710841Z # Subtest: DIAGNOSTIC when no fleet convergence (bot must not ratify observed reality — VP2-CX-3)
+2026-08-01T22:58:03.4726129Z ok 50 - DIAGNOSTIC when no fleet convergence (bot must not ratify observed reality — VP2-CX-3)
+2026-08-01T22:58:03.4742186Z   ---
+2026-08-01T22:58:03.4742982Z   duration_ms: 0.551669
+2026-08-01T22:58:03.4743525Z   type: 'test'
+2026-08-01T22:58:03.4744424Z   ...
+2026-08-01T22:58:03.4745316Z # Subtest: DIAGNOSTIC on downgrade direction even with convergence
+2026-08-01T22:58:03.4746385Z ok 51 - DIAGNOSTIC on downgrade direction even with convergence
+2026-08-01T22:58:03.4747143Z   ---
+2026-08-01T22:58:03.4747674Z   duration_ms: 0.257027
+2026-08-01T22:58:03.4748261Z   type: 'test'
+2026-08-01T22:58:03.4748772Z   ...
+2026-08-01T22:58:03.4749529Z # Subtest: DIAGNOSTIC when extracted version is not published
+2026-08-01T22:58:03.4750488Z ok 52 - DIAGNOSTIC when extracted version is not published
+2026-08-01T22:58:03.4751174Z   ---
+2026-08-01T22:58:03.4751690Z   duration_ms: 0.389451
+2026-08-01T22:58:03.4752256Z   type: 'test'
+2026-08-01T22:58:03.4752836Z   ...
+2026-08-01T22:58:03.4753938Z # Subtest: convergence may come from members[] declarations, not only verdict rows
+2026-08-01T22:58:03.4755168Z ok 53 - convergence may come from members[] declarations, not only verdict rows
+2026-08-01T22:58:03.4755962Z   ---
+2026-08-01T22:58:03.4756452Z   duration_ms: 0.246872
+2026-08-01T22:58:03.4756980Z   type: 'test'
+2026-08-01T22:58:03.4757463Z   ...
+2026-08-01T22:58:03.4758177Z # Subtest: applyPinCatchUp edits exactly the target member
+2026-08-01T22:58:03.4759021Z ok 54 - applyPinCatchUp edits exactly the target member
+2026-08-01T22:58:03.4759651Z   ---
+2026-08-01T22:58:03.4760414Z   duration_ms: 0.489067
+2026-08-01T22:58:03.4760921Z   type: 'test'
+2026-08-01T22:58:03.4761391Z   ...
+2026-08-01T22:58:03.4762398Z # Subtest: ambiguous-literal ELIGIBLE only when declared pin is among the observed set (VP2-CX-4)
+2026-08-01T22:58:03.4775322Z ok 55 - ambiguous-literal ELIGIBLE only when declared pin is among the observed set (VP2-CX-4)
+2026-08-01T22:58:03.4795063Z   ---
+2026-08-01T22:58:03.4814627Z   duration_ms: 0.693086
+2026-08-01T22:58:03.4834257Z   type: 'test'
+2026-08-01T22:58:03.4834609Z   ...
+2026-08-01T22:58:03.4838570Z # Subtest: unifyLiterals rewrites every literal to the declared pin and reports only changed files
+2026-08-01T22:58:03.4841749Z ok 56 - unifyLiterals rewrites every literal to the declared pin and reports only changed files
+2026-08-01T22:58:03.4842784Z   ---
+2026-08-01T22:58:03.4843303Z   duration_ms: 0.611346
+2026-08-01T22:58:03.4844241Z   type: 'test'
+2026-08-01T22:58:03.4844762Z   ...
+2026-08-01T22:58:03.4845469Z # Subtest: scanWorkflowLiterals counts per-file hits
+2026-08-01T22:58:03.4846442Z ok 57 - scanWorkflowLiterals counts per-file hits
+2026-08-01T22:58:03.4847210Z   ---
+2026-08-01T22:58:03.4847753Z   duration_ms: 1.512697
+2026-08-01T22:58:03.4848370Z   type: 'test'
+2026-08-01T22:58:03.4848905Z   ...
+2026-08-01T22:58:03.5655691Z # Subtest: creates a deterministic PIN-DRIFT WO marked catch-up-candidate when fleet convergence exists
+2026-08-01T22:58:03.5693885Z ok 58 - creates a deterministic PIN-DRIFT WO marked catch-up-candidate when fleet convergence exists
+2026-08-01T22:58:03.5764318Z   ---
+2026-08-01T22:58:03.5764688Z   duration_ms: 4.589398
+2026-08-01T22:58:03.5765084Z   type: 'test'
+2026-08-01T22:58:03.5765401Z   ...
+2026-08-01T22:58:03.5766020Z # Subtest: PIN-DRIFT without fleet convergence is diagnostic-only
+2026-08-01T22:58:03.5766872Z ok 59 - PIN-DRIFT without fleet convergence is diagnostic-only
+2026-08-01T22:58:03.5767405Z   ---
+2026-08-01T22:58:03.5767715Z   duration_ms: 1.031492
+2026-08-01T22:58:03.5768096Z   type: 'test'
+2026-08-01T22:58:03.5768443Z   ...
+2026-08-01T22:58:03.5769485Z # Subtest: same runId re-emit is a no-op (idempotent under rebase-retry)
+2026-08-01T22:58:03.5770415Z ok 60 - same runId re-emit is a no-op (idempotent under rebase-retry)
+2026-08-01T22:58:03.5770973Z   ---
+2026-08-01T22:58:03.5771287Z   duration_ms: 1.141683
+2026-08-01T22:58:03.5771641Z   type: 'test'
+2026-08-01T22:58:03.5771950Z   ...
+2026-08-01T22:58:03.5772705Z # Subtest: new runId appends a recurrence line and bumps recurrenceCount; history capped
+2026-08-01T22:58:03.5774090Z ok 61 - new runId appends a recurrence line and bumps recurrenceCount; history capped
+2026-08-01T22:58:03.5774769Z   ---
+2026-08-01T22:58:03.5775076Z   duration_ms: 8.204919
+2026-08-01T22:58:03.5775431Z   type: 'test'
+2026-08-01T22:58:03.5775743Z   ...
+2026-08-01T22:58:03.5776408Z # Subtest: PASS row auto-clears an OPEN WO for that repo (cleared-by-sweep)
+2026-08-01T22:58:03.5777369Z ok 62 - PASS row auto-clears an OPEN WO for that repo (cleared-by-sweep)
+2026-08-01T22:58:03.5777960Z   ---
+2026-08-01T22:58:03.5778282Z   duration_ms: 1.219548
+2026-08-01T22:58:03.5778639Z   type: 'test'
+2026-08-01T22:58:03.5778944Z   ...
+2026-08-01T22:58:03.5779471Z # Subtest: a cleared WO reopens when the same defect recurs
+2026-08-01T22:58:03.5780222Z ok 63 - a cleared WO reopens when the same defect recurs
+2026-08-01T22:58:03.5780722Z   ---
+2026-08-01T22:58:03.5781025Z   duration_ms: 1.410378
+2026-08-01T22:58:03.5781370Z   type: 'test'
+2026-08-01T22:58:03.5781669Z   ...
+2026-08-01T22:58:03.5782612Z # Subtest: UNVERIFIABLE mechanical-ambiguity reason is unify-candidate; other reasons diagnostic
+2026-08-01T22:58:03.5807057Z ok 64 - UNVERIFIABLE mechanical-ambiguity reason is unify-candidate; other reasons diagnostic
+2026-08-01T22:58:03.5824477Z   ---
+2026-08-01T22:58:03.5862831Z   duration_ms: 0.428678
+2026-08-01T22:58:03.5879891Z   type: 'test'
+2026-08-01T22:58:03.5894325Z   ...
+2026-08-01T22:58:03.5904854Z # Subtest: pinDriftCandidate demands convergence evidence from OTHER rows only
+2026-08-01T22:58:03.5913120Z ok 65 - pinDriftCandidate demands convergence evidence from OTHER rows only
+2026-08-01T22:58:03.5934392Z   ---
+2026-08-01T22:58:03.5954338Z   duration_ms: 0.202857
+2026-08-01T22:58:03.5964232Z   type: 'test'
+2026-08-01T22:58:03.5974365Z   ...
+2026-08-01T22:58:03.5991214Z # Subtest: validateConformanceWo rejects the operator-only eligibility marker and tenant targets
+2026-08-01T22:58:03.6013528Z ok 66 - validateConformanceWo rejects the operator-only eligibility marker and tenant targets
+2026-08-01T22:58:03.6024336Z   ---
+2026-08-01T22:58:03.6034375Z   duration_ms: 0.854513
+2026-08-01T22:58:03.6038325Z   type: 'test'
+2026-08-01T22:58:03.6054221Z   ...
+2026-08-01T22:58:03.6074731Z # Subtest: pinDriftCandidate refuses downgrade / same-version / malformed semver (B4)
+2026-08-01T22:58:03.6085892Z ok 67 - pinDriftCandidate refuses downgrade / same-version / malformed semver (B4)
+2026-08-01T22:58:03.6104241Z   ---
+2026-08-01T22:58:03.6111122Z   duration_ms: 0.771832
+2026-08-01T22:58:03.6134287Z   type: 'test'
+2026-08-01T22:58:03.6135023Z   ...
+2026-08-01T22:58:03.6137125Z # Subtest: unverifiableCandidate: ONLY the exact workflow-literal reason qualifies (B4')
+2026-08-01T22:58:03.6154903Z ok 68 - unverifiableCandidate: ONLY the exact workflow-literal reason qualifies (B4')
+2026-08-01T22:58:03.6174336Z   ---
+2026-08-01T22:58:03.6181504Z   duration_ms: 0.350694
+2026-08-01T22:58:03.6194377Z   type: 'test'
+2026-08-01T22:58:03.6204248Z   ...
+2026-08-01T22:58:03.6206629Z # Subtest: unverifiableCandidate: legacy exact-shape spot check (B4)
+2026-08-01T22:58:03.6224610Z ok 69 - unverifiableCandidate: legacy exact-shape spot check (B4)
+2026-08-01T22:58:03.6235810Z   ---
+2026-08-01T22:58:03.6254297Z   duration_ms: 0.205031
+2026-08-01T22:58:03.6261495Z   type: 'test'
+2026-08-01T22:58:03.6283258Z   ...
+2026-08-01T22:58:03.6890238Z # Subtest: all declared members PASS → verdict PASS, rows == declared
+2026-08-01T22:58:03.6904876Z ok 70 - all declared members PASS → verdict PASS, rows == declared
+2026-08-01T22:58:03.6931443Z   ---
+2026-08-01T22:58:03.6967288Z   duration_ms: 3.36989
+2026-08-01T22:58:03.7007918Z   type: 'test'
+2026-08-01T22:58:03.7024141Z   ...
+2026-08-01T22:58:03.7064839Z # Subtest: missing artifact → UNVERIFIABLE row IN the denominator, verdict NON-PASS
+2026-08-01T22:58:03.7080820Z ok 71 - missing artifact → UNVERIFIABLE row IN the denominator, verdict NON-PASS
+2026-08-01T22:58:03.7116634Z   ---
+2026-08-01T22:58:03.7138770Z   duration_ms: 0.842625
+2026-08-01T22:58:03.7171618Z   type: 'test'
+2026-08-01T22:58:03.7194188Z   ...
+2026-08-01T22:58:03.7212914Z # Subtest: malformed artifact JSON → UNVERIFIABLE, never green
+2026-08-01T22:58:03.7236481Z ok 72 - malformed artifact JSON → UNVERIFIABLE, never green
+2026-08-01T22:58:03.7264444Z   ---
+2026-08-01T22:58:03.7284241Z   duration_ms: 1.230494
+2026-08-01T22:58:03.7299230Z   type: 'test'
+2026-08-01T22:58:03.7302786Z   ...
+2026-08-01T22:58:03.7304315Z # Subtest: partial artifact (no sha/gateExit) → UNVERIFIABLE — partial observation is not a verdict
+2026-08-01T22:58:03.7305976Z ok 73 - partial artifact (no sha/gateExit) → UNVERIFIABLE — partial observation is not a verdict
+2026-08-01T22:58:03.7306848Z   ---
+2026-08-01T22:58:03.7307288Z   duration_ms: 0.941651
+2026-08-01T22:58:03.7307749Z   type: 'test'
+2026-08-01T22:58:03.7308153Z   ...
+2026-08-01T22:58:03.7308852Z # Subtest: gate failure → FAIL row, verdict NON-PASS
+2026-08-01T22:58:03.7309719Z ok 74 - gate failure → FAIL row, verdict NON-PASS
+2026-08-01T22:58:03.7310307Z   ---
+2026-08-01T22:58:03.7310710Z   duration_ms: 0.792032
+2026-08-01T22:58:03.7311192Z   type: 'test'
+2026-08-01T22:58:03.7311609Z   ...
+2026-08-01T22:58:03.7312474Z # Subtest: undeclared artifact → REGISTRY-DRIFT row, verdict NON-PASS
+2026-08-01T22:58:03.7313941Z ok 75 - undeclared artifact → REGISTRY-DRIFT row, verdict NON-PASS
+2026-08-01T22:58:03.7314743Z   ---
+2026-08-01T22:58:03.7334335Z   duration_ms: 2.23731
+2026-08-01T22:58:03.7350943Z   type: 'test'
+2026-08-01T22:58:03.7356382Z   ...
+2026-08-01T22:58:03.7358080Z # Subtest: artifact repo mismatch (renamed inside) → UNVERIFIABLE
+2026-08-01T22:58:03.7359557Z ok 76 - artifact repo mismatch (renamed inside) → UNVERIFIABLE
+2026-08-01T22:58:03.7360209Z   ---
+2026-08-01T22:58:03.7360635Z   duration_ms: 0.785232
+2026-08-01T22:58:03.7361095Z   type: 'test'
+2026-08-01T22:58:03.7361522Z   ...
+2026-08-01T22:58:03.7362610Z # Subtest: empty artifacts dir → every row UNVERIFIABLE (the force_unverifiable negative proof shape)
+2026-08-01T22:58:03.7364381Z ok 77 - empty artifacts dir → every row UNVERIFIABLE (the force_unverifiable negative proof shape)
+2026-08-01T22:58:03.7369788Z   ---
+2026-08-01T22:58:03.7370395Z   duration_ms: 5.643904
+2026-08-01T22:58:03.7370881Z   type: 'test'
+2026-08-01T22:58:03.7371296Z   ...
+2026-08-01T22:58:03.7372224Z # Subtest: registry below minMembers floor → NON-PASS, no rows fabricated
+2026-08-01T22:58:03.7373425Z ok 78 - registry below minMembers floor → NON-PASS, no rows fabricated
+2026-08-01T22:58:03.7374560Z   ---
+2026-08-01T22:58:03.7374992Z   duration_ms: 0.856756
+2026-08-01T22:58:03.7375487Z   type: 'test'
+2026-08-01T22:58:03.7375910Z   ...
+2026-08-01T22:58:03.7376865Z # Subtest: registry with no consumers / missing minMembers → NON-PASS fail-closed
+2026-08-01T22:58:03.7378120Z ok 79 - registry with no consumers / missing minMembers → NON-PASS fail-closed
+2026-08-01T22:58:03.7378903Z   ---
+2026-08-01T22:58:03.7379320Z   duration_ms: 0.623805
+2026-08-01T22:58:03.7379790Z   type: 'test'
+2026-08-01T22:58:03.7380198Z   ...
+2026-08-01T22:58:03.7381096Z # Subtest: download-artifact directory layout (verdict-<slug>/verdict.json) is accepted
+2026-08-01T22:58:03.7382205Z ok 80 - download-artifact directory layout (verdict-<slug>/verdict.json) is accepted
+2026-08-01T22:58:03.7382853Z   ---
+2026-08-01T22:58:03.7383156Z   duration_ms: 0.881783
+2026-08-01T22:58:03.7383500Z   type: 'test'
+2026-08-01T22:58:03.7384050Z   ...
+2026-08-01T22:58:03.7385012Z # Subtest: pin-drift: extracted pin != intent → PIN-DRIFT row, NON-PASS (the CT 0.2.0 catch shape)
+2026-08-01T22:58:03.7385976Z ok 81 - pin-drift: extracted pin != intent → PIN-DRIFT row, NON-PASS (the CT 0.2.0 catch shape)
+2026-08-01T22:58:03.7386646Z   ---
+2026-08-01T22:58:03.7386866Z   duration_ms: 0.764862
+2026-08-01T22:58:03.7387107Z   type: 'test'
+2026-08-01T22:58:03.7387308Z   ...
+2026-08-01T22:58:03.7387775Z # Subtest: pin extraction failed (null) → UNVERIFIABLE, never a guessed pin
+2026-08-01T22:58:03.7388421Z ok 82 - pin extraction failed (null) → UNVERIFIABLE, never a guessed pin
+2026-08-01T22:58:03.7388783Z   ---
+2026-08-01T22:58:03.7388975Z   duration_ms: 0.629763
+2026-08-01T22:58:03.7389198Z   type: 'test'
+2026-08-01T22:58:03.7389392Z   ...
+2026-08-01T22:58:03.7389828Z # Subtest: shared blueprint missing → SHARED-BLUEPRINT-MISSING, NON-PASS
+2026-08-01T22:58:03.7390415Z ok 83 - shared blueprint missing → SHARED-BLUEPRINT-MISSING, NON-PASS
+2026-08-01T22:58:03.7390765Z   ---
+2026-08-01T22:58:03.7390957Z   duration_ms: 0.705704
+2026-08-01T22:58:03.7391167Z   type: 'test'
+2026-08-01T22:58:03.7391356Z   ...
+2026-08-01T22:58:03.7391791Z # Subtest: shared blueprint sha mismatch → SHARED-BLUEPRINT-DRIFT, NON-PASS
+2026-08-01T22:58:03.7392405Z ok 84 - shared blueprint sha mismatch → SHARED-BLUEPRINT-DRIFT, NON-PASS
+2026-08-01T22:58:03.7392746Z   ---
+2026-08-01T22:58:03.7392942Z   duration_ms: 0.642472
+2026-08-01T22:58:03.7393163Z   type: 'test'
+2026-08-01T22:58:03.7393363Z   ...
+2026-08-01T22:58:03.7394231Z # Subtest: green gate does NOT hide pin drift — defects list carries both classes
+2026-08-01T22:58:03.7394909Z ok 85 - green gate does NOT hide pin drift — defects list carries both classes
+2026-08-01T22:58:03.7395281Z   ---
+2026-08-01T22:58:03.7395485Z   duration_ms: 1.339013
+2026-08-01T22:58:03.7395723Z   type: 'test'
+2026-08-01T22:58:03.7395918Z   ...
+2026-08-01T22:58:03.7396231Z # Subtest: all pins + shared shas agree → PASS
+2026-08-01T22:58:03.7396635Z ok 86 - all pins + shared shas agree → PASS
+2026-08-01T22:58:03.7396904Z   ---
+2026-08-01T22:58:03.7397102Z   duration_ms: 0.526251
+2026-08-01T22:58:03.7397322Z   type: 'test'
+2026-08-01T22:58:03.7397512Z   ...
+2026-08-01T22:58:03.7398249Z # Subtest: no canonical sha supplied → shared-blueprint checks skipped (pin checks still armed)
+2026-08-01T22:58:03.7399021Z ok 87 - no canonical sha supplied → shared-blueprint checks skipped (pin checks still armed)
+2026-08-01T22:58:03.7399435Z   ---
+2026-08-01T22:58:03.7399625Z   duration_ms: 0.579439
+2026-08-01T22:58:03.7399843Z   type: 'test'
+2026-08-01T22:58:03.7400030Z   ...
+2026-08-01T22:58:03.7400516Z # Subtest: overlay leg: all members vendored overlay-rule-sha matches compiled → PASS
+2026-08-01T22:58:03.7401207Z ok 88 - overlay leg: all members vendored overlay-rule-sha matches compiled → PASS
+2026-08-01T22:58:03.7401587Z   ---
+2026-08-01T22:58:03.7401777Z   duration_ms: 0.664905
+2026-08-01T22:58:03.7401992Z   type: 'test'
+2026-08-01T22:58:03.7402181Z   ...
+2026-08-01T22:58:03.7402654Z # Subtest: overlay leg: a member with NO overlay-rule-sha → OVERLAY-MISSING, NON-PASS
+2026-08-01T22:58:03.7403299Z ok 89 - overlay leg: a member with NO overlay-rule-sha → OVERLAY-MISSING, NON-PASS
+2026-08-01T22:58:03.7404230Z   ---
+2026-08-01T22:58:03.7404432Z   duration_ms: 0.568674
+2026-08-01T22:58:03.7404653Z   type: 'test'
+2026-08-01T22:58:03.7404840Z   ...
+2026-08-01T22:58:03.7405437Z # Subtest: overlay leg: a member whose overlay-rule-sha DIFFERS from compiled → OVERLAY-DRIFT, NON-PASS
+2026-08-01T22:58:03.7406246Z ok 90 - overlay leg: a member whose overlay-rule-sha DIFFERS from compiled → OVERLAY-DRIFT, NON-PASS
+2026-08-01T22:58:03.7406681Z   ---
+2026-08-01T22:58:03.7406874Z   duration_ms: 0.568864
+2026-08-01T22:58:03.7407086Z   type: 'test'
+2026-08-01T22:58:03.7407277Z   ...
+2026-08-01T22:58:03.7407863Z # Subtest: overlay leg: a declared member ABSENT from the expected map → UNVERIFIABLE (never a silent PASS)
+2026-08-01T22:58:03.7408697Z ok 91 - overlay leg: a declared member ABSENT from the expected map → UNVERIFIABLE (never a silent PASS)
+2026-08-01T22:58:03.7409152Z   ---
+2026-08-01T22:58:03.7409342Z   duration_ms: 0.603555
+2026-08-01T22:58:03.7409558Z   type: 'test'
+2026-08-01T22:58:03.7409757Z   ...
+2026-08-01T22:58:03.7410642Z # Subtest: overlay leg: no expectedOverlayMap supplied → overlay checks skipped (dual-run: byte leg can run alone during the window)
+2026-08-01T22:58:03.7411712Z ok 92 - overlay leg: no expectedOverlayMap supplied → overlay checks skipped (dual-run: byte leg can run alone during the window)
+2026-08-01T22:58:03.7412248Z   ---
+2026-08-01T22:58:03.7412438Z   duration_ms: 0.485732
+2026-08-01T22:58:03.7412659Z   type: 'test'
+2026-08-01T22:58:03.7412846Z   ...
+2026-08-01T22:58:03.7413432Z # Subtest: dual-run: BOTH legs armed, both must pass — overlay drift fails even when shared byte leg is clean
+2026-08-01T22:58:03.7414405Z ok 93 - dual-run: BOTH legs armed, both must pass — overlay drift fails even when shared byte leg is clean
+2026-08-01T22:58:03.7414852Z   ---
+2026-08-01T22:58:03.7415058Z   duration_ms: 0.608451
+2026-08-01T22:58:03.7415276Z   type: 'test'
+2026-08-01T22:58:03.7415462Z   ...
+2026-08-01T22:58:03.7415958Z # Subtest: unification: reconcile accepts a PortfolioBlueprint shape (.members) as the consumer set
+2026-08-01T22:58:03.7416711Z ok 94 - unification: reconcile accepts a PortfolioBlueprint shape (.members) as the consumer set
+2026-08-01T22:58:03.7417138Z   ---
+2026-08-01T22:58:03.7417335Z   duration_ms: 0.513583
+2026-08-01T22:58:03.7417553Z   type: 'test'
+2026-08-01T22:58:03.7417741Z   ...
+2026-08-01T22:58:03.7418378Z # Subtest: unification: a PortfolioBlueprint below minMembers floor → NON-PASS (floor still enforced via .members)
+2026-08-01T22:58:03.7419304Z ok 95 - unification: a PortfolioBlueprint below minMembers floor → NON-PASS (floor still enforced via .members)
+2026-08-01T22:58:03.7419781Z   ---
+2026-08-01T22:58:03.7419975Z   duration_ms: 0.331476
+2026-08-01T22:58:03.7420189Z   type: 'test'
+2026-08-01T22:58:03.7420379Z   ...
+2026-08-01T22:58:03.7420557Z 1..95
+2026-08-01T22:58:03.7420737Z # tests 95
+2026-08-01T22:58:03.7420923Z # suites 0
+2026-08-01T22:58:03.7421115Z # pass 95
+2026-08-01T22:58:03.7421299Z # fail 0
+2026-08-01T22:58:03.7421490Z # cancelled 0
+2026-08-01T22:58:03.7421829Z # skipped 0
+2026-08-01T22:58:03.7422032Z # todo 0
+2026-08-01T22:58:03.7422242Z # duration_ms 642.592835
+2026-08-01T22:58:03.7544364Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:58:03.7545577Z Post job cleanup.
+2026-08-01T22:58:03.8855034Z (node:2095) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-01T22:58:03.8856655Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-01T22:58:03.9046484Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:58:03.9047681Z Post job cleanup.
+2026-08-01T22:58:03.9944963Z [command]/usr/bin/git version
+2026-08-01T22:58:03.9988275Z git version 2.54.0
+2026-08-01T22:58:04.0028165Z Temporarily overriding HOME='/home/runner/work/_temp/b1747ac1-74b9-447b-9548-df14b564290e' before making global git config changes
+2026-08-01T22:58:04.0034783Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-01T22:58:04.0037064Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-labs/odin-labs
+2026-08-01T22:58:04.0081429Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-01T22:58:04.0122959Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-01T22:58:04.0404280Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-01T22:58:04.0446805Z http.https://github.com/.extraheader
+2026-08-01T22:58:04.0476949Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-08-01T22:58:04.0541353Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-01T22:58:04.0889632Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-01T22:58:04.0984069Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-01T22:58:04.1546207Z Cleaning up orphan processes
+2026-08-01T22:58:04.1808837Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

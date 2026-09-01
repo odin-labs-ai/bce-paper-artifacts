@@ -1,0 +1,13 @@
+{
+  "blueprintRef": "dark-factory-signal-surface@0.3.0",
+  "ctRepoRevision": "8b65a7007ae1a6694d15323442de356d8e0fb4b7",
+  "hash": "b807aa8d0eaa0f29ebc912662e6303165fd14f00ef4790b3ae77911908d43827",
+  "id": "evidence:dark-factory-signal-surface@0.3.0:b807aa8d0eaa0f29",
+  "previousHash": "13ab9a76d3038344b1d952bf7e2bbcb6d7af11196a590282c98d646c21456c8a",
+  "reportEvidenceRef": "architecture-graph.json@sha256:207ab678ee99b2862d06f1c63f071a9c53a007e903628fd12558c98e8ba8958f",
+  "schemaVersion": "1",
+  "score": 100,
+  "traceId": "dark-factory-signal-surface",
+  "verdict": "pass",
+  "violationCount": 0
+}

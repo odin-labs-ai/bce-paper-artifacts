@@ -1,0 +1,273 @@
+[EXCERPT NOTICE: 1 git-fetch branch/tag enumeration lines omitted (they name unrelated internal work branches); 1 registry-auth boilerplate lines replaced inline. Nothing from the gate/probe/sweep execution or its verdict was removed. 2 registry-config boilerplate lines also replaced inline. Full raw log available to reviewers on request.]
+
+﻿2026-08-01T22:23:56.4281640Z Current runner version: '2.336.0'
+2026-08-01T22:23:56.4318376Z ##[group]Runner Image Provisioner
+2026-08-01T22:23:56.4319792Z Hosted Compute Agent
+2026-08-01T22:23:56.4320754Z Version: 20260707.563
+2026-08-01T22:23:56.4321681Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+2026-08-01T22:23:56.4322954Z Build Date: 2026-07-07T19:33:50Z
+2026-08-01T22:23:56.4323982Z Worker ID: {035e7492-83af-41f3-bc2f-955747659e53}
+2026-08-01T22:23:56.4325201Z Azure Region: eastus
+2026-08-01T22:23:56.4326075Z ##[endgroup]
+2026-08-01T22:23:56.4328531Z ##[group]Operating System
+2026-08-01T22:23:56.4329617Z Ubuntu
+2026-08-01T22:23:56.4330413Z 24.04.4
+2026-08-01T22:23:56.4331355Z LTS
+2026-08-01T22:23:56.4332142Z ##[endgroup]
+2026-08-01T22:23:56.4333494Z ##[group]Runner Image
+2026-08-01T22:23:56.4334484Z Image: ubuntu-24.04
+2026-08-01T22:23:56.4335353Z Version: 20260720.247.2
+2026-08-01T22:23:56.4337678Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+2026-08-01T22:23:56.4340345Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+2026-08-01T22:23:56.4341881Z ##[endgroup]
+2026-08-01T22:23:56.4343693Z ##[group]GITHUB_TOKEN Permissions
+2026-08-01T22:23:56.4346290Z Contents: read
+2026-08-01T22:23:56.4347662Z Metadata: read
+2026-08-01T22:23:56.4348593Z ##[endgroup]
+2026-08-01T22:23:56.4351468Z Secret source: Actions
+2026-08-01T22:23:56.4353204Z Prepare workflow directory
+2026-08-01T22:23:56.4808902Z Prepare all required actions
+2026-08-01T22:23:56.4876434Z Getting action download info
+2026-08-01T22:23:56.7733380Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-08-01T22:23:56.9868452Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-08-01T22:23:57.0852757Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-08-01T22:23:57.3101768Z Complete job name: D_BLUEPRINT drift check (cloud leg)
+2026-08-01T22:23:57.3888391Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:23:57.3901478Z ##[group]Run actions/checkout@v4
+2026-08-01T22:23:57.3902552Z with:
+2026-08-01T22:23:57.3903242Z   repository: odin-labs-ai/odin-labs
+2026-08-01T22:23:57.3911073Z   token: ***
+2026-08-01T22:23:57.3911779Z   ssh-strict: true
+2026-08-01T22:23:57.3912471Z   ssh-user: git
+2026-08-01T22:23:57.3913180Z   persist-credentials: true
+2026-08-01T22:23:57.3913928Z   clean: true
+2026-08-01T22:23:57.3914657Z   sparse-checkout-cone-mode: true
+2026-08-01T22:23:57.3915483Z   fetch-depth: 1
+2026-08-01T22:23:57.3916154Z   fetch-tags: false
+2026-08-01T22:23:57.3917154Z   show-progress: true
+2026-08-01T22:23:57.3917881Z   lfs: false
+2026-08-01T22:23:57.3918779Z   submodules: false
+2026-08-01T22:23:57.3919510Z   set-safe-directory: true
+2026-08-01T22:23:57.3920328Z   allow-unsafe-pr-checkout: false
+2026-08-01T22:23:57.3921524Z ##[endgroup]
+2026-08-01T22:23:57.5454358Z Syncing repository: odin-labs-ai/odin-labs
+2026-08-01T22:23:57.5562587Z ##[group]Getting Git version info
+2026-08-01T22:23:57.5563770Z Working directory is '/home/runner/work/odin-labs/odin-labs'
+2026-08-01T22:23:57.5565314Z [command]/usr/bin/git version
+2026-08-01T22:23:57.8380352Z git version 2.54.0
+2026-08-01T22:23:57.8386231Z ##[endgroup]
+2026-08-01T22:23:57.8397880Z Temporarily overriding HOME='/home/runner/work/_temp/fe0cc5ce-07d9-4f52-8abc-f6ecd976da19' before making global git config changes
+2026-08-01T22:23:57.8400849Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-01T22:23:57.8402961Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-labs/odin-labs
+2026-08-01T22:23:57.8427555Z Deleting the contents of '/home/runner/work/odin-labs/odin-labs'
+2026-08-01T22:23:57.8430853Z ##[group]Initializing the repository
+2026-08-01T22:23:57.8436804Z [command]/usr/bin/git init /home/runner/work/odin-labs/odin-labs
+2026-08-01T22:23:57.8521907Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-08-01T22:23:57.8524500Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-08-01T22:23:57.8527131Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-08-01T22:23:57.8528916Z hint: call:
+2026-08-01T22:23:57.8532910Z hint:
+2026-08-01T22:23:57.8535321Z hint: 	git config --global init.defaultBranch <name>
+2026-08-01T22:23:57.8537092Z hint:
+2026-08-01T22:23:57.8538249Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-08-01T22:23:57.8539996Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-08-01T22:23:57.8541576Z hint:
+2026-08-01T22:23:57.8542435Z hint: 	git branch -m <name>
+2026-08-01T22:23:57.8543416Z hint:
+2026-08-01T22:23:57.8544584Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-08-01T22:23:57.8546389Z Initialized empty Git repository in /home/runner/work/odin-labs/odin-labs/.git/
+2026-08-01T22:23:57.8553305Z [command]/usr/bin/git remote add origin https://github.com/odin-labs-ai/odin-labs
+2026-08-01T22:23:57.8591300Z ##[endgroup]
+2026-08-01T22:23:57.8593552Z ##[group]Disabling automatic garbage collection
+2026-08-01T22:23:57.8595806Z [command]/usr/bin/git config --local gc.auto 0
+2026-08-01T22:23:57.8630048Z ##[endgroup]
+2026-08-01T22:23:57.8632154Z ##[group]Setting up auth
+2026-08-01T22:23:57.8636281Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-01T22:23:57.8674117Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-01T22:23:57.9066120Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-01T22:23:57.9100507Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-01T22:23:57.9354151Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-01T22:23:57.9381602Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-01T22:23:57.9626558Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-08-01T22:23:57.9664315Z ##[endgroup]
+2026-08-01T22:23:57.9666655Z ##[group]Fetching the repository
+2026-08-01T22:23:57.9675528Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +64542a7054903fdb343ca849d0be2e42204896f6:refs/remotes/origin/main
+2026-08-01T22:24:03.7412980Z From https://github.com/odin-labs-ai/odin-labs
+2026-08-01T22:24:03.7449468Z ##[endgroup]
+2026-08-01T22:24:03.7450580Z ##[group]Determining the checkout info
+2026-08-01T22:24:03.7451871Z ##[endgroup]
+2026-08-01T22:24:03.7461903Z [command]/usr/bin/git sparse-checkout disable
+2026-08-01T22:24:03.7509007Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-08-01T22:24:03.7539684Z ##[group]Checking out the ref
+2026-08-01T22:24:03.7543931Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-08-01T22:24:04.7683822Z Updating files:  86% (5432/6301)
+2026-08-01T22:24:04.8842625Z Updating files:  87% (5482/6301)
+2026-08-01T22:24:04.8901296Z Updating files:  88% (5545/6301)
+2026-08-01T22:24:04.8953848Z Updating files:  89% (5608/6301)
+2026-08-01T22:24:04.9012479Z Updating files:  90% (5671/6301)
+2026-08-01T22:24:04.9099638Z Updating files:  91% (5734/6301)
+2026-08-01T22:24:04.9169705Z Updating files:  92% (5797/6301)
+2026-08-01T22:24:04.9229171Z Updating files:  93% (5860/6301)
+2026-08-01T22:24:04.9285171Z Updating files:  94% (5923/6301)
+2026-08-01T22:24:04.9341768Z Updating files:  95% (5986/6301)
+2026-08-01T22:24:04.9407472Z Updating files:  96% (6049/6301)
+2026-08-01T22:24:04.9467779Z Updating files:  97% (6112/6301)
+2026-08-01T22:24:04.9521942Z Updating files:  98% (6175/6301)
+2026-08-01T22:24:04.9565621Z Updating files:  99% (6238/6301)
+2026-08-01T22:24:04.9587683Z Updating files: 100% (6301/6301)
+2026-08-01T22:24:04.9588627Z Updating files: 100% (6301/6301), done.
+2026-08-01T22:24:04.9694390Z Switched to a new branch 'main'
+2026-08-01T22:24:04.9717452Z branch 'main' set up to track 'origin/main'.
+2026-08-01T22:24:04.9817740Z ##[endgroup]
+2026-08-01T22:24:04.9880322Z [command]/usr/bin/git log -1 --format=%H
+2026-08-01T22:24:04.9897727Z 64542a7054903fdb343ca849d0be2e42204896f6
+2026-08-01T22:24:05.0247971Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:24:05.0250835Z ##[group]Run actions/setup-node@v4
+2026-08-01T22:24:05.0251122Z with:
+2026-08-01T22:24:05.0251322Z   node-version: 22
+2026-08-01T22:24:05.0251546Z   always-auth: false
+2026-08-01T22:24:05.0251774Z   check-latest: false
+2026-08-01T22:24:05.0254568Z   token: ***
+2026-08-01T22:24:05.0254786Z ##[endgroup]
+2026-08-01T22:24:05.1953247Z (node:2013) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-01T22:24:05.1955551Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-01T22:24:05.2065500Z Found in cache @ /opt/hostedtoolcache/node/22.23.1/x64
+2026-08-01T22:24:05.2068545Z ##[group]Environment details
+2026-08-01T22:24:05.8582678Z node: v22.23.1
+2026-08-01T22:24:05.8583286Z npm: 10.9.8
+2026-08-01T22:24:05.8583703Z yarn: 1.22.22
+2026-08-01T22:24:05.8584558Z ##[endgroup]
+[EXCERPT: registry-config boilerplate line omitted (registry hostname wiring; no verdict content)]
+[EXCERPT: registry-config boilerplate line omitted (registry hostname wiring; no verdict content)]
+[EXCERPT: registry-auth boilerplate line omitted (token value was CI-masked; the auth-wiring pattern is internal lore per the release ADR)]
+2026-08-01T22:24:05.8839746Z shell: /usr/bin/bash -e {0}
+2026-08-01T22:24:05.8840022Z env:
+2026-08-01T22:24:05.8840509Z   NODE_AUTH_TOKEN: ***
+2026-08-01T22:24:05.8840756Z ##[endgroup]
+2026-08-01T22:24:05.8968267Z ##[group]Run set -uo pipefail
+2026-08-01T22:24:05.8968577Z set -uo pipefail
+2026-08-01T22:24:05.8969054Z if npm install --no-save --no-audit --no-fund @odinlabs-ai/engineering-blueprint@0.12.1 \
+2026-08-01T22:24:05.8969842Z   || { echo "install retry 1"; sleep 10; npm install --no-save --no-audit --no-fund @odinlabs-ai/engineering-blueprint@0.12.1; }; then
+2026-08-01T22:24:05.8970475Z   if npx --no-install bce --help >/dev/null; then
+2026-08-01T22:24:05.8970862Z     echo "engine=published-pin" >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:05.8971215Z     echo "resolved=true" >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:05.8971511Z     exit 0
+2026-08-01T22:24:05.8971726Z   fi
+2026-08-01T22:24:05.8971921Z fi
+2026-08-01T22:24:05.8972785Z echo "::warning title=published engine pin unavailable::@odinlabs-ai/engineering-blueprint@0.12.1 could not be installed/verified — falling back to source-build (graceful degradation, rule 01; never a silent skip)."
+2026-08-01T22:24:05.8973733Z echo "resolved=false" >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:05.9016781Z shell: /usr/bin/bash -e {0}
+2026-08-01T22:24:05.9017224Z ##[endgroup]
+2026-08-01T22:24:08.1676134Z 
+2026-08-01T22:24:08.1686345Z added 28 packages in 2s
+2026-08-01T22:24:08.8762504Z ##[group]Run set -euo pipefail
+2026-08-01T22:24:08.8762849Z set -euo pipefail
+2026-08-01T22:24:08.8763090Z set +e
+2026-08-01T22:24:08.8763408Z PROBE_ROW="$(bash .claude/scripts/blueprint-drift-check.sh .)"
+2026-08-01T22:24:08.8763784Z set -e
+2026-08-01T22:24:08.8764008Z echo "probe row: $PROBE_ROW"
+2026-08-01T22:24:08.8764279Z {
+2026-08-01T22:24:08.8764493Z   echo "row<<PROBE_EOF"
+2026-08-01T22:24:08.8764752Z   echo "$PROBE_ROW"
+2026-08-01T22:24:08.8764992Z   echo "PROBE_EOF"
+2026-08-01T22:24:08.8765235Z } >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:08.8765471Z 
+2026-08-01T22:24:08.8765668Z verdict_is() {
+2026-08-01T22:24:08.8766150Z   printf '%s' "$PROBE_ROW" | jq -e --arg v "$1" '.[] | select(.probe=="blueprint-drift") | .verdict==$v' >/dev/null 2>&1
+2026-08-01T22:24:08.8766640Z }
+2026-08-01T22:24:08.8766990Z 
+2026-08-01T22:24:08.8767248Z if verdict_is CONFORMANT; then
+2026-08-01T22:24:08.8767571Z   echo "verdict=CONFORMANT" >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:08.8768068Z   echo "OK: D_BLUEPRINT CONFORMANT — the authored blueprints match the repo at HEAD."
+2026-08-01T22:24:08.8768522Z   exit 0
+2026-08-01T22:24:08.8768729Z fi
+2026-08-01T22:24:08.8768939Z if verdict_is DRIFT; then
+2026-08-01T22:24:08.8769239Z   echo "verdict=DRIFT" >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:08.8769626Z   echo "--- full bce gate output (operator detail) ---"
+2026-08-01T22:24:08.8770140Z   npx --no-install bce gate --repo . --blueprint-dir .ai/blueprints --extractor ast || true
+2026-08-01T22:24:08.8771532Z   echo "::error::D_BLUEPRINT DRIFT — a blueprint no longer conforms to the repo (a forbidden dependency/egress crept in, or a required component vanished) even though no PR touched its scope. Fix the code, or amend the blueprint via the human-attended bce apply ceremony (detection-only — NEVER auto-heal). Probe row: $PROBE_ROW"
+2026-08-01T22:24:08.8772738Z   exit 1
+2026-08-01T22:24:08.8772953Z fi
+2026-08-01T22:24:08.8773226Z echo "verdict=INCONCLUSIVE" >> "$GITHUB_OUTPUT"
+2026-08-01T22:24:08.8774241Z echo "::error::D_BLUEPRINT INCONCLUSIVE — the probe did not return CONFORMANT/DRIFT (bce unavailable, no blueprints, or an unexpected row shape). An inconclusive monitor is NEVER a green one (rule 44 invariant c / rule 39 invariant e). Probe row: $PROBE_ROW"
+2026-08-01T22:24:08.8775164Z exit 1
+2026-08-01T22:24:08.8823358Z shell: /usr/bin/bash -e {0}
+2026-08-01T22:24:08.8823631Z ##[endgroup]
+2026-08-01T22:24:15.6429887Z probe row: [{"probe":"blueprint-drift","verdict":"CONFORMANT","drift":false}]
+2026-08-01T22:24:15.6466087Z OK: D_BLUEPRINT CONFORMANT — the authored blueprints match the repo at HEAD.
+2026-08-01T22:24:15.6529448Z ##[group]Run set -euo pipefail
+2026-08-01T22:24:15.6529762Z set -euo pipefail
+2026-08-01T22:24:15.6530044Z mkdir -p /tmp/heartbeat
+2026-08-01T22:24:15.6530305Z jq -nc \
+2026-08-01T22:24:15.6530544Z   --arg verdict "$VERDICT" \
+2026-08-01T22:24:15.6530830Z   --arg engine "$ENGINE" \
+2026-08-01T22:24:15.6531095Z   --arg sha "$GITHUB_SHA" \
+2026-08-01T22:24:15.6531357Z   --arg runId "$RUN_ID" \
+2026-08-01T22:24:15.6531611Z   --arg runUrl "$RUN_URL" \
+2026-08-01T22:24:15.6531878Z   --arg trigger "$TRIGGER" \
+2026-08-01T22:24:15.6532532Z   '{probe:"blueprint-drift", leg:"cloud", verdict:$verdict, engine:$engine, sha:$sha, runId:$runId, runUrl:$runUrl, trigger:$trigger, generatedAt:(now|todate)}' \
+2026-08-01T22:24:15.6533242Z   | tee -a /tmp/heartbeat/blueprint-drift-heartbeat.jsonl
+2026-08-01T22:24:15.6533580Z {
+2026-08-01T22:24:15.6533878Z   echo "### Blueprint Drift Monitor (cloud leg)"
+2026-08-01T22:24:15.6534192Z   echo ""
+2026-08-01T22:24:15.6534604Z   echo "- verdict: **$VERDICT**"
+2026-08-01T22:24:15.6534884Z   echo '```'
+2026-08-01T22:24:15.6535118Z   printf '%s\n' "$PROBE_ROW"
+2026-08-01T22:24:15.6535376Z   echo '```'
+2026-08-01T22:24:15.6535603Z } >> "$GITHUB_STEP_SUMMARY"
+2026-08-01T22:24:15.6582499Z shell: /usr/bin/bash -e {0}
+2026-08-01T22:24:15.6582767Z env:
+2026-08-01T22:24:15.6582973Z   VERDICT: CONFORMANT
+2026-08-01T22:24:15.6583336Z   PROBE_ROW: [{"probe":"blueprint-drift","verdict":"CONFORMANT","drift":false}]
+2026-08-01T22:24:15.6583748Z   ENGINE: published-pin
+2026-08-01T22:24:15.6583976Z   RUN_ID: 30721163116
+2026-08-01T22:24:15.6584331Z   RUN_URL: https://github.com/odin-labs-ai/odin-labs/actions/runs/30721163116
+2026-08-01T22:24:15.6584728Z   TRIGGER: workflow_dispatch
+2026-08-01T22:24:15.6584969Z ##[endgroup]
+2026-08-01T22:24:15.6695964Z {"probe":"blueprint-drift","leg":"cloud","verdict":"CONFORMANT","engine":"published-pin","sha":"64542a7054903fdb343ca849d0be2e42204896f6","runId":"30721163116","runUrl":"https://github.com/odin-labs-ai/odin-labs/actions/runs/30721163116","trigger":"workflow_dispatch","generatedAt":"2026-08-01T22:24:15Z"}
+2026-08-01T22:24:15.6769357Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:24:15.6770588Z ##[group]Run actions/upload-artifact@v4
+2026-08-01T22:24:15.6770861Z with:
+2026-08-01T22:24:15.6771079Z   name: blueprint-drift-heartbeat
+2026-08-01T22:24:15.6771410Z   path: /tmp/heartbeat/blueprint-drift-heartbeat.jsonl
+2026-08-01T22:24:15.6771737Z   retention-days: 90
+2026-08-01T22:24:15.6771964Z   if-no-files-found: warn
+2026-08-01T22:24:15.6772203Z   compression-level: 6
+2026-08-01T22:24:15.6772422Z   overwrite: false
+2026-08-01T22:24:15.6772648Z   include-hidden-files: false
+2026-08-01T22:24:15.6772910Z ##[endgroup]
+2026-08-01T22:24:15.8498246Z (node:2134) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-01T22:24:15.8506076Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-01T22:24:15.8529075Z With the provided path, there will be 1 file uploaded
+2026-08-01T22:24:15.8535075Z Artifact name is valid!
+2026-08-01T22:24:15.8535736Z Root directory input is valid!
+2026-08-01T22:24:15.9883682Z Beginning upload of artifact content to blob storage
+2026-08-01T22:24:16.0070570Z (node:2134) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-08-01T22:24:16.0479635Z Uploaded bytes 409
+2026-08-01T22:24:16.0653726Z Finished uploading artifact content to blob storage!
+2026-08-01T22:24:16.0655186Z SHA256 digest of uploaded artifact zip is aea10995519895dd179d429ffa045b140e3b111ce4d1d4bc9ace98c5f34fd51f
+2026-08-01T22:24:16.0656511Z Finalizing artifact upload
+2026-08-01T22:24:16.2299784Z Artifact blueprint-drift-heartbeat.zip successfully finalized. Artifact ID 8824897403
+2026-08-01T22:24:16.2301497Z Artifact blueprint-drift-heartbeat has been successfully uploaded! Final size is 409 bytes. Artifact ID is 8824897403
+2026-08-01T22:24:16.2307585Z Artifact download URL: https://github.com/odin-labs-ai/odin-labs/actions/runs/30721163116/artifacts/8824897403
+2026-08-01T22:24:16.2485188Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:24:16.2486363Z Post job cleanup.
+2026-08-01T22:24:16.3859106Z (node:2147) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-01T22:24:16.3884588Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-01T22:24:16.4119639Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-01T22:24:16.4121785Z Post job cleanup.
+2026-08-01T22:24:16.5547793Z [command]/usr/bin/git version
+2026-08-01T22:24:16.5607863Z git version 2.54.0
+2026-08-01T22:24:16.5707805Z Temporarily overriding HOME='/home/runner/work/_temp/401d0906-4b6c-4120-9433-17940e38332a' before making global git config changes
+2026-08-01T22:24:16.5725871Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-01T22:24:16.5749752Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-labs/odin-labs
+2026-08-01T22:24:16.5776359Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-01T22:24:16.5834260Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-01T22:24:16.6203308Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-01T22:24:16.6241787Z http.https://github.com/.extraheader
+2026-08-01T22:24:16.6259422Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-08-01T22:24:16.6334301Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-01T22:24:16.6742840Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-01T22:24:16.6815774Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-01T22:24:16.7335109Z Cleaning up orphan processes
+2026-08-01T22:24:16.7598047Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

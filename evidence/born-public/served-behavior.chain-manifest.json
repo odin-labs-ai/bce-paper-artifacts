@@ -1,0 +1,23 @@
+[
+  {
+    "index": 0,
+    "fixture": "behavior-surface/conformant-varying",
+    "recordId": "evidence:served-behavior@0.1.0:f217e321d94c7f87",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 1,
+    "fixture": "behavior-surface/drift-constant-output",
+    "recordId": "evidence:served-behavior@0.1.0:ae6e70d038b4c650",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 2,
+    "fixture": "behavior-surface/drift-oracle-violation",
+    "recordId": "evidence:served-behavior@0.1.0:1f13af7d31645c3d",
+    "score": 60,
+    "verdict": "fail"
+  }
+]

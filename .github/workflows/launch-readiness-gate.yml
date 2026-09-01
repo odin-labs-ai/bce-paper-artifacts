@@ -1,0 +1,112 @@
+name: launch-readiness-gate
+
+# ==============================================================================
+# The claims this repository makes about itself that stop being true at the flip.
+#
+# This is a PROVENANCE package. Its whole value is that a referee can trust what
+# it says about itself. A provenance package that is publicly wrong about its own
+# status is worse than one that says nothing -- the reader has no way to know
+# which other claims decayed the same way.
+#
+# Three claims are written for a private repository:
+#   README "Status: private during paper preparation"   self-refuting once public
+#   CITATION.cff `# doi:` commented as zenodo.TBD       the paper cites a DOI the
+#                                                       dataset does not carry
+#   README "engine release ~late October 2026"          the engine ships in THIS
+#                                                       ceremony, not in October
+#
+# The third would have gone unnoticed longest. This repository flips public EARLY
+# in the sequence -- it mints the DOI the sibling's citation gate needs -- several
+# steps before the engine repository flips. So there is a real window where this
+# public README announces a release date the project has already abandoned.
+#
+# INERT while private, blocking the instant the repository is public. Visibility
+# is GitHub's own value, passed in, never inferred.
+# ==============================================================================
+
+on:
+  # NO paths: filter, deliberately. A required status check that does not RUN on a
+  # given PR sits PERMANENTLY PENDING there -- not failed, pending, which no code
+  # change resolves. Filtering this gate makes it impossible to ever add to the
+  # required set, because every PR touching none of the filtered paths would be
+  # unmergeable forever.
+  #
+  # This was MEASURED on this repository, not reasoned about: PR #10 touched only
+  # ODIN-PUBLIC-MAPPING.md, and the required checksums gate appeared and gated
+  # while this one was absent entirely.
+  #
+  # The cost of running everywhere is a few file reads and one `npm view` -- no
+  # install, no build. Worth paying to keep this gate requirable once its claims
+  # are cleared at the flip.
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # Daily. The flip is a repo-settings change that fires no workflow at all, so
+    # polling is the only way this gate learns the repository went public.
+    - cron: '41 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    name: self-claims (inert while private, blocking once public)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # ----------------------------------------------------------------------
+      # NEGATIVE SELF-TEST — prove the teeth before trusting the pass.
+      #
+      # While private the real run below is inert and exits 0 forever, so without
+      # this the gate could sit green until the day it matters and never once
+      # demonstrate it can refuse. The breakage is PLANTED rather than relying on
+      # today's outstanding claims: after the flip those are all corrected, and a
+      # self-test assuming "forced-public is always red" would start failing
+      # exactly when the project got it right.
+      # ----------------------------------------------------------------------
+      - name: Self-test — forced-public must REFUSE a planted false claim
+        shell: bash
+        run: |
+          set -uo pipefail
+          cp README.md /tmp/README.orig
+          printf '\n**Status**: private during paper preparation and review. (launch-readiness self-test)\n' >> README.md
+          # errexit is ON in GitHub's default shell; the refusal IS the measurement.
+          set +e
+          LAUNCH_READINESS_FORCE_PUBLIC=1 node scripts/launch-readiness-check.mjs > /tmp/planted.log 2>&1
+          rc=$?
+          set -e
+          cp /tmp/README.orig README.md   # always restore
+          if [ "$rc" -ne 1 ]; then
+            echo "::error::self-test FAILED — forced-public exited ${rc} with a planted false claim, expected 1."
+            echo "A gate that cannot refuse a wrong page cannot vouch for a right one."
+            sed -n '1,40p' /tmp/planted.log
+            exit 1
+          fi
+          grep -q 'readme/status-private' /tmp/planted.log || {
+            echo "::error::self-test refused, but not for the planted reason."
+            sed -n '1,40p' /tmp/planted.log; exit 1; }
+          echo "self-test: PASS — forced-public refused the planted claim (exit 1), naming it."
+          grep -q 'launch-readiness self-test' README.md && { echo "::error::self-test restore failed"; exit 1; }
+          echo "self-test: restore verified."
+
+      # Per-detector negative control. The self-test above plants ONE false claim
+      # and proves ONE detector. The rest are regexes over prose, and a typo'd
+      # regex does not throw — it silently matches nothing and its claim reports
+      # TRUE forever. This proves each individually: strip the real claim (must go
+      # quiet), plant it back (must fire). It also exercises docs/engine-availability,
+      # which otherwise never runs while bce-engine is still the 0.0.0 stub.
+      - name: Self-test — every detector, individually
+        run: node scripts/launch-readiness-selftest.mjs
+
+      - name: Check the self-claims against this repository's real visibility
+        env:
+          REPO_IS_PRIVATE: ${{ github.event.repository.private }}
+        run: node scripts/launch-readiness-check.mjs

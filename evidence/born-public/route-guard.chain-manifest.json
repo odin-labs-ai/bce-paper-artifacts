@@ -1,0 +1,65 @@
+[
+  {
+    "index": 0,
+    "fixture": "route-surface/conformant-guarded",
+    "recordId": "evidence:route-guard@0.1.0:257aa36d895ee985",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 1,
+    "fixture": "route-surface/conformant-mixed-verbs",
+    "recordId": "evidence:route-guard@0.1.0:9ae3e88656ca6248",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 2,
+    "fixture": "route-surface/conformant-nested-segments",
+    "recordId": "evidence:route-guard@0.1.0:f0620559ad057d0f",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 3,
+    "fixture": "route-surface/drift-decoy-guard",
+    "recordId": "evidence:route-guard@0.1.0:8fed2f3518e0015c",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 4,
+    "fixture": "route-surface/drift-legacy-route",
+    "recordId": "evidence:route-guard@0.1.0:b12b724f388fcf6f",
+    "score": 80,
+    "verdict": "fail"
+  },
+  {
+    "index": 5,
+    "fixture": "route-surface/drift-missing-guard",
+    "recordId": "evidence:route-guard@0.1.0:507efdbb3a8d650d",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 6,
+    "fixture": "route-surface/drift-mock-metric",
+    "recordId": "evidence:route-guard@0.1.0:a82745301ee4f684",
+    "score": 80,
+    "verdict": "fail"
+  },
+  {
+    "index": 7,
+    "fixture": "route-surface/drift-shadow-provisioner",
+    "recordId": "evidence:route-guard@0.1.0:e53c0785c85b336c",
+    "score": 80,
+    "verdict": "fail"
+  },
+  {
+    "index": 8,
+    "fixture": "route-surface/drift-unguarded-new-route",
+    "recordId": "evidence:route-guard@0.1.0:50f53cb1c0643c9e",
+    "score": 20,
+    "verdict": "fail"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "blueprintRef": "odin-estate--odin-labs-ai-odin-labs@1.0.0",
+  "ctRepoRevision": "8b65a7007ae1a6694d15323442de356d8e0fb4b7",
+  "hash": "def46b977a523377843aa2ab4e66a6d3337dd12bb18c72420c2b1ca9ece49bd0",
+  "id": "evidence:odin-estate--odin-labs-ai-odin-labs@1.0.0:def46b977a523377",
+  "previousHash": "d2410e04d618412ec38c7206b0efb6a4662fa3e890616e9d5b978b8430539665",
+  "reportEvidenceRef": "architecture-graph.json@sha256:8b721dc11dc8cf18792c7a33f276cc177f3e086a5b42cbf63f958a1f5b84536e",
+  "schemaVersion": "1",
+  "score": 100,
+  "traceId": "odin-estate--odin-labs-ai-odin-labs",
+  "verdict": "pass",
+  "violationCount": 0
+}

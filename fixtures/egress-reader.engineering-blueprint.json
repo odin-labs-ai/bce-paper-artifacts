@@ -1,0 +1,57 @@
+{
+  "apiVersion": "odin.ai/v1alpha1",
+  "kind": "EngineeringBlueprint",
+  "metadata": {
+    "id": "egress-reader",
+    "name": "Egress Reader — governed-gateway-only surface",
+    "version": "0.1.0",
+    "status": "approved",
+    "ownerRole": "platform-engineer",
+    "stewardRole": "blueprint-steward"
+  },
+  "intentRefs": [
+    "policy:gateway-choke-point",
+    "policy:capability-transparency-invariant"
+  ],
+  "scope": {
+    "repositories": ["example-agent"],
+    "paths": ["src/**/*.ts"],
+    "environments": ["staging", "production"]
+  },
+  "extraction": {
+    "profile": "odin-extension",
+    "paths": ["src/**/*.ts"],
+    "guardSymbols": ["registerTool"],
+    "minFiles": 1
+  },
+  "architecture": {
+    "components": [
+      { "id": "reader", "type": "odinExtension", "owner": "contributor" },
+      { "id": "governedGateway", "type": "governedDependency", "owner": "agent-gateway" }
+    ],
+    "relationships": [
+      { "from": "reader", "to": "governedGateway", "type": "egress", "allowed": true }
+    ]
+  },
+  "constraints": [
+    {
+      "id": "reader-egress-governed-only",
+      "type": "forbiddenEgress",
+      "severity": "critical",
+      "from": "*",
+      "governedHosts": ["localhost", "127.0.0.1", "staging.example.com", "control.example.com", "agent-gateway"],
+      "egressCallees": ["fetch"],
+      "policyRef": "policy:gateway-choke-point"
+    }
+  ],
+  "evidenceRequirements": [
+    {
+      "type": "staticAst",
+      "required": true,
+      "onMissing": "block"
+    }
+  ],
+  "approvals": [
+    { "role": "blueprint-steward", "stage": "ratify" }
+  ]
+}

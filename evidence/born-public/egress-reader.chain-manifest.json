@@ -1,0 +1,51 @@
+[
+  {
+    "index": 0,
+    "fixture": "egress-surface/advisory-egress-crossmodule",
+    "recordId": "evidence:egress-reader@0.1.0:30fe805b9a9b56eb",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 1,
+    "fixture": "egress-surface/advisory-egress-envonly",
+    "recordId": "evidence:egress-reader@0.1.0:65bd40bc4b8d0f13",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 2,
+    "fixture": "egress-surface/conformant-houseidiom",
+    "recordId": "evidence:egress-reader@0.1.0:1a7f6b073d643f0e",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 3,
+    "fixture": "egress-surface/drift-egress-optbag",
+    "recordId": "evidence:egress-reader@0.1.0:1c54cfe9e1c373a8",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 4,
+    "fixture": "egress-surface/drift-egress-provider-houseidiom",
+    "recordId": "evidence:egress-reader@0.1.0:907296eb0a54acb2",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 5,
+    "fixture": "egress-surface/drift-egress-undici-client",
+    "recordId": "evidence:egress-reader@0.1.0:01f996d4672c8a6d",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 6,
+    "fixture": "egress-surface/unresolvable-env",
+    "recordId": "evidence:egress-reader@0.1.0:34f4e69be15a2461",
+    "score": 100,
+    "verdict": "pass"
+  }
+]

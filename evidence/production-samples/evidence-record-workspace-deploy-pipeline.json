@@ -1,0 +1,13 @@
+{
+  "blueprintRef": "workspace-deploy-pipeline@0.1.0",
+  "ctRepoRevision": "8b65a7007ae1a6694d15323442de356d8e0fb4b7",
+  "hash": "135da7a4d2143cc4bc6537a876e11f1cc9393149c7a510a42d46454339b27b9b",
+  "id": "evidence:workspace-deploy-pipeline@0.1.0:135da7a4d2143cc4",
+  "previousHash": "7b00216bfb6f087268c66e00b1922359992fd238cb4539073792fddaa76e3cbf",
+  "reportEvidenceRef": "architecture-graph.json@sha256:d4747e2f7a1faafaf95bcd18f42b920545bdf40f495a8c84ed1faf34e7dd7c33",
+  "schemaVersion": "1",
+  "score": 100,
+  "traceId": "workspace-deploy-pipeline",
+  "verdict": "pass",
+  "violationCount": 0
+}

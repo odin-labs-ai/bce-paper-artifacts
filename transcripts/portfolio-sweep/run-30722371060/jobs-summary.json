@@ -1,0 +1,513 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-08-01T22:58:04Z",
+      "conclusion": "success",
+      "id": 91428122421,
+      "name": "hermetic-self-test (verdict + pin-extract negative paths)",
+      "started_at": "2026-08-01T22:57:52Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run the reconciler + pin-extraction + overlay-rule-sha + remediation-emit + score-rollup suites"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T22:58:25Z",
+      "conclusion": "success",
+      "id": 91428154433,
+      "name": "read declared consumer set",
+      "started_at": "2026-08-01T22:58:07Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth (for the pinned engine)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the Blueprint Compliance Engine (fleet enginePin)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Registry \u2192 matrix"
+        },
+        {
+          "conclusion": "success",
+          "name": "Canonical shared-blueprint sha (fail-closed if absent)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Compile the canonical PortfolioBlueprint \u2192 expected overlay-rule-sha map (WO-B3-05)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T22:59:05Z",
+      "conclusion": "success",
+      "id": 91428184568,
+      "name": "gate odin-labs-ai/odin-suite",
+      "started_at": "2026-08-01T22:58:28Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout member odin-labs-ai/odin-suite"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the Blueprint Compliance Engine (registry enginePin, bounded retry)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Gate + pin-extract + shared-blueprint sha"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload verdict artifact"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout member odin-labs-ai/odin-suite"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T22:59:13Z",
+      "conclusion": "success",
+      "id": 91428184571,
+      "name": "gate odin-labs-ai/local-agents",
+      "started_at": "2026-08-01T22:58:35Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout member odin-labs-ai/local-agents"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the Blueprint Compliance Engine (registry enginePin, bounded retry)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Gate + pin-extract + shared-blueprint sha"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload verdict artifact"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout member odin-labs-ai/local-agents"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T22:59:57Z",
+      "conclusion": "success",
+      "id": 91428184574,
+      "name": "gate odin-labs-ai/odin-control-tower",
+      "started_at": "2026-08-01T22:58:35Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout member odin-labs-ai/odin-control-tower"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the Blueprint Compliance Engine (registry enginePin, bounded retry)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Gate + pin-extract + shared-blueprint sha"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload verdict artifact"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout member odin-labs-ai/odin-control-tower"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T22:58:56Z",
+      "conclusion": "success",
+      "id": 91428184576,
+      "name": "gate odin-labs-ai/odin-labs",
+      "started_at": "2026-08-01T22:58:28Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout member odin-labs-ai/odin-labs"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the Blueprint Compliance Engine (registry enginePin, bounded retry)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Gate + pin-extract + shared-blueprint sha"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload verdict artifact"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout member odin-labs-ai/odin-labs"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T23:06:10Z",
+      "conclusion": "success",
+      "id": 91428184581,
+      "name": "gate odin-labs-ai/odin-command-center",
+      "started_at": "2026-08-01T22:58:28Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout member odin-labs-ai/odin-command-center"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the Blueprint Compliance Engine (registry enginePin, bounded retry)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Gate + pin-extract + shared-blueprint sha"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload verdict artifact"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout member odin-labs-ai/odin-command-center"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Mint App installation token (contents:read; PAT fallback)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout sweep host (scripts + npmrc pattern)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T23:06:35Z",
+      "conclusion": "success",
+      "id": 91428855718,
+      "name": "portfolio verdict (denominator-pinned)",
+      "started_at": "2026-08-01T23:06:17Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Download all member verdicts (explicit-tolerate)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Reconcile against the declared consumer set"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload portfolio verdict"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-08-01T23:06:58Z",
+      "conclusion": "success",
+      "id": 91428893233,
+      "name": "record verdict + heartbeat (sink discipline)",
+      "started_at": "2026-08-01T23:06:45Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout main (push credential = [secret-name redacted])"
+        },
+        {
+          "conclusion": "success",
+          "name": "Download portfolio verdict (explicit-tolerate)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Write verdict record + verdict-aware heartbeat"
+        },
+        {
+          "conclusion": "success",
+          "name": "Emit conformance-remediation WOs (VP-2 B1 \u2014 detect\u2192propose loop)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Fleet Architecture Score rollup (B4 WO-3 \u2014 honest, denominator-disclosed)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Fleet Trust Rollup (W6 \u2014 standing, committed-sources-only, WITHHELD beats invented)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Commit (scoped, skip-ci, rebase-safe \u2014 the sink's proven discipline)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout main (push credential = [secret-name redacted])"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    }
+  ]
+}

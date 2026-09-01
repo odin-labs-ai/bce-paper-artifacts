@@ -1,0 +1,114 @@
+[
+  {
+    "index": 0,
+    "fixture": "extension-surface/conformant",
+    "recordId": "evidence:luna-chat-extension@0.1.0:e67638700850206a",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 1,
+    "fixture": "extension-surface/conformant-comment",
+    "recordId": "evidence:luna-chat-extension@0.1.0:7dbb5ae5d8702bab",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 2,
+    "fixture": "extension-surface/conformant-curried",
+    "recordId": "evidence:luna-chat-extension@0.1.0:47ec4fa003bc55c6",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 3,
+    "fixture": "extension-surface/conformant-typeimport",
+    "recordId": "evidence:luna-chat-extension@0.1.0:a06c059a938b13a4",
+    "score": 100,
+    "verdict": "pass"
+  },
+  {
+    "index": 4,
+    "fixture": "extension-surface/drift-decoy-register",
+    "recordId": "evidence:luna-chat-extension@0.1.0:3cd86e7ccd993200",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 5,
+    "fixture": "extension-surface/drift-dynamic-import",
+    "recordId": "evidence:luna-chat-extension@0.1.0:eb820663f53a2c38",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 6,
+    "fixture": "extension-surface/drift-dynamic-template",
+    "recordId": "evidence:luna-chat-extension@0.1.0:1e8d33a051dbab42",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 7,
+    "fixture": "extension-surface/drift-forbidden-import",
+    "recordId": "evidence:luna-chat-extension@0.1.0:173c459f4d569ebb",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 8,
+    "fixture": "extension-surface/drift-no-register",
+    "recordId": "evidence:luna-chat-extension@0.1.0:d32ea4e24ad0dc4e",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 9,
+    "fixture": "extension-surface/drift-reexport",
+    "recordId": "evidence:luna-chat-extension@0.1.0:2e312931f56e1ca0",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 10,
+    "fixture": "extension-surface/drift-require",
+    "recordId": "evidence:luna-chat-extension@0.1.0:47b45f6d7115eaed",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 11,
+    "fixture": "extension-surface/drift-require-template",
+    "recordId": "evidence:luna-chat-extension@0.1.0:4fc35de4ab7fadea",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 12,
+    "fixture": "extension-surface/drift-shadow-harness",
+    "recordId": "evidence:luna-chat-extension@0.1.0:61fede8a79469137",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 13,
+    "fixture": "extension-surface/drift-stray-register",
+    "recordId": "evidence:luna-chat-extension@0.1.0:4d1f72f8c5efd13e",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 14,
+    "fixture": "extension-surface/drift-ungoverned-import",
+    "recordId": "evidence:luna-chat-extension@0.1.0:980a6966c7f6d9b3",
+    "score": 60,
+    "verdict": "fail"
+  },
+  {
+    "index": 15,
+    "fixture": "extension-surface/drift-unrecognized-factory",
+    "recordId": "evidence:luna-chat-extension@0.1.0:ce5cc6a628a67a7a",
+    "score": 0,
+    "verdict": "fail"
+  }
+]

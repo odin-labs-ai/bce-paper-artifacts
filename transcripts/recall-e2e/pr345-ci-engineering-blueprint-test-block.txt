@@ -1,0 +1,140 @@
+2026-08-02T10:31:12.9166014Z ##[group]@odinlabs-ai/engineering-blueprint:test
+2026-08-02T10:31:12.9167120Z cache miss, executing 9c332dc013fb959c
+2026-08-02T10:31:12.9167545Z 
+2026-08-02T10:31:12.9168176Z > @odinlabs-ai/engineering-blueprint@0.12.1 test /home/runner/work/local-agents/local-agents/packages/engineering-blueprint
+2026-08-02T10:31:12.9168878Z > vitest run
+2026-08-02T10:31:12.9169143Z 
+2026-08-02T10:31:12.9169256Z 
+2026-08-02T10:31:12.9170216Z  RUN  v4.1.8 /home/runner/work/local-agents/local-agents/packages/engineering-blueprint
+2026-08-02T10:31:12.9171742Z 
+2026-08-02T10:31:12.9172407Z  ✓ tests/egress-blueprint.test.ts (53 tests) 77401ms
+2026-08-02T10:31:12.9173403Z      ✓ 1. CONFORMANT (house-idiom, governed default) → verdict pass, host resolved AND governed  5712ms
+2026-08-02T10:31:12.9174619Z      ✓ 2. DRIFT (house-idiom, ungoverned default — the realistic drift shape) → verdict fail, exactly one critical violation, score 60  3921ms
+2026-08-02T10:31:12.9176375Z      ✓ 3. UNRESOLVABLE (fetch(process.env.TARGET), no literal fallback) → verdict pass, ZERO violations, honestly disclosed in coverage.unsupported  3410ms
+2026-08-02T10:31:12.9177823Z      ✓ the CLI/gate `bce run` exit-1 contract holds on the drift fixture (via runGate)  3097ms
+2026-08-02T10:31:12.9178994Z      ✓ AST egress extraction + evaluate is byte-deterministic on the drift surface  6463ms
+2026-08-02T10:31:12.9180161Z      ✓ AST egress extraction + evaluate is byte-deterministic on the conformant surface  6032ms
+2026-08-02T10:31:12.9192542Z      ✓ drift-egress-optbag (https.request({hostname:"api.openai.com"})) → RED, one critical violation  2710ms
+2026-08-02T10:31:12.9194117Z      ✓ drift-egress-undici-client (new Client("https://api.openai.com")) → RED, one critical violation on the CONSTRUCTOR host  2700ms
+2026-08-02T10:31:12.9195735Z      ✓ a GOVERNED options-bag host is NOT a violation (allowlist-safe — the widen never false-REDs a governed host)  3255ms
+2026-08-02T10:31:12.9196921Z      ✓ advisory-egress-envonly (fetch(`${process.env.LLM_HOST}/v1`)) → PASS, ZERO violations, itemized with location  3068ms
+2026-08-02T10:31:12.9198348Z      ✓ advisory-egress-crossmodule (imported const host) → PASS, ZERO violations, itemized with location  2693ms
+2026-08-02T10:31:12.9199738Z      ✓ the aggregate count line STILL appears alongside the itemized lines (the b1 count is preserved, not replaced)  2876ms
+2026-08-02T10:31:12.9201360Z      ✓ conformant-houseidiom: resolved localhost → NO Class B item added (only the pre-existing aggregate count)  2851ms
+2026-08-02T10:31:12.9202726Z      ✓ drift-egress-provider-houseidiom: resolved api.openai.com → NO Class B item added  3273ms
+2026-08-02T10:31:12.9204162Z      ✓ AST extraction + evaluate is byte-identical across two runs on drift-egress-optbag  6154ms
+2026-08-02T10:31:12.9205317Z      ✓ AST extraction + evaluate is byte-identical across two runs on drift-egress-undici-client  6122ms
+2026-08-02T10:31:12.9206632Z      ✓ AST extraction + evaluate is byte-identical across two runs on advisory-egress-envonly  5411ms
+2026-08-02T10:31:12.9207801Z      ✓ AST extraction + evaluate is byte-identical across two runs on advisory-egress-crossmodule  7104ms
+2026-08-02T10:31:12.9208868Z  ✓ tests/materializer.test.ts (20 tests) 97ms
+2026-08-02T10:31:12.9210051Z  ✓ tests/extension-blueprint.test.ts (48 tests) 29167ms
+2026-08-02T10:31:12.9211257Z      ✓ the drifted extension (no register) yields NO provides edge  5151ms
+2026-08-02T10:31:12.9212468Z      ✓ DRIFT (no governed registration) → fail, the ungoverned-registration constraint fires  3597ms
+2026-08-02T10:31:12.9213726Z      ✓ [ast] #1 forbidden import in a file with an UNRECOGNIZED factory still fails  3385ms
+2026-08-02T10:31:12.9214946Z      ✓ [ast] #3 a DECOY .registerTool / local registerTool is NOT credited as governed  3299ms
+2026-08-02T10:31:12.9216139Z      ✓ [ast] a STRAY governed register OUTSIDE the factory body does NOT satisfy provides  3273ms
+2026-08-02T10:31:12.9217401Z      ✓ [ast] a bare registerTool imported from an UNGOVERNED module is not credited  3422ms
+2026-08-02T10:31:12.9218711Z      ✓ #3 evidenceType:tenantGuard on an odin-extension constraint does NOT retarget it to route semantics  2989ms
+2026-08-02T10:31:12.9220245Z      ✓ a from-specific forbiddenDependency STILL catches a forbidden import in an unrecognized-factory file  3342ms
+2026-08-02T10:31:12.9221901Z  ✓ tests/recall-e2e-proof.test.ts (52 tests) 25038ms
+2026-08-02T10:31:12.9223025Z      ✓ REFUSES a sub-floor threshold (minRecall<=0) — a rule-40 bypass  24984ms
+2026-08-02T10:31:12.9224017Z  ✓ tests/gate-skip-honesty.test.ts (19 tests) 667ms
+2026-08-02T10:31:12.9225076Z  ✓ tests/author-cli.test.ts (13 tests) 89232ms
+2026-08-02T10:31:12.9226260Z      ✓ author → validate ROUND-TRIP: the written draft passes bce validate + parseBlueprint  9678ms
+2026-08-02T10:31:12.9227661Z      ✓ EVERY constraint type in ConstraintTypeSchema is authorable (incl. both forbiddenEgress modes)  3886ms
+2026-08-02T10:31:12.9228760Z      ✓ REFUSES with no --intent-ref (schema demands intentRefs min 1)  2855ms
+2026-08-02T10:31:12.9229928Z      ✓ REFUSES with zero --constraint (schema demands constraints min 1)  3358ms
+2026-08-02T10:31:12.9231198Z      ✓ REFUSES an unknown constraint type, a malformed minimumMetric, and a missing --id  11338ms
+2026-08-02T10:31:12.9232556Z      ✓ REFUSES a forbiddenPattern with a catastrophic-backtracking (ReDoS) regex  3882ms
+2026-08-02T10:31:12.9233565Z      ✓ REFUSES a forbiddenPattern with an over-length regex  3703ms
+2026-08-02T10:31:12.9234678Z      ✓ REFUSES a forbiddenPattern with a non-compiling regex  2618ms
+2026-08-02T10:31:12.9236052Z      ✓ REFUSES odin-extension without --scope-paths, and a missing/underivable --repository  11596ms
+2026-08-02T10:31:12.9237178Z      ✓ bce init is an alias for bce author  9172ms
+2026-08-02T10:31:12.9238188Z      ✓ scan sanity with --repo PASSES when the scope matches files (odin-extension profile)  8319ms
+2026-08-02T10:31:12.9239454Z      ✓ scan sanity FAILS CLOSED (exit 2) when the scope matches 0 files — draft left for editing  9484ms
+2026-08-02T10:31:12.9240760Z      ✓ duplicate constraint fragments get deterministic positional suffixes (no silent overwrite)  9340ms
+2026-08-02T10:31:12.9242221Z  ✓ tests/forbidden-pattern.test.ts (16 tests) 37045ms
+2026-08-02T10:31:12.9243555Z      ✓ extractor records a deterministic coverage.patternScan (sorted, repo-relative) on the seeded repo  11209ms
+2026-08-02T10:31:12.9244935Z      ✓ both extractors yield the IDENTICAL patternScan (ast/line-scan parity — content grep needs no AST)  7159ms
+2026-08-02T10:31:12.9246502Z      ✓ RED: a planted Math.random() mock literal produces a forbiddenPattern violation + verdict fail + score 60  10241ms
+2026-08-02T10:31:12.9248236Z      ✓ WITNESS: the SAME seeded repo scores 100/pass under an 0.8.0-era blueprint (forbiddenFile on a non-matching glob) — forbiddenPattern is the discriminator  2213ms
+2026-08-02T10:31:12.9249678Z      ✓ GREEN: a clean tree (real computation, no mock literal) scores 100/pass under forbiddenPattern  1154ms
+2026-08-02T10:31:12.9251704Z      ✓ PATH-NARROWED: an optional `path` glob restricts which files the pattern reddens  759ms
+2026-08-02T10:31:12.9253317Z      ✓ BACK-COMPAT: a blueprint with NO forbiddenPattern constraint yields a graph WITHOUT patternScan (pre-0.9.0 graphs serialize byte-unchanged)  774ms
+2026-08-02T10:31:12.9254764Z      ✓ DETERMINISM: two independent scan+evaluate runs produce byte-identical reports  1615ms
+2026-08-02T10:31:12.9256209Z      ✓ a forbiddenPattern-only blueprint over a GREEN graph grades TOOTHED (injecting the mock-literal hit reddens it)  854ms
+2026-08-02T10:31:12.9257620Z      ✓ a forbiddenFile-only blueprint over a GREEN graph grades TOOTHED (was: default → TRIVIALLY_GREEN)  1032ms
+2026-08-02T10:31:12.9258784Z  ✓ tests/teeth.test.ts (13 tests) 153ms
+2026-08-02T10:31:12.9259820Z  ✓ tests/gateway-harvest.test.ts (17 tests) 86ms
+2026-08-02T10:31:12.9260759Z  ✓ tests/forbidden-egress.test.ts (8 tests) 9989ms
+2026-08-02T10:31:12.9271592Z      ✓ emits an egress edge for a raw fetch() to a provider host  3942ms
+2026-08-02T10:31:12.9272920Z      ✓ does NOT report a violation for an internal-service fetch (allowlist-safe)  1574ms
+2026-08-02T10:31:12.9274241Z      ✓ detects http.request / axios / got property-access + bare-identifier egress forms  1026ms
+2026-08-02T10:31:12.9275377Z      ✓ matches a subdomain of a forbidden host but not an unrelated host  715ms
+2026-08-02T10:31:12.9276698Z      ✓ surfaces a computed/non-literal fetch URL in coverage.unsupported (never silently passed)  582ms
+2026-08-02T10:31:12.9277711Z      ✓ scores 100/pass on an internal-only surface  573ms
+2026-08-02T10:31:12.9278922Z      ✓ scores RED (fail, <100) on a seeded raw provider-host egress  806ms
+2026-08-02T10:31:12.9279893Z      ✓ is deterministic — same tree in, byte-identical report out  757ms
+2026-08-02T10:31:12.9281120Z  ✓ tests/drift-steward-bridge.test.ts (12 tests) 8ms
+2026-08-02T10:31:12.9282213Z  ✓ tests/board.test.ts (12 tests) 6ms
+2026-08-02T10:31:12.9283121Z  ✓ tests/ast-hostile-scan-surface.test.ts (6 tests) 2604ms
+2026-08-02T10:31:12.9284491Z      ✓ CRASH-REGRESSION: extract() completes on the hostile tree (threw InvalidOperationError at 0.12.0)  1077ms
+2026-08-02T10:31:12.9285753Z      ✓ under-detection is bounded: the REAL forbidden import in the REAL .ts file is still detected  684ms
+2026-08-02T10:31:12.9287151Z      ✓ patternScan parity: ast and line-scan yield the IDENTICAL patternScan on the hostile tree (the §4 extractor-parity shape)  523ms
+2026-08-02T10:31:12.9288487Z      ✓ a hostile-only tree (no TS at all) extracts to an empty-but-valid graph, never a crash  311ms
+2026-08-02T10:31:12.9289692Z  ✓ tests/run-two-path-agreement.test.ts (3 tests) 6723ms
+2026-08-02T10:31:12.9291104Z      ✓ AGREEMENT: pinned (no --ref) and --no-pin BOTH grade HEAD — byte-identical violations, revision = HEAD sha  3471ms
+2026-08-02T10:31:12.9292426Z      ✓ EXPLICIT: --ref origin/main still resolves the origin/main sha and grades THAT older tree  1542ms
+2026-08-02T10:31:12.9293691Z      ✓ PASSTHROUGH: an explicit 40-hex sha is honored verbatim as the revision  1663ms
+2026-08-02T10:31:12.9294899Z  ✓ tests/steward-queue.test.ts (10 tests) 8ms
+2026-08-02T10:31:12.9295982Z  ✓ tests/gateway-harvest-cli.test.ts (9 tests) 5287ms
+2026-08-02T10:31:12.9297126Z      ✓ parses a synthetic JSONL fixture → deterministic BoundaryLearningLink[] + EvidenceItem[]  527ms
+2026-08-02T10:31:12.9298427Z      ✓ DETERMINISTIC — the same fixture in ANY order yields byte-identical link output  1052ms
+2026-08-02T10:31:12.9299448Z      ✓ accepts a JSON-array fixture shape as well as JSONL  523ms
+2026-08-02T10:31:12.9300494Z      ✓ --out writes the bundle to a file (still deterministic)  530ms
+2026-08-02T10:31:12.9301717Z      ✓ the subjectRef carries attribution but NEVER a raw gateway key (rule 02 secret discipline)  539ms
+2026-08-02T10:31:12.9303070Z      ✓ FAIL-CLOSED — a missing --refusal-lines file is a hard error, never a silent empty pass  554ms
+2026-08-02T10:31:12.9304219Z      ✓ FAIL-CLOSED — an empty fixture is a hard error, never an empty green run  530ms
+2026-08-02T10:31:12.9305360Z      ✓ FAIL-CLOSED — a malformed JSONL line is a hard error, never a partial silent pass  516ms
+2026-08-02T10:31:12.9306463Z      ✓ requires --refusal-lines (usage error when omitted)  513ms
+2026-08-02T10:31:12.9307504Z  ✓ tests/forbidden-file.test.ts (5 tests) 2383ms
+2026-08-02T10:31:12.9308655Z      ✓ extractor mints 0 components on the named-export seed but DOES record it in coverage.scannedFiles  1044ms
+2026-08-02T10:31:12.9310269Z      ✓ RED: a named-export beta-provisioner.ts produces a forbiddenFile violation + verdict fail  505ms
+2026-08-02T10:31:12.9311672Z      ✓ WITNESS: the SAME seed scores GREEN under an equivalent forbiddenPath (the gap forbiddenFile closes)  414ms
+2026-08-02T10:31:12.9312640Z      ✓ GREEN: a clean tree (legit database-provisioner.ts) scores 100/pass under forbiddenFile  417ms
+2026-08-02T10:31:12.9313417Z  ✓ tests/violation-rollup.test.ts (8 tests) 1068ms
+2026-08-02T10:31:12.9314351Z      ✓ rolls 2 report runs into a runs bundle with a populated proposals[] lane  528ms
+2026-08-02T10:31:12.9315380Z      ✓ a single non-recurring run yields ZERO proposals (honest empty, not fabricated)  534ms
+2026-08-02T10:31:12.9316341Z  ✓ tests/apply-cli.test.ts (6 tests) 2722ms
+2026-08-02T10:31:12.9317231Z      ✓ DRY-RUN without --confirm mutates nothing  555ms
+2026-08-02T10:31:12.9318272Z      ✓ LANDS a safe tighten with --confirm --actor → version bumps + apply-evidence written  555ms
+2026-08-02T10:31:12.9319307Z      ✓ REFUSES a dangerous relax without --dangerous-ack + --rationale  556ms
+2026-08-02T10:31:12.9320327Z      ✓ LANDS a dangerous relax only with the full --dangerous-ack --rationale ceremony  529ms
+2026-08-02T10:31:12.9321346Z      ✓ refuses without --actor (never anonymous)  520ms
+2026-08-02T10:31:12.9322146Z  ✓ tests/engineering-blueprint.test.ts (10 tests) 26ms
+2026-08-02T10:31:12.9323041Z  ✓ tests/recall-gate.test.ts (12 tests) 6ms
+2026-08-02T10:31:12.9323797Z  ✓ tests/determinism-proof.test.ts (7 tests) 52ms
+2026-08-02T10:31:12.9324656Z  ✓ tests/apply-proposal.test.ts (13 tests) 12ms
+2026-08-02T10:31:12.9325547Z  ✓ tests/self-dogfood-termination.test.ts (4 tests) 4057ms
+2026-08-02T10:31:12.9326483Z      ✓ the engine gates its OWN source GREEN (100/pass) — the invariant holds  1964ms
+2026-08-02T10:31:12.9327499Z      ✓ a self-serving drift (engine imports forbidden @prisma/client) is caught RED  2086ms
+2026-08-02T10:31:12.9328470Z  ✓ tests/observations-merge.test.ts (7 tests) 3310ms
+2026-08-02T10:31:12.9329351Z      ✓ a bare --observations (no path) dies LOUD, never a silent skip  515ms
+2026-08-02T10:31:12.9330522Z      ✓ a malformed observation node (bad path segment) is REJECTED (never a silent partial merge)  1387ms
+2026-08-02T10:31:12.9331582Z      ✓ a non-array observations file is REJECTED  1400ms
+2026-08-02T10:31:12.9332436Z  ✓ tests/materialize-stream.test.ts (5 tests) 267ms
+2026-08-02T10:31:12.9333123Z fatal: 'origin' does not appear to be a git repository
+2026-08-02T10:31:12.9333574Z fatal: Could not read from remote repository.
+2026-08-02T10:31:12.9333816Z 
+2026-08-02T10:31:12.9334071Z Please make sure you have the correct access rights
+2026-08-02T10:31:12.9334454Z and the repository exists.
+2026-08-02T10:31:12.9334994Z fatal: ambiguous argument 'no-such-ref-xyz': unknown revision or path not in the working tree.
+2026-08-02T10:31:12.9335662Z Use '--' to separate paths from revisions, like this:
+2026-08-02T10:31:12.9336140Z 'git <command> [<revision>...] -- [<file>...]'
+2026-08-02T10:31:12.9336933Z  ✓ tests/pin-default-head.test.ts (6 tests) 151ms
+2026-08-02T10:31:12.9337804Z  ✓ tests/corpus.test.ts (13 tests) 935ms
+2026-08-02T10:31:12.9338767Z      ✓ evaluate() over the real fixture produces a report that caughtDefect() credits  927ms
+2026-08-02T10:31:12.9339730Z  ✓ tests/new-context-proposer.test.ts (8 tests) 7ms
+2026-08-02T10:31:12.9340641Z  ✓ tests/evidence-store.test.ts (13 tests) 6ms
+2026-08-02T10:31:12.9341536Z  ✓ tests/gate.test.ts (14 tests) 932ms
+2026-08-02T10:31:12.9342437Z      ✓ DRIFT (no governed registration) repo → failed  876ms

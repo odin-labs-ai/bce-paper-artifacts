@@ -1,0 +1,92 @@
+{
+  "apiVersion": "odin.ai/v1alpha1",
+  "kind": "EngineeringBlueprint",
+  "metadata": {
+    "id": "luna-chat-extension",
+    "name": "Luna Chat Extension — governed agent extension surface",
+    "version": "0.1.0",
+    "status": "approved",
+    "ownerRole": "platform-engineer",
+    "stewardRole": "blueprint-steward"
+  },
+  "intentRefs": [
+    "policy:permission-spine",
+    "policy:gateway-choke-point",
+    "policy:extension-arch"
+  ],
+  "scope": {
+    "repositories": ["example-agent"],
+    "paths": ["src/extensions/**/*.extension.ts"],
+    "environments": ["staging", "production"]
+  },
+  "extraction": {
+    "profile": "odin-extension",
+    "paths": ["src/extensions/**/*.extension.ts"],
+    "guardSymbols": ["registerTool", "registerOdinTool"],
+    "governedModules": ["@example/agent-harness", "@example/agent-runtime"],
+    "forbiddenImports": ["openai", "@anthropic-ai/sdk", "@google/generative-ai"],
+    "minFiles": 1
+  },
+  "architecture": {
+    "components": [
+      { "id": "lunaChatExtension", "type": "odinExtension", "owner": "contributor" },
+      { "id": "governedRouter", "type": "governedDependency", "owner": "agent-gateway" }
+    ],
+    "relationships": [
+      {
+        "from": "lunaChatExtension",
+        "to": "governedRouter",
+        "type": "registers-through",
+        "allowed": true
+      },
+      {
+        "from": "lunaChatExtension",
+        "to": "openai",
+        "type": "imports",
+        "allowed": false
+      }
+    ]
+  },
+  "constraints": [
+    {
+      "id": "ext-must-be-recognizable",
+      "type": "requiredComponent",
+      "severity": "high",
+      "component": "odinExtension",
+      "policyRef": "policy:extension-arch"
+    },
+    {
+      "id": "ext-registers-through-governed-path",
+      "type": "requiredDependency",
+      "severity": "critical",
+      "component": "odinExtension",
+      "policyRef": "policy:permission-spine"
+    },
+    {
+      "id": "no-direct-provider-sdk",
+      "type": "forbiddenDependency",
+      "severity": "critical",
+      "from": "*",
+      "to": "openai",
+      "policyRef": "policy:gateway-choke-point"
+    },
+    {
+      "id": "no-direct-anthropic-sdk",
+      "type": "forbiddenDependency",
+      "severity": "critical",
+      "from": "*",
+      "to": "@anthropic-ai/sdk",
+      "policyRef": "policy:gateway-choke-point"
+    }
+  ],
+  "evidenceRequirements": [
+    {
+      "type": "staticAst",
+      "required": true,
+      "onMissing": "block"
+    }
+  ],
+  "approvals": [
+    { "role": "blueprint-steward", "stage": "ratify" }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "1",
+  "title": "bce seeded-defect corpus manifest",
+  "note": "The corpus SPEC (ground truth for the recall measurement): every seeded id maps to a real fixture tree in this repository and to the constraintId the engine emits when it catches the defect, at the minimum severity that counts as a catch. Descriptions are genericized; ids, blueprintRefs, fixtures, constraintIds and severities are verbatim from the frozen SEEDED_CORPUS constant. recall = |caught| / |seeded|. A catch counts only under the blueprint the defect was planted in and at/above expectedSeverity.",
+  "counts": {
+    "seeded": 25,
+    "seededFixtureDirs": 23,
+    "cleanFixtureDirs": 12,
+    "surfaces": 4
+  },
+  "blueprints": {
+    "luna-chat-extension@0.1.0": "fixtures/luna-chat-extension.engineering-blueprint.json",
+    "egress-reader@0.1.0": "fixtures/egress-reader.engineering-blueprint.json",
+    "route-guard@0.1.0": "fixtures/route-guard.engineering-blueprint.json",
+    "served-behavior@0.1.0": "fixtures/served-behavior.engineering-blueprint.json"
+  },
+  "seeded": [
+    {
+      "id": "ext-direct-openai-import",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-forbidden-import",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the extension imports the openai SDK directly instead of routing through the gateway"
+    },
+    {
+      "id": "ext-reexport-openai",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-reexport",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the extension re-exports the openai SDK (export \u2026 from) \u2014 a provider reach via re-export"
+    },
+    {
+      "id": "ext-dynamic-import-openai",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-dynamic-import",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the extension reaches openai via a dynamic import() \u2014 the async-import bypass"
+    },
+    {
+      "id": "ext-ungoverned-registration",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-no-register",
+      "constraintId": "ext-registers-through-governed-path",
+      "expectedSeverity": "critical",
+      "description": "the extension does not register through the governed registerTool path"
+    },
+    {
+      "id": "ext-shadowed-harness-decoy",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-shadow-harness",
+      "constraintId": "ext-registers-through-governed-path",
+      "expectedSeverity": "critical",
+      "description": "the extension registers via a same-name decoy that shadows the pi harness (ungoverned)"
+    },
+    {
+      "id": "ext-decoy-registration",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-decoy-register",
+      "constraintId": "ext-registers-through-governed-path",
+      "expectedSeverity": "critical",
+      "description": "the extension registers via a decoy object .registerTool (not the governed harness)"
+    },
+    {
+      "id": "ext-ungoverned-egress-provider",
+      "blueprintRef": "egress-reader@0.1.0",
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/drift-egress-provider-houseidiom",
+      "constraintId": "reader-egress-governed-only",
+      "expectedSeverity": "critical",
+      "description": "the extension egresses to an ungoverned provider host via the house-idiom ||-chain default, bypassing the gateway"
+    },
+    {
+      "id": "ext-ungoverned-egress-optbag",
+      "blueprintRef": "egress-reader@0.1.0",
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/drift-egress-optbag",
+      "constraintId": "reader-egress-governed-only",
+      "expectedSeverity": "critical",
+      "description": "the extension egresses to an ungoverned provider host via the http(s).request options-bag {hostname} form"
+    },
+    {
+      "id": "ext-ungoverned-egress-undici-client",
+      "blueprintRef": "egress-reader@0.1.0",
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/drift-egress-undici-client",
+      "constraintId": "reader-egress-governed-only",
+      "expectedSeverity": "critical",
+      "description": "the extension egresses to an ungoverned provider host via a new undici.Client(literal-url) dispatcher constructor"
+    },
+    {
+      "id": "rg-missing-tenant-guard",
+      "blueprintRef": "route-guard@0.1.0",
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/drift-missing-guard",
+      "constraintId": "d6-tenant-guard",
+      "expectedSeverity": "critical",
+      "description": "tenant route POST validates+queries with NO tenant-guard call \u2014 the exact C-AUTH-02 unit shape (CWE-306)"
+    },
+    {
+      "id": "rg-unguarded-new-route",
+      "blueprintRef": "route-guard@0.1.0",
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/drift-unguarded-new-route",
+      "constraintId": "d6-tenant-guard",
+      "expectedSeverity": "critical",
+      "description": "a NEW parallel route ships GET+POST with zero guard calls beside guarded neighbors \u2014 the real 75-violation shape"
+    },
+    {
+      "id": "rg-decoy-guard-object",
+      "blueprintRef": "route-guard@0.1.0",
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/drift-decoy-guard",
+      "constraintId": "d6-tenant-guard",
+      "expectedSeverity": "critical",
+      "description": "handler calls auth.requireTenantAccess (same-name property-access decoy, not the bare imported guard)"
+    },
+    {
+      "id": "rg-legacy-route-path",
+      "blueprintRef": "route-guard@0.1.0",
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/drift-legacy-route",
+      "constraintId": "no-legacy-route-path",
+      "expectedSeverity": "high",
+      "description": "a guarded route placed under the forbidden src/app/api/legacy/** path (forbiddenPath arm, first corpus exercise)"
+    },
+    {
+      "id": "rg-shadow-provisioner-file",
+      "blueprintRef": "route-guard@0.1.0",
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/drift-shadow-provisioner",
+      "constraintId": "no-parallel-provisioner-file",
+      "expectedSeverity": "high",
+      "description": "a parallel *-provisioner.ts authored as a named-export class (0 components) \u2014 caught via coverage.scannedFiles only"
+    },
+    {
+      "id": "rg-mocked-metric-pattern",
+      "blueprintRef": "route-guard@0.1.0",
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/drift-mock-metric",
+      "constraintId": "no-mocked-metrics",
+      "expectedSeverity": "high",
+      "description": "a guarded route returns a mocked Math.random() metric \u2014 caught via coverage.patternScan at the exact file#line"
+    },
+    {
+      "id": "ext-unrecognizable-factory",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-unrecognized-factory",
+      "constraintId": "ext-must-be-recognizable",
+      "expectedSeverity": "high",
+      "description": "file with a non-name-recognized factory extracts 0 odinExtension components \u2014 the requiredComponent arm fires"
+    },
+    {
+      "id": "ext-unrecognizable-forbidden-import",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-unrecognized-factory",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the forbidden openai import is caught via the file: pseudo-component even without a recognized factory"
+    },
+    {
+      "id": "ext-unrecognizable-zero-targets",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-unrecognized-factory",
+      "constraintId": "ext-registers-through-governed-path",
+      "expectedSeverity": "critical",
+      "description": "requiredDependency over ZERO target components is NOT vacuously satisfied \u2014 the fail-closed zero-targets arm"
+    },
+    {
+      "id": "bhv-constant-function",
+      "blueprintRef": "served-behavior@0.1.0",
+      "surface": "behavior-surface",
+      "fixture": "fixtures/behavior-surface/drift-constant-output",
+      "constraintId": "served-output-varies-with-input",
+      "expectedSeverity": "critical",
+      "description": "all recorded observations share ONE outputHash across distinct+held-out stimuli \u2014 the mock/constant-function signature"
+    },
+    {
+      "id": "bhv-oracle-violation",
+      "blueprintRef": "served-behavior@0.1.0",
+      "surface": "behavior-surface",
+      "fixture": "fixtures/behavior-surface/drift-oracle-violation",
+      "constraintId": "served-output-varies-with-input",
+      "expectedSeverity": "critical",
+      "description": "one recorded observation violated its property oracle (oracleSatisfied=0) with distinct hashes \u2014 the oracle branch, isolated"
+    },
+    {
+      "id": "ext-require-openai",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-require",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the extension reaches openai via CommonJS require() \u2014 the require-form bypass"
+    },
+    {
+      "id": "ext-require-template-openai",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-require-template",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the extension reaches openai via require(`openai`) \u2014 the template-literal require specifier"
+    },
+    {
+      "id": "ext-dynamic-template-openai",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-dynamic-template",
+      "constraintId": "no-direct-provider-sdk",
+      "expectedSeverity": "critical",
+      "description": "the extension reaches openai via import(`openai`) \u2014 the template-literal dynamic-import specifier"
+    },
+    {
+      "id": "ext-stray-register",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-stray-register",
+      "constraintId": "ext-registers-through-governed-path",
+      "expectedSeverity": "critical",
+      "description": "the factory body never registers; a stray registration sits OUTSIDE it (not credited \u2014 fail-closed)"
+    },
+    {
+      "id": "ext-ungoverned-registry-import",
+      "blueprintRef": "luna-chat-extension@0.1.0",
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/drift-ungoverned-import",
+      "constraintId": "ext-registers-through-governed-path",
+      "expectedSeverity": "critical",
+      "description": "bare registerTool imported from an UNGOVERNED module \u2014 ungoverned provenance is not credited"
+    }
+  ],
+  "cleanFixtures": [
+    {
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/conformant"
+    },
+    {
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/conformant-comment"
+    },
+    {
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/conformant-curried"
+    },
+    {
+      "surface": "extension-surface",
+      "fixture": "fixtures/extension-surface/conformant-typeimport"
+    },
+    {
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/advisory-egress-crossmodule"
+    },
+    {
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/advisory-egress-envonly"
+    },
+    {
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/conformant-houseidiom"
+    },
+    {
+      "surface": "egress-surface",
+      "fixture": "fixtures/egress-surface/unresolvable-env"
+    },
+    {
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/conformant-guarded"
+    },
+    {
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/conformant-mixed-verbs"
+    },
+    {
+      "surface": "route-surface",
+      "fixture": "fixtures/route-surface/conformant-nested-segments"
+    },
+    {
+      "surface": "behavior-surface",
+      "fixture": "fixtures/behavior-surface/conformant-varying"
+    }
+  ]
+}

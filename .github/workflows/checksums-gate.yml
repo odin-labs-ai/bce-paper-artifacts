@@ -1,0 +1,114 @@
+name: checksums-gate
+
+# ==============================================================================
+# The integrity manifest, enforced.
+#
+# This repository's whole claim is provenance: a referee is invited to re-derive
+# every shipped byte. Until this workflow existed there was NOTHING enforcing
+# CHECKSUMS.txt -- the repository had no workflows at all -- so the manifest was
+# maintained by hand and drifted twice in one day:
+#
+#   #4 (08ca33f)  repaired one manifest line after a README edit falsified it
+#   #5 (01d4d9f)  edited README.md and transcripts/PROVENANCE.md WITHOUT
+#                 regenerating -- re-falsifying the manifest in the very next
+#                 commit, and shipping it
+#
+# Measured on a clean tree at 01d4d9f: 116 OK / 2 FAILED, plus
+# ODIN-PUBLIC-MAPPING.md tracked since 2026-08-04 and never manifested at all.
+# A provenance package whose own manifest is stale is the one defect it cannot
+# afford, and a hand-maintained manifest will always drift again.
+#
+# Three legs, because "shasum -c passes" alone is not integrity:
+#
+#   1. INTEGRITY  every manifest entry matches the file on disk
+#   2. COVERAGE   every tracked file appears in the manifest. Leg 1 alone cannot
+#                 see an omission -- an unlisted file is silently un-verified,
+#                 which is exactly how ODIN-PUBLIC-MAPPING.md went 10 days
+#                 unhashed while `shasum -c` reported success.
+#   3. NO ORPHANS no manifest entry names a file that no longer exists
+#
+# There is no skip flag.
+# ==============================================================================
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checksums:
+    name: integrity + coverage + no-orphans
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # Per-leg negative control. Leg 1 was demonstrated once (a flipped byte
+      # reddened it); leg 2 fired only by accident, against the commit that added
+      # this workflow; leg 3 had NEVER fired. A leg that cannot fail is a leg
+      # nobody has watched work — and leg 2 is the one that catches what leg 1
+      # structurally cannot see, since `shasum -c` only checks entries that are
+      # LISTED. Runs first, so a broken gate is caught before its verdict is used.
+      - name: Self-test — all three legs, each on its own planted breakage
+        shell: bash
+        run: bash scripts/checksums-gate-selftest.sh
+
+      - name: Leg 1 — INTEGRITY (every manifest entry matches the file on disk)
+        shell: bash
+        run: |
+          set -uo pipefail
+          if [ ! -f CHECKSUMS.txt ]; then
+            echo "::error::checksums-gate: CHECKSUMS.txt is missing. This repository's"
+            echo "integrity claim depends on it; a release cannot ship without it."
+            exit 1
+          fi
+          out="$(shasum -a 256 -c CHECKSUMS.txt 2>&1)"; rc=$?
+          ok="$(printf '%s\n' "$out" | grep -c ': OK$' || true)"
+          bad="$(printf '%s\n' "$out" | grep -c ': FAILED' || true)"
+          echo "integrity: ${ok} OK / ${bad} FAILED"
+          if [ "$rc" -ne 0 ] || [ "$bad" -ne 0 ]; then
+            echo "::error::checksums-gate leg 1 FAILED — the manifest does not match the tree."
+            printf '%s\n' "$out" | grep -v ': OK$' | head -40
+            echo ""
+            echo "Regenerate it in the SAME commit as the content change:"
+            echo "  git ls-files | grep -v '^CHECKSUMS.txt\$' | sed 's|^|./|' | tr '\\n' '\\0' | xargs -0 shasum -a 256 > CHECKSUMS.txt"
+            exit 1
+          fi
+
+      - name: Leg 2 — COVERAGE (every tracked file is manifested)
+        shell: bash
+        run: |
+          set -uo pipefail
+          # The manifest ships './'-prefixed paths; git ls-files emits bare paths.
+          git ls-files | grep -v '^CHECKSUMS.txt$' | sort > /tmp/tracked.txt
+          sed 's|^[a-f0-9]\{64\}  \./||' CHECKSUMS.txt | sort > /tmp/manifested.txt
+          missing="$(comm -23 /tmp/tracked.txt /tmp/manifested.txt)"
+          if [ -n "$missing" ]; then
+            echo "::error::checksums-gate leg 2 FAILED — tracked file(s) absent from the manifest."
+            echo "These ship UNVERIFIED. Leg 1 cannot see them: 'shasum -c' only checks the"
+            echo "entries that are listed, so an omitted file passes silently."
+            printf '%s\n' "$missing"
+            exit 1
+          fi
+          echo "coverage: $(wc -l < /tmp/tracked.txt) tracked file(s), all manifested"
+
+      - name: Leg 3 — NO ORPHANS (no manifest entry names a vanished file)
+        shell: bash
+        run: |
+          set -uo pipefail
+          orphans="$(comm -13 /tmp/tracked.txt /tmp/manifested.txt)"
+          if [ -n "$orphans" ]; then
+            echo "::error::checksums-gate leg 3 FAILED — manifest entries name file(s) not in the tree."
+            printf '%s\n' "$orphans"
+            exit 1
+          fi
+          echo "no-orphans: every manifest entry resolves to a tracked file"
+
+      - name: Manifest is enforced
+        shell: bash
+        run: |
+          echo "checksums-gate: PASS — integrity, coverage and no-orphans all green."

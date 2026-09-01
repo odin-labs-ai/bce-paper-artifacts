@@ -1,0 +1,69 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-07-30T21:40:13Z",
+      "conclusion": "failure",
+      "id": 91011841261,
+      "name": "blueprint-behavioral-odin-agent",
+      "started_at": "2026-07-30T21:39:49Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout (full history for changed-file diff)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Compute whether this PR touches a probed seam"
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup pnpm"
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup Node"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure npm registry auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install odin-agent dependencies"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Install the Blueprint Compliance Engine (pinned, run-capable)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Run the served-runtime probe (self-guarding)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Grade the behavioral blueprint (bce run --observations)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Setup Node"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup pnpm"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout (full history for changed-file diff)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    }
+  ]
+}

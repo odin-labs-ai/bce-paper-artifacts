@@ -1,0 +1,61 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-08-01T22:24:18Z",
+      "conclusion": "success",
+      "id": 91425116025,
+      "name": "D_BLUEPRINT drift check (cloud leg)",
+      "started_at": "2026-08-01T22:23:55Z",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout (fresh clone \u2014 the cloud freshness gate)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup Node"
+        },
+        {
+          "conclusion": "success",
+          "name": "Configure GitHub Packages auth"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install the pinned published engine (primary \u2014 hermetic)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Fallback \u2014 source-build the engine (the launchd runner's own path)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run the drift check + assert the probe actually RAN"
+        },
+        {
+          "conclusion": "success",
+          "name": "Heartbeat line"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload heartbeat artifact"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup Node"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout (fresh clone \u2014 the cloud freshness gate)"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    }
+  ]
+}

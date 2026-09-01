@@ -1,0 +1,83 @@
+{
+  "apiVersion": "odin.ai/v1alpha1",
+  "kind": "EngineeringBlueprint",
+  "metadata": {
+    "id": "route-guard",
+    "name": "Route Guard — tenant-guarded Next.js API route surface (C-AUTH-02 / historical-D6 form)",
+    "version": "0.1.0",
+    "status": "approved",
+    "ownerRole": "platform-engineer",
+    "stewardRole": "blueprint-steward"
+  },
+  "intentRefs": [
+    "policy:tenant-ownership-invariant",
+    "adr:write-authority-model"
+  ],
+  "scope": {
+    "repositories": ["example-app"],
+    "paths": ["src/app/api/**/*.ts"],
+    "environments": ["staging", "production"]
+  },
+  "extraction": {
+    "profile": "next-route-handler",
+    "paths": ["src/app/api/**/*.ts"],
+    "guardSymbols": ["requireTenantAccess", "requireTenantWriteAccess", "requireTenantAdminAccess"],
+    "minFiles": 3
+  },
+  "architecture": {
+    "components": [
+      { "id": "tenantRouteHandlers", "type": "apiRouteHandler", "owner": "control-tower" },
+      { "id": "tenantGuardLib", "type": "governedDependency", "owner": "control-tower" }
+    ],
+    "relationships": [
+      {
+        "from": "tenantRouteHandlers",
+        "to": "tenantGuardLib",
+        "type": "guards",
+        "allowed": true
+      }
+    ]
+  },
+  "constraints": [
+    {
+      "id": "d6-tenant-guard",
+      "type": "requiredDependency",
+      "severity": "critical",
+      "component": "apiRouteHandler",
+      "evidenceType": "tenantGuard",
+      "policyRef": "policy:tenant-ownership-invariant"
+    },
+    {
+      "id": "no-legacy-route-path",
+      "type": "forbiddenPath",
+      "severity": "high",
+      "path": "src/app/api/legacy/**",
+      "policyRef": "policy:tenant-ownership-invariant"
+    },
+    {
+      "id": "no-parallel-provisioner-file",
+      "type": "forbiddenFile",
+      "severity": "high",
+      "path": "**/*-provisioner.ts",
+      "policyRef": "policy:tenant-provisioning"
+    },
+    {
+      "id": "no-mocked-metrics",
+      "type": "forbiddenPattern",
+      "severity": "high",
+      "pattern": "Math\\.random\\(\\)",
+      "path": "src/app/api/**/route.ts",
+      "policyRef": "policy:explicit-over-implicit"
+    }
+  ],
+  "evidenceRequirements": [
+    {
+      "type": "staticAst",
+      "required": true,
+      "onMissing": "block"
+    }
+  ],
+  "approvals": [
+    { "role": "blueprint-steward", "stage": "ratify" }
+  ]
+}

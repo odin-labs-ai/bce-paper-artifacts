@@ -1,0 +1,165 @@
+[EXCERPT NOTICE: 474 git-fetch branch/tag enumeration lines omitted (they name unrelated internal work branches); 0 registry-auth boilerplate lines replaced inline. Nothing from the gate/probe/sweep execution or its verdict was removed. Full raw log available to reviewers on request.]
+
+﻿2026-07-30T22:13:13.4637769Z Current runner version: '2.336.0'
+2026-07-30T22:13:13.4677088Z ##[group]Runner Image Provisioner
+2026-07-30T22:13:13.4678477Z Hosted Compute Agent
+2026-07-30T22:13:13.4679357Z Version: 20260707.563
+2026-07-30T22:13:13.4680274Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+2026-07-30T22:13:13.4681539Z Build Date: 2026-07-07T19:33:50Z
+2026-07-30T22:13:13.4682857Z Worker ID: {16c864c1-0210-4a63-94dd-0733a9321002}
+2026-07-30T22:13:13.4684130Z Azure Region: eastus
+2026-07-30T22:13:13.4685082Z ##[endgroup]
+2026-07-30T22:13:13.4687472Z ##[group]Operating System
+2026-07-30T22:13:13.4688591Z Ubuntu
+2026-07-30T22:13:13.4689443Z 24.04.4
+2026-07-30T22:13:13.4690416Z LTS
+2026-07-30T22:13:13.4691200Z ##[endgroup]
+2026-07-30T22:13:13.4692166Z ##[group]Runner Image
+2026-07-30T22:13:13.4693248Z Image: ubuntu-24.04
+2026-07-30T22:13:13.4694121Z Version: 20260720.247.2
+2026-07-30T22:13:13.4696364Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+2026-07-30T22:13:13.4698881Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+2026-07-30T22:13:13.4700495Z ##[endgroup]
+2026-07-30T22:13:13.4702625Z ##[group]GITHUB_TOKEN Permissions
+2026-07-30T22:13:13.4705802Z Contents: read
+2026-07-30T22:13:13.4706722Z Metadata: read
+2026-07-30T22:13:13.4707716Z ##[endgroup]
+2026-07-30T22:13:13.4711136Z Secret source: Actions
+2026-07-30T22:13:13.4713605Z Prepare workflow directory
+2026-07-30T22:13:13.5187438Z Prepare all required actions
+2026-07-30T22:13:13.5257348Z Getting action download info
+2026-07-30T22:13:13.7800423Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-07-30T22:13:14.0217932Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+2026-07-30T22:13:14.1975415Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-07-30T22:13:14.3934482Z Complete job name: blueprint-behavioral-odin-agent
+2026-07-30T22:13:14.4990152Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T22:13:14.5001591Z ##[group]Run actions/checkout@v4
+2026-07-30T22:13:14.5003084Z with:
+2026-07-30T22:13:14.5003798Z   fetch-depth: 0
+2026-07-30T22:13:14.5004531Z   repository: odin-labs-ai/odin-suite
+2026-07-30T22:13:14.5008784Z   token: ***
+2026-07-30T22:13:14.5009229Z   ssh-strict: true
+2026-07-30T22:13:14.5009676Z   ssh-user: git
+2026-07-30T22:13:14.5010137Z   persist-credentials: true
+2026-07-30T22:13:14.5010645Z   clean: true
+2026-07-30T22:13:14.5011099Z   sparse-checkout-cone-mode: true
+2026-07-30T22:13:14.5011627Z   fetch-tags: false
+2026-07-30T22:13:14.5033695Z   show-progress: true
+2026-07-30T22:13:14.5034463Z   lfs: false
+2026-07-30T22:13:14.5035228Z   submodules: false
+2026-07-30T22:13:14.5035935Z   set-safe-directory: true
+2026-07-30T22:13:14.5036734Z   allow-unsafe-pr-checkout: false
+2026-07-30T22:13:14.5038268Z ##[endgroup]
+2026-07-30T22:13:14.6300784Z Syncing repository: odin-labs-ai/odin-suite
+2026-07-30T22:13:14.6303908Z ##[group]Getting Git version info
+2026-07-30T22:13:14.6305294Z Working directory is '/home/runner/work/odin-suite/odin-suite'
+2026-07-30T22:13:14.6307560Z [command]/usr/bin/git version
+2026-07-30T22:13:14.7376358Z git version 2.54.0
+2026-07-30T22:13:14.7397589Z ##[endgroup]
+2026-07-30T22:13:14.7411445Z Temporarily overriding HOME='/home/runner/work/_temp/ae73fe4b-4e5b-4bc5-a502-512501ed1489' before making global git config changes
+2026-07-30T22:13:14.7414616Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-30T22:13:14.7417050Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-suite/odin-suite
+2026-07-30T22:13:14.7717846Z Deleting the contents of '/home/runner/work/odin-suite/odin-suite'
+2026-07-30T22:13:14.7763811Z ##[group]Initializing the repository
+2026-07-30T22:13:14.7788791Z [command]/usr/bin/git init /home/runner/work/odin-suite/odin-suite
+2026-07-30T22:13:14.7921281Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-07-30T22:13:14.7941049Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-07-30T22:13:14.7955202Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-07-30T22:13:14.7957124Z hint: call:
+2026-07-30T22:13:14.7958292Z hint:
+2026-07-30T22:13:14.7959495Z hint: 	git config --global init.defaultBranch <name>
+2026-07-30T22:13:14.7960885Z hint:
+2026-07-30T22:13:14.7962544Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-07-30T22:13:14.7964509Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-07-30T22:13:14.7966002Z hint:
+2026-07-30T22:13:14.7967033Z hint: 	git branch -m <name>
+2026-07-30T22:13:14.7968324Z hint:
+2026-07-30T22:13:14.7969818Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-07-30T22:13:14.7975717Z Initialized empty Git repository in /home/runner/work/odin-suite/odin-suite/.git/
+2026-07-30T22:13:14.7979949Z [command]/usr/bin/git remote add origin https://github.com/odin-labs-ai/odin-suite
+2026-07-30T22:13:15.0736685Z ##[endgroup]
+2026-07-30T22:13:15.0738862Z ##[group]Disabling automatic garbage collection
+2026-07-30T22:13:15.0740594Z [command]/usr/bin/git config --local gc.auto 0
+2026-07-30T22:13:15.0789729Z ##[endgroup]
+2026-07-30T22:13:15.0792132Z ##[group]Setting up auth
+2026-07-30T22:13:15.0794067Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-30T22:13:15.1348205Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-30T22:13:15.3343804Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-30T22:13:15.3405426Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-30T22:13:15.3789498Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-30T22:13:15.3853983Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-30T22:13:15.4224016Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-07-30T22:13:15.4788802Z ##[endgroup]
+2026-07-30T22:13:15.4814260Z ##[group]Fetching the repository
+2026-07-30T22:13:15.4817819Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +0d5914b4fef398442819e9cc12166cfedbe2fdc0:refs/remotes/pull/1006/merge
+2026-07-30T22:13:18.0967948Z From https://github.com/odin-labs-ai/odin-suite
+2026-07-30T22:13:18.3461317Z  * [new ref]           0d5914b4fef398442819e9cc12166cfedbe2fdc0 -> pull/1006/merge
+2026-07-30T22:13:18.3503413Z ##[endgroup]
+2026-07-30T22:13:18.3504662Z ##[group]Determining the checkout info
+2026-07-30T22:13:18.3506711Z ##[endgroup]
+2026-07-30T22:13:18.3507881Z [command]/usr/bin/git sparse-checkout disable
+2026-07-30T22:13:18.3512056Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-07-30T22:13:18.3514907Z ##[group]Checking out the ref
+2026-07-30T22:13:18.3515768Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1006/merge
+2026-07-30T22:13:18.6673725Z Note: switching to 'refs/remotes/pull/1006/merge'.
+2026-07-30T22:13:18.6682241Z 
+2026-07-30T22:13:18.6692641Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-07-30T22:13:18.6701174Z changes and commit them, and you can discard any commits you make in this
+2026-07-30T22:13:18.6702977Z state without impacting any branches by switching back to a branch.
+2026-07-30T22:13:18.6714111Z 
+2026-07-30T22:13:18.6720981Z If you want to create a new branch to retain commits you create, you may
+2026-07-30T22:13:18.6722030Z do so (now or later) by using -c with the switch command. Example:
+2026-07-30T22:13:18.6722617Z 
+2026-07-30T22:13:18.6730381Z   git switch -c <new-branch-name>
+2026-07-30T22:13:18.6730764Z 
+2026-07-30T22:13:18.6731068Z Or undo this operation with:
+2026-07-30T22:13:18.6731502Z 
+2026-07-30T22:13:18.6731731Z   git switch -
+2026-07-30T22:13:18.6732412Z 
+2026-07-30T22:13:18.6732852Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-07-30T22:13:18.6733498Z 
+2026-07-30T22:13:18.6734227Z HEAD is now at 0d5914b4 Merge cd7779e6a855850548f90b77f8764c975cef54ae into 0963350e8483b8fdd3360db20656231efe13d4ee
+2026-07-30T22:13:18.6736694Z ##[endgroup]
+2026-07-30T22:13:18.6740817Z [command]/usr/bin/git log -1 --format=%H
+2026-07-30T22:13:18.6755942Z 0d5914b4fef398442819e9cc12166cfedbe2fdc0
+2026-07-30T22:13:18.7012582Z ##[group]Run set -euo pipefail
+2026-07-30T22:13:18.7013058Z set -euo pipefail
+2026-07-30T22:13:18.7013441Z # schedule / dispatch = full sweep, always run.
+2026-07-30T22:13:18.7013847Z if [ "pull_request" != "pull_request" ]; then
+2026-07-30T22:13:18.7014206Z   echo "mode=sweep" >> "$GITHUB_OUTPUT"
+2026-07-30T22:13:18.7014511Z   exit 0
+2026-07-30T22:13:18.7014733Z fi
+2026-07-30T22:13:18.7015014Z BASE="0963350e8483b8fdd3360db20656231efe13d4ee"
+2026-07-30T22:13:18.7015409Z HEAD="cd7779e6a855850548f90b77f8764c975cef54ae"
+2026-07-30T22:13:18.7015907Z # Path-scope derived from the probe's REAL seam imports + the gate's own machinery.
+2026-07-30T22:13:18.7016536Z # (Deliberately broader than the blueprint's scope.paths of src/tui/** — see header.)
+2026-07-30T22:13:18.7017080Z MATCH=$(git diff --name-only "$BASE" "$HEAD" | grep -E \
+2026-07-30T22:13:18.7018257Z   '^odin-agent/src/tui/|^odin-agent/src/rpc/prompt-frame-dispatch\.ts$|^odin-agent/src/blueprint/served-runtime-probe\.ts$|^odin-agent/\.ai/blueprints/agent-tui-cockpit\.served-runtime\.json$|^\.github/workflows/blueprint-behavioral-gate-odin-agent\.yml$' \
+2026-07-30T22:13:18.7019312Z   || true)
+2026-07-30T22:13:18.7019558Z if [ -z "$MATCH" ]; then
+2026-07-30T22:13:18.7019853Z   echo "mode=skip" >> "$GITHUB_OUTPUT"
+2026-07-30T22:13:18.7020374Z   echo "This PR touches no probed seam — behavioral gate out of scope; skip-green."
+2026-07-30T22:13:18.7020832Z else
+2026-07-30T22:13:18.7021091Z   echo "mode=run" >> "$GITHUB_OUTPUT"
+2026-07-30T22:13:18.7021462Z   printf 'Probed seams touched:\n%s\n' "$MATCH"
+2026-07-30T22:13:18.7021780Z fi
+2026-07-30T22:13:18.7075638Z shell: /usr/bin/bash -e {0}
+2026-07-30T22:13:18.7075974Z ##[endgroup]
+2026-07-30T22:13:18.7216297Z This PR touches no probed seam — behavioral gate out of scope; skip-green.
+2026-07-30T22:13:18.7456497Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-30T22:13:18.7458417Z Post job cleanup.
+2026-07-30T22:13:18.8399902Z [command]/usr/bin/git version
+2026-07-30T22:13:18.8443313Z git version 2.54.0
+2026-07-30T22:13:18.8484355Z Temporarily overriding HOME='/home/runner/work/_temp/b4e60225-1fe9-4697-8739-c95be09c30ae' before making global git config changes
+2026-07-30T22:13:18.8487667Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-30T22:13:18.8491358Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/odin-suite/odin-suite
+2026-07-30T22:13:18.8536184Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-30T22:13:18.8577973Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-30T22:13:18.8923201Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-30T22:13:18.8969921Z http.https://github.com/.extraheader
+2026-07-30T22:13:18.9002971Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-07-30T22:13:18.9060237Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-30T22:13:18.9403643Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-30T22:13:18.9442778Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-30T22:13:18.9848539Z Cleaning up orphan processes
+2026-07-30T22:13:19.0155329Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
