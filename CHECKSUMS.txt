@@ -4,10 +4,10 @@ ccbe355d1b27d47c26a26864b255640bbe3664e35fbbd067bdf6061a97f98c83  ./.github/work
 7af162177934ce912c0d54b7bc82e0d3d94b5044292a5cc66e98fca85b0824a7  ./EXCLUSIONS.md
 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  ./LICENSE
 2b0eff64f3367758e0b76287f7c12d26ed21fb17675247e4a57528bcfaa23b7f  ./NOTICE
-1e4d7b22029b792aeef4924be795122e4a7cc464f14846641eca7d9bef08edb3  ./README.md
+181981cbcf5eea2f568159c89395683a0c4d2f76b219215becb85800541a6383  ./README.md
 042f20fbe29a6c8e5b26703a879dada8cc75db4eca3cea7e4dc2d64395e1bf12  ./corpus/MANIFEST.json
 b1f62a489b21caada5ab5f3f2b1404a340128e1370bd43bae9cb2399102037e0  ./corpus/PROVENANCE.md
-22f916b389d16e232941b29318a02be2671512dffa10dcdb9208dc224d409481  ./evidence/PROVENANCE.md
+3459d42cf692b70ffe37e85426d83b387e9afc80a8ce90a39ab9e4fa3b13ab37  ./evidence/PROVENANCE.md
 eea33d578442e26609e69fd24d746d38c5276f2f7957cd9a31eff4129b517ddc  ./evidence/born-public/egress-reader.chain-manifest.json
 ae3c67a6345ff8cbdf334816f13aa19aae000c1b1ccbbaed36bc8c847a1e964a  ./evidence/born-public/egress-reader.chain.jsonl
 3ab97a42ebefd5768e1eb57a4c8ffca3da780b6b5d735d51f0343f58184e0894  ./evidence/born-public/luna-chat-extension.chain-manifest.json
@@ -24,7 +24,7 @@ ceb212ad57cbda36f482cff4d76daee321756dddb45c0f99732f2941b83fe3ae  ./evidence/pro
 ca1df06145a92f3ee48f3668ff7c31a6c9baf9421aeac3bd5ffcce3b12f7d023  ./evidence/production-samples/evidence-record-workspace-deploy-pipeline.json
 57cc1586a0d0ef80b7f795cfde980105eca2943098b4d69af9d144d78136a6e7  ./evidence/score-series/fleet-subsystem-score-series.jsonl
 070e51ba7531d26bc3453ae9f1cac173b0108d505de160e4fb689b22a55b3402  ./evidence/score-series/portfolio-fleet-score-series.jsonl
-25ac2bf26ad665ce51ea00fe7c1ddaa5076c4c300014c76925e129aefc029a2e  ./fixtures/PROVENANCE.md
+d9f5faeb5bee9c434d57b07892bac612bacf8a9063ed1301dee722a154c8444d  ./fixtures/PROVENANCE.md
 b860db1f3172104384dbbd974427f8e0c7e0cfa5844d25126a2581d5ff4cf364  ./fixtures/behavior-surface/conformant-varying/observations.json
 b87a63b7eef1c7a6606f86ab0912ee9ba21eb4e0a99ec23a1892db9804435144  ./fixtures/behavior-surface/conformant-varying/src/served-runtime.extension.ts
 a6ff3df6ccfa0da1a35af06eb4f0fe17c97dc78882a961e6e922c5b0edcecc02  ./fixtures/behavior-surface/drift-constant-output/observations.json

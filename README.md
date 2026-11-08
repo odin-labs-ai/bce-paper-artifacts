@@ -30,7 +30,7 @@ built engine code.
 npx --yes --package=bce-engine@0.6.1 -- bce demo --recipe module-layering   # one clean and one planted-drift fixture: GREEN, then RED
 ```
 
-## Capability scope — what re-derives TODAY vs at engine release
+## Capability scope — what re-derives with this repo alone vs with the public engine
 
 | Claim surface | With this repo + node alone | With the public engine |
 |---|---|---|
@@ -39,7 +39,7 @@ npx --yes --package=bce-engine@0.6.1 -- bce demo --recipe module-layering   # on
 | Engine-pin drift fails closed (version-skew honesty) | **YES (inspectable)** — the recorded DRIFT→CONFORMANT pair in `transcripts/pin-drift/` | re-executable |
 | Gates are wired as required checks | **YES (inspectable)** — live branch-protection API reads in `transcripts/branch-protection/` (including the honest `enforce_admins: false` disclosure) | unchanged |
 | Corpus spec (what was seeded, where, what counts as a catch) | **YES** — `corpus/MANIFEST.json` + the full fixture trees in `fixtures/` | unchanged |
-| Recall / false-positive measurement (the headline validation) | **Inspectable, not re-executable**: the recorded CI transcript (`transcripts/recall-e2e/`, 52 e2e + 13 corpus tests green) + the corpus + fixtures are here, but re-RUNNING the measurement requires the engine | **YES** — the public engine's recall protocol, commands below |
+| Recall / false-positive measurement (the headline validation) | **Inspectable, not re-executable**: the recorded CI transcript (`transcripts/recall-e2e/`, 52 e2e + 13 corpus tests green) + the corpus + fixtures are here, but re-RUNNING the measurement requires the engine | **YES, as a protocol re-run** over the public engine's genericized corpus, not the paper's run — commands below |
 | Production evidence provenance | **Partial** — 4 byte-intact fleet records content-verify; chain predecessors are not shipped (stated, not hidden) | unchanged |
 
 ## Re-derivation commands
@@ -53,7 +53,7 @@ node verify/verify-chain.mjs evidence/production-samples # 4 fleet records — c
 
 The paper's availability section names two commands in the private monorepo
 (`pnpm --filter @odinlabs-ai/engineering-blueprint test recall-e2e-proof` and `… test corpus`). Their public
-descendants live in the engine repository, pinned here to a released tag (Node 22+, about a minute):
+descendants live in the engine repository, pinned here to a released tag (Node 22+):
 
 ```bash
 git clone --depth 1 --branch v0.6.1 https://github.com/blueprint-conformance/bce.git && cd bce
