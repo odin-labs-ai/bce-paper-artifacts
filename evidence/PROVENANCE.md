@@ -21,8 +21,10 @@ scores). **These chains are demonstrations of the evidence-chain mechanics over 
 nothing about any production system**, and the drift records in a chain do not represent a witnessed
 regression-and-fix episode on real code — they are fixture runs in directory-sort order.
 
-Re-generation at engine release: `bce run --emit` (or the exported `toEvidenceRecord`) over the same fixtures
-reproduces byte-identical records — the record shape is deterministic and wall-clock-free.
+Re-generation: these records were emitted by the paper's private engine build; `bce run --emit` (or the exported
+`toEvidenceRecord`) of that build over the same fixtures reproduces them byte for byte, because the record shape is
+deterministic and wall-clock-free. The public `bce-engine` line emits its own records and is not claimed to
+reproduce these bytes.
 
 ## production-samples/ (existence proof tier — byte-intact)
 

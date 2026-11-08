@@ -17,22 +17,29 @@ this repository's own launch-readiness gate reports that one outstanding item by
 ## What is (and is not) here
 
 **The engine is not in this repository.** The verifier engine (`bce` — schema, extractors, evaluator, gate,
-CLI) is a self-contained package (18 published versions, 0.2.0–0.17.1 — fifteen minor releases plus three
-patches, 0.2.1, 0.12.1 and 0.17.1, the 0.16.x minor never published; 0.17.1 latest as of 2026-08-31)
-currently on a private, access-restricted registry. A public open-core release of the verifier under
-Apache-2.0 is **prepared and planned to follow this preprint**. Until then the engine is available to
-reviewers on request. Nothing in this repository contains engine source or built engine code.
+CLI) is public under Apache-2.0: source at [blueprint-conformance/bce](https://github.com/blueprint-conformance/bce),
+package [`bce-engine`](https://www.npmjs.com/package/bce-engine) on npm (check the current version with
+`npm view bce-engine version dist.integrity`). The paper's runs used the engine's earlier private
+lineage, published as `@odinlabs-ai/engineering-blueprint` 0.2.0–0.17.1 on a private registry; the public
+`bce-engine` restarted the version line at 0.1.0. Nothing in this repository contains engine source or
+built engine code.
 
-## Capability scope — what re-derives TODAY vs at engine release
+**Try the engine itself** (Node 22+), in any directory:
 
-| Claim surface | With this repo + node alone, today | At engine release (~Oct 2026) |
+```bash
+npx --yes --package=bce-engine@0.6.1 -- bce demo --recipe module-layering   # one clean and one planted-drift fixture: GREEN, then RED
+```
+
+## Capability scope — what re-derives with this repo alone vs with the public engine
+
+| Claim surface | With this repo + node alone | With the public engine |
 |---|---|---|
 | Evidence-chain integrity (tamper-evidence of records) | **YES** — `node verify/verify-chain.mjs evidence/born-public` and `…/production-samples` | unchanged |
 | The gate can go RED (planted regression fails CI) | **YES (inspectable)** — recorded run transcripts + API metadata in `transcripts/behavioral-gate/` (the planted-regression branch) with the exact fetch commands | re-executable against the public engine's own CI |
 | Engine-pin drift fails closed (version-skew honesty) | **YES (inspectable)** — the recorded DRIFT→CONFORMANT pair in `transcripts/pin-drift/` | re-executable |
 | Gates are wired as required checks | **YES (inspectable)** — live branch-protection API reads in `transcripts/branch-protection/` (including the honest `enforce_admins: false` disclosure) | unchanged |
 | Corpus spec (what was seeded, where, what counts as a catch) | **YES** — `corpus/MANIFEST.json` + the full fixture trees in `fixtures/` | unchanged |
-| Recall / false-positive measurement (the headline validation) | **Inspectable, not re-executable**: the recorded CI transcript (`transcripts/recall-e2e/`, 52 e2e + 13 corpus tests green) + the corpus + fixtures are here, but re-RUNNING the measurement requires the engine | **YES** — two commands, below |
+| Recall / false-positive measurement (the headline validation) | **Inspectable, not re-executable**: the recorded CI transcript (`transcripts/recall-e2e/`, 52 e2e + 13 corpus tests green) + the corpus + fixtures are here, but re-RUNNING the measurement requires the engine | **YES, as a protocol re-run** over the public engine's genericized corpus, not the paper's run — commands below |
 | Production evidence provenance | **Partial** — 4 byte-intact fleet records content-verify; chain predecessors are not shipped (stated, not hidden) | unchanged |
 
 ## Re-derivation commands
@@ -44,18 +51,20 @@ node verify/verify-chain.mjs evidence/born-public        # 35 records, 4 chains 
 node verify/verify-chain.mjs evidence/production-samples # 4 fleet records — content hashes must verify
 ```
 
-Quoted from the paper's availability section — **engine package required** (on request until the open-core
-release; a revised paper version will add the repository link):
+The paper's availability section names two commands in the private monorepo
+(`pnpm --filter @odinlabs-ai/engineering-blueprint test recall-e2e-proof` and `… test corpus`). Their public
+descendants live in the engine repository, pinned here to a released tag (Node 22+):
 
 ```bash
-pnpm --filter @odinlabs-ai/engineering-blueprint test recall-e2e-proof   # real extractor+evaluator over the
-                                                                         # seeded fixtures, gate verdict at
-                                                                         # pinned thresholds
-pnpm --filter @odinlabs-ai/engineering-blueprint test corpus             # corpus integrity: every fixture resolves
+git clone --depth 1 --branch v0.6.1 https://github.com/blueprint-conformance/bce.git && cd bce
+npm ci
+npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-manifest.test.ts
 ```
 
-Full re-execution of those two commands awaits the engine release; presenting them without that caveat would
-overstate what a reader can do today, so: you cannot run them yet unless you request engine access.
+This re-executes the recall **protocol** over the public engine's genericized corpus, not a byte-identical
+replay of the paper's run: suite-v2 rows 1–25 map to the frozen corpus in `corpus/` here, and rows 26–35 postdate
+the paper. The engine's [`corpus/CORPUS-MAP.md`](https://github.com/blueprint-conformance/bce/blob/v0.6.1/corpus/CORPUS-MAP.md)
+states exactly what is identical, what was genericized, and the claim the mapping supports.
 
 ## Layout
 
@@ -83,8 +92,9 @@ EXCLUSIONS.md   what was withheld or excerpted, why, and the recorded leak-audit
 
 Every sentence in this repository is bound to the paper's claims table at its recorded tier. In particular:
 
-- The engine is **not** publicly available today; its public release is planned (see above). This repository
-  is the paper-artifacts subset only.
+- The engine is public (see above), but its released line is not the private build the paper measured; the
+  mapping between the two corpora is stated in the engine's `corpus/CORPUS-MAP.md`. This repository is the
+  paper-artifacts subset only.
 - The born-public evidence chains demonstrate chain **mechanics** over public fixtures; they witness nothing
   about production. The production samples are latest-link records; no production RED→fix→GREEN chain
   round-trip is claimed.

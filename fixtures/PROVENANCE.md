@@ -33,8 +33,8 @@ At artifact-build time (2026-08-02) the maintainer ran the real engine's `tests/
 `tests/recall-e2e-proof.test.ts` (vitest, node 22) twice in a local checkout: once against the pristine
 fixtures, once with this repository's genericized fixtures grafted in. **Both runs: 2 files, 65 tests, all
 passing** — every seeded defect still caught at its expected severity, every clean fixture still clean. The
-genericization changed no verdict. (This validation ran locally against the private engine; a reviewer can
-re-run it when the engine publishes, or on request.)
+genericization changed no verdict. (This validation ran locally against the paper's private engine build, on request only. The public engine's
+own recall tests over its genericized corpus are a different run; see the README.)
 
 ## Not included (see /EXCLUSIONS.md)
 
