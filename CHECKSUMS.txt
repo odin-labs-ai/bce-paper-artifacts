@@ -1,10 +1,10 @@
 ccbe355d1b27d47c26a26864b255640bbe3664e35fbbd067bdf6061a97f98c83  ./.github/workflows/checksums-gate.yml
 34c7abbee84145c86dd8ed964e671c146ab5d20fed8041914e5129dca317f6c9  ./.github/workflows/launch-readiness-gate.yml
 9fe8a920ced196c301809660702ab740438f66f49ca989e5a26a95dcf141731d  ./CITATION.cff
-f7e5b1fbf431ed63738e60b8417e11d90ec2bcc88b3f613488fc45d45bc16089  ./EXCLUSIONS.md
+7af162177934ce912c0d54b7bc82e0d3d94b5044292a5cc66e98fca85b0824a7  ./EXCLUSIONS.md
 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  ./LICENSE
 2b0eff64f3367758e0b76287f7c12d26ed21fb17675247e4a57528bcfaa23b7f  ./NOTICE
-13e785a7ac875b74bd91858de5bb235d755dba990abbc46993652f79b7ed5963  ./README.md
+1e4d7b22029b792aeef4924be795122e4a7cc464f14846641eca7d9bef08edb3  ./README.md
 042f20fbe29a6c8e5b26703a879dada8cc75db4eca3cea7e4dc2d64395e1bf12  ./corpus/MANIFEST.json
 b1f62a489b21caada5ab5f3f2b1404a340128e1370bd43bae9cb2399102037e0  ./corpus/PROVENANCE.md
 22f916b389d16e232941b29318a02be2671512dffa10dcdb9208dc224d409481  ./evidence/PROVENANCE.md
@@ -87,7 +87,7 @@ dc505059e2a12c72c95eec7373173b06d9c9061ad7ddebf7ec4a202469317775  ./fixtures/rou
 5282528e523745c9e5527ef8b11358420c45d838833a41032920ef5116da11d3  ./fixtures/route-surface/drift-unguarded-new-route/src/app/api/tenants/[id]/projects/route.ts
 092c2314968a8f907e7b2f6a0772ba75f722da1f7343d90e5822a909b7cdc90b  ./fixtures/served-behavior.engineering-blueprint.json
 220b688bc636c5b7f83653f3435b496b166c6d6496e27df4a7943f6b36868b80  ./scripts/checksums-gate-selftest.sh
-e306b3ea718078a40cd1d52020371687a497aea9d4fd2f37757f23d4a825c95a  ./scripts/launch-readiness-check.mjs
+61eaceada126099733d397453a90ea1d8ba80bf6283568514c57b402118eb885  ./scripts/launch-readiness-check.mjs
 8d3f82333854f15c547dd0a4e85f5c0981d3f0f75af49bd2113d70d2e5344cbf  ./scripts/launch-readiness-selftest.mjs
 252f6153ab171f0e4605436b3e99bf3ecb8125b8d927698053844fa0704a0d3e  ./transcripts/PROVENANCE.md
 058a1f9fc1bec5b5f7985f501191ab7e9b8bec2cdf54285f899ffc99aad96448  ./transcripts/behavioral-gate/green-30586345158/job-log-excerpt.txt

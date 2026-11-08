@@ -157,6 +157,8 @@ try {
   const { execFileSync } = await import('node:child_process');
   engineVersion = execFileSync('npm', ['view', ENGINE_PKG, 'version'], {
     encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+    // npm is npm.cmd on Windows, which execFileSync only finds through a shell.
+    shell: process.platform === 'win32',
   }).trim();
   probeOk = true;
   // 0.0.0 is the reservation stub, not the engine.

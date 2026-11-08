@@ -9,7 +9,7 @@ provenance header, and nothing verdict-bearing was removed.
 
 | Item | Reason class |
 |---|---|
-| The engine itself — schema, extractors, evaluator, gate, CLI, built bundles, tests | Open-core release-timing gate: the verifier publishes as its own repository following this preprint; shipping engine bytes here would bypass that decision. Available to reviewers on request. |
+| The engine itself — schema, extractors, evaluator, gate, CLI, built bundles, tests | It is its own public repository, [blueprint-conformance/bce](https://github.com/blueprint-conformance/bce) (npm `bce-engine`); this package carries the paper's evidence only. |
 | The steward/self-revision loop, fleet wiring, served-runtime probe, approval spine, attestation/signing, hosted surfaces | Closed surface per the open-core decision record — commercially closed, not required for any paper result. |
 | `fixtures/portfolio/` + `control-tower-ontology.engineering-blueprint.json` (from the source fixture tree) | Name real private repositories throughout; not referenced by the seeded corpus. |
 | `fixtures/gateway-refusals-synthetic.jsonl` | Belongs to the closed harvest surface. |
