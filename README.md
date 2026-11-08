@@ -27,7 +27,7 @@ built engine code.
 **Try the engine itself** (Node 22+), in any directory:
 
 ```bash
-npx --yes --package=bce-engine@0.6.1 -- bce demo --recipe module-layering   # one clean and one planted-drift fixture: GREEN, then RED
+npx --yes --package=bce-engine@0.6.2 -- bce demo --recipe module-layering   # one clean and one planted-drift fixture: GREEN, then RED
 ```
 
 ## Capability scope — what re-derives with this repo alone vs with the public engine
@@ -56,14 +56,14 @@ The paper's availability section names two commands in the private monorepo
 descendants live in the engine repository, pinned here to a released tag (Node 22+):
 
 ```bash
-git clone --depth 1 --branch v0.6.1 https://github.com/blueprint-conformance/bce.git && cd bce
+git clone --depth 1 --branch v0.6.2 https://github.com/blueprint-conformance/bce.git && cd bce
 npm ci
 npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-manifest.test.ts
 ```
 
 This re-executes the recall **protocol** over the public engine's genericized corpus, not a byte-identical
 replay of the paper's run: suite-v2 rows 1–25 map to the frozen corpus in `corpus/` here, and rows 26–35 postdate
-the paper. The engine's [`corpus/CORPUS-MAP.md`](https://github.com/blueprint-conformance/bce/blob/v0.6.1/corpus/CORPUS-MAP.md)
+the paper. The engine's [`corpus/CORPUS-MAP.md`](https://github.com/blueprint-conformance/bce/blob/v0.6.2/corpus/CORPUS-MAP.md)
 states exactly what is identical, what was genericized, and the claim the mapping supports.
 
 ## Layout
