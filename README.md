@@ -67,9 +67,13 @@ also works in Windows PowerShell 5.1, which has no `&&`:
 ```bash
 git clone --depth 1 --branch v0.6.2 https://github.com/blueprint-conformance/bce.git
 cd bce
-npm ci   # installs ~390 packages, then builds the engine via its `prepare` script
+npm ci
 npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-manifest.test.ts
 ```
+
+`npm ci` installs from the engine's lockfile, which locks 387 packages, 372 of them development-only. npm skips
+the platform-specific builds that do not match your machine, so the count it reports is lower. It then builds the
+engine through its `prepare` script.
 
 This re-executes the recall **protocol** over the public engine's genericized corpus, not a byte-identical
 replay of the paper's run: suite-v2 rows 1–25 map to the frozen corpus in `corpus/` here, and rows 26–35 postdate
