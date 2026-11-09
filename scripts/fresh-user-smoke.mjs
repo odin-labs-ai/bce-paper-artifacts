@@ -16,12 +16,20 @@
 // clone to the commit under test (a PR's head), so a PR is smoked against its own
 // docs and tree rather than against main. It is logged as a harness step.
 //
+// After the documented lines, the harness checks CHECKSUMS.txt in the fresh clone
+// (what `sha256sum -c CHECKSUMS.txt` does, in node so it runs the same on every OS).
+// verify/README.md tells a referee to run that check, and on Windows the clone is
+// made with core.autocrlf=true (the Git for Windows default; the workflow sets it,
+// and SMOKE_EXPECT_AUTOCRLF makes the harness fail if the clone does not have it),
+// so a line-ending rewrite of any pinned file fails the smoke.
+//
 //   node scripts/fresh-user-smoke.mjs --shell bash          (bash | zsh | pwsh | powershell | cmd)
 //   node scripts/fresh-user-smoke.mjs --list                print what would run, run nothing
 //
 // No install, no dependencies: node 18+ built-ins only.
 // =============================================================================
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -164,6 +172,41 @@ function show(output, all) {
   process.stdout.write(keep.map((l) => `    | ${l}`).join('\n') + '\n');
 }
 
+// --- the integrity manifest -------------------------------------------------
+
+/** `sha256sum -c CHECKSUMS.txt` in node: how many entries there are, and which do not match the file on disk. */
+export function checkManifest(dir) {
+  const text = readFileSync(join(dir, 'CHECKSUMS.txt'), 'utf8');
+  let total = 0;
+  const bad = [];
+  for (const line of text.split('\n')) {
+    if (line === '') continue;
+    const m = line.match(/^([a-f0-9]{64}) [ *](.+)$/);
+    if (!m) { bad.push(`unparseable line: ${JSON.stringify(line)}`); continue; }
+    total++;
+    let got = 'missing';
+    try { got = createHash('sha256').update(readFileSync(join(dir, m[2]))).digest('hex'); } catch { /* reported as a mismatch */ }
+    if (got !== m[1]) bad.push(m[2]);
+  }
+  return { total, bad };
+}
+
+/** The core.autocrlf git uses in `dir` (system, global, GIT_CONFIG_* env and local config merged), or '(unset)'. */
+export function autocrlfOf(dir) {
+  const r = spawnSync('git', ['-C', dir, 'config', '--get', 'core.autocrlf'], { encoding: 'utf8' });
+  return (r.stdout || '').trim() || '(unset)';
+}
+
+/** Fail unless the clone has the core.autocrlf the workflow asked for (SMOKE_EXPECT_AUTOCRLF), so the leg cannot quietly test LF only. */
+export function checkAutocrlf(dir, pass, fail) {
+  const want = process.env.SMOKE_EXPECT_AUTOCRLF;
+  const got = autocrlfOf(dir);
+  if (!want) { console.log(`  (harness) fresh clone has core.autocrlf=${got}`); return got; }
+  if (got === want) pass(`fresh clone has core.autocrlf=${got} (expected: ${want})`);
+  else fail(`fresh clone has core.autocrlf=${got}, the workflow expected ${want}`);
+  return got;
+}
+
 // --- main -------------------------------------------------------------------
 
 /** The directory a documented `git clone … URL [dir]` creates. */
@@ -215,6 +258,16 @@ function smoke(doc, shell) {
     }
     if (!/\b0 failures\b/.test(combined)) fail('no "0 failures" summary line in the output');
     show(combined, failures.length > before);
+
+    // The integrity check verify/README.md documents, on the clone exactly as checked out.
+    const dir = join(fresh, cloneDir(doc.commands[cloneAt]));
+    if (!existsSync(join(dir, 'CHECKSUMS.txt'))) fail('CHECKSUMS.txt is missing from the fresh clone');
+    else {
+      const crlf = checkAutocrlf(dir, pass, fail);
+      const m = checkManifest(dir);
+      if (m.total > 0 && m.bad.length === 0) pass(`CHECKSUMS.txt: ${m.total} OK / 0 FAILED in the fresh clone (core.autocrlf=${crlf})`);
+      else fail(`CHECKSUMS.txt: ${m.bad.length} of ${m.total} FAILED in the fresh clone (core.autocrlf=${crlf}): ${m.bad.slice(0, 5).join(', ')}${m.bad.length > 5 ? ', ...' : ''}`);
+    }
 
     if (doc.expect.skipCd) {
       const nodeLine = doc.commands.find((l) => /^\s*node\s/.test(l));

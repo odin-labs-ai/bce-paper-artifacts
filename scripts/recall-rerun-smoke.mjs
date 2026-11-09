@@ -17,7 +17,9 @@
 // directory outside the checkout; the only thing added between lines is an
 // exit-code check (scriptFor in fresh-user-smoke.mjs). No harness step is
 // inserted: the block clones a pinned tag of another repository, so the commit
-// under test here only changes which README text is run.
+// under test here only changes which README text is run. After the run the harness
+// checks the engine clone's core.autocrlf against SMOKE_EXPECT_AUTOCRLF (the Windows
+// legs clone with true, the Git for Windows default).
 //
 //   node scripts/recall-rerun-smoke.mjs --shell bash        (bash | zsh | pwsh | powershell | cmd)
 //   node scripts/recall-rerun-smoke.mjs --list              print what would run, run nothing
@@ -29,7 +31,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runLines } from './fresh-user-smoke.mjs';
+import { runLines, cloneDir, checkAutocrlf } from './fresh-user-smoke.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -101,6 +103,8 @@ function smoke(doc, shell) {
     const r = runLines(shell, doc.commands, fresh, scratch, 'recall');
     console.log(`  (${Math.round((Date.now() - t0) / 1000)}s)`);
     const out = norm(r.output);
+    const engineDir = join(fresh, cloneDir(doc.commands.find((l) => ENGINE_CLONE.test(l))));
+    checkAutocrlf(engineDir, pass, fail);
     if (r.status === doc.expect.exitCode) pass(`exit code ${r.status} (documented: ${doc.expect.exitCode})`);
     else fail(`exit code ${r.status}, documented ${doc.expect.exitCode}`);
     for (const s of doc.expect.output) {

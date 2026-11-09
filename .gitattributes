@@ -1,0 +1,18 @@
+# Every tracked file is pinned byte-for-byte in CHECKSUMS.txt, and a referee is told
+# to check it with `sha256sum -c` / `shasum -a 256 -c` / Get-FileHash. Git for
+# Windows installs with core.autocrlf=true, which would rewrite LF to CRLF in the
+# working tree and make every text entry FAIL (131 of 131 on a default clone of
+# f913f5c), which reads as tampering. These rules keep the working tree identical
+# to the committed bytes whatever core.autocrlf says.
+
+# Text files: stored LF, checked out LF on every OS.
+* text=auto eol=lf
+
+# Evidence, transcripts, the frozen corpus, fixtures and the manifest itself are
+# bytes, not text: never converted in either direction, so the hash of the file on
+# disk is the hash of the blob.
+evidence/** -text
+transcripts/** -text
+corpus/** -text
+fixtures/** -text
+CHECKSUMS.txt -text

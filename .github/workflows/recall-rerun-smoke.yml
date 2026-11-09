@@ -17,6 +17,7 @@ name: recall re-run smoke
 # Shells: the README says the block works in POSIX shells and in Windows
 # PowerShell 5.1, so Linux and macOS run it in bash, and Windows runs it in pwsh
 # and in Windows PowerShell 5.1 (separate legs, so they install in parallel).
+# The Windows legs clone with core.autocrlf=true, the Git for Windows default.
 # Node 22 is the minimum the README states for this block.
 #
 # Triggers: weekly (catches engine-tag, npm registry and runner-image drift that
@@ -54,8 +55,10 @@ jobs:
             shell: bash
           - os: windows-latest
             shell: pwsh
+            autocrlf: 'true'
           - os: windows-latest
             shell: powershell
+            autocrlf: 'true'
     steps:
       # Only the harness script and the README come from this checkout; the
       # commands under test run in a fresh directory, cloning the engine.
@@ -72,4 +75,10 @@ jobs:
         run: node scripts/recall-rerun-smoke.mjs --list
 
       - name: Run the documented recall re-run literally (${{ matrix.shell }})
+        env:
+          # Windows legs clone the way a default Git for Windows user does.
+          GIT_CONFIG_COUNT: ${{ matrix.autocrlf && '1' || '0' }}
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: ${{ matrix.autocrlf }}
+          SMOKE_EXPECT_AUTOCRLF: ${{ matrix.autocrlf }}
         run: node scripts/recall-rerun-smoke.mjs --shell ${{ matrix.shell }}
