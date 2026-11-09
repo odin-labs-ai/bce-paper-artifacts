@@ -15,6 +15,11 @@ name: fresh-user smoke
 # OS runs every one of those shells it has: bash (+ zsh on macOS), and on Windows
 # pwsh, Windows PowerShell 5.1, cmd and Git Bash.
 #
+# After the quickstart the harness runs the CHECKSUMS.txt check verify/README.md
+# documents, in the fresh clone. On Windows the clone is made with
+# core.autocrlf=true (the Git for Windows default, set here through GIT_CONFIG_*),
+# so the check runs on the bytes a default Windows user actually gets.
+#
 # On a PR the fresh clone is moved to the PR head (a logged harness step right
 # after the documented clone), so the PR's own docs and tree are what gets smoked.
 # Node 18 is the minimum the docs promise.
@@ -50,6 +55,10 @@ jobs:
             shells: bash,zsh
           - os: windows-latest
             shells: pwsh,powershell,cmd,bash
+            # Git for Windows installs with core.autocrlf=true. Clone the way a
+            # default Windows user does, so the CHECKSUMS.txt check sees CRLF
+            # rewrites if .gitattributes ever stops preventing them.
+            autocrlf: 'true'
     steps:
       # Only the harness script comes from this checkout; the commands under test
       # run in a separate fresh clone made by the documented `git clone` line.
@@ -68,4 +77,8 @@ jobs:
       - name: Run the documented quickstarts literally (${{ matrix.shells }})
         env:
           SMOKE_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GIT_CONFIG_COUNT: ${{ matrix.autocrlf && '1' || '0' }}
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: ${{ matrix.autocrlf }}
+          SMOKE_EXPECT_AUTOCRLF: ${{ matrix.autocrlf }}
         run: node scripts/fresh-user-smoke.mjs --shell ${{ matrix.shells }}

@@ -62,7 +62,9 @@ fleet records.
 The paper's availability section names two commands in the private monorepo
 (`pnpm --filter @odinlabs-ai/engineering-blueprint test recall-e2e-proof` and `… test corpus`). Their public
 descendants live in the engine repository, pinned here to a released tag (Node 22+). One command per line, so it
-also works in Windows PowerShell 5.1, which has no `&&`:
+also works in Windows PowerShell 5.1, which has no `&&`. If PowerShell says `npm.ps1 cannot be loaded because
+running scripts is disabled on this system` (the default policy on Windows 10/11), run
+`Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or type `npm.cmd` / `npx.cmd` instead of `npm` / `npx`:
 
 ```bash
 git clone --depth 1 --branch v0.6.2 https://github.com/blueprint-conformance/bce.git
