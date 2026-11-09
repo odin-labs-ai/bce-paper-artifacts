@@ -75,6 +75,8 @@ npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-
 the platform-specific builds that do not match your machine, so the count it reports is lower. It then builds the
 engine through its `prepare` script.
 
+Every line must exit 0, and vitest's summary line reads `Test Files 3 passed (3)`.
+
 This re-executes the recall **protocol** over the public engine's genericized corpus, not a byte-identical
 replay of the paper's run: suite-v2 rows 1–25 map to the frozen corpus in `corpus/` here, and rows 26–35 postdate
 the paper. The engine's [`corpus/CORPUS-MAP.md`](https://github.com/blueprint-conformance/bce/blob/v0.6.2/corpus/CORPUS-MAP.md)

@@ -130,7 +130,7 @@ export function scriptFor(shell, lines) {
   throw new Error(`unknown shell ${shell}`);
 }
 
-function shellCommand(shell, file) {
+export function shellCommand(shell, file) {
   switch (shell) {
     case 'bash': {
       // On Windows the bare `bash` on PATH can be WSL's launcher; the docs mean Git Bash.
@@ -145,7 +145,7 @@ function shellCommand(shell, file) {
   }
 }
 
-function runLines(shell, lines, cwd, scratch, tag) {
+export function runLines(shell, lines, cwd, scratch, tag) {
   const { ext, body } = scriptFor(shell, lines);
   const file = join(scratch, `${tag}${ext}`);
   writeFileSync(file, body);
