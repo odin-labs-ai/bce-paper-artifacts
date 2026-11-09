@@ -1,0 +1,75 @@
+name: recall re-run smoke
+
+# ==============================================================================
+# Run README.md's pinned recall re-run block ("Re-derivation commands", the block
+# that clones the engine repository at a release tag, runs `npm ci`, then the
+# recall/corpus vitest files) the way a reader would: in an empty directory
+# outside this checkout, on all three OSes.
+#
+# fresh-user-smoke.yml covers the verifier block above it. This one is separate
+# because it is heavy (~390 packages, an engine build, the test run) and depends
+# on npm and on another repository, so it is NOT a required check.
+#
+# The commands are NOT written in this file. scripts/recall-rerun-smoke.mjs reads
+# them out of the README's fenced block at run time, and reads the expected exit
+# code and vitest summary out of the sentence after it.
+#
+# Shells: the README says the block works in POSIX shells and in Windows
+# PowerShell 5.1, so Linux and macOS run it in bash, and Windows runs it in pwsh
+# and in Windows PowerShell 5.1 (separate legs, so they install in parallel).
+# Node 22 is the minimum the README states for this block.
+#
+# Triggers: weekly (catches engine-tag, npm registry and runner-image drift that
+# no commit here causes), on demand, and on PRs that touch the README or this
+# smoke, so a change to the block is run before it merges.
+# ==============================================================================
+
+on:
+  schedule:
+    - cron: '41 6 * * 1'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - README.md
+      - scripts/recall-rerun-smoke.mjs
+      - scripts/recall-rerun-smoke.test.mjs
+      - scripts/fresh-user-smoke.mjs
+      - .github/workflows/recall-rerun-smoke.yml
+
+permissions:
+  contents: read
+
+jobs:
+  recall:
+    name: recall re-run smoke (${{ matrix.os }}, ${{ matrix.shell }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            shell: bash
+          - os: macos-latest
+            shell: bash
+          - os: windows-latest
+            shell: pwsh
+          - os: windows-latest
+            shell: powershell
+    steps:
+      # Only the harness script and the README come from this checkout; the
+      # commands under test run in a fresh directory, cloning the engine.
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Docs-drift unit checks (extraction, pin, expectations)
+        run: node --test scripts/recall-rerun-smoke.test.mjs
+
+      - name: The commands as extracted from the README
+        run: node scripts/recall-rerun-smoke.mjs --list
+
+      - name: Run the documented recall re-run literally (${{ matrix.shell }})
+        run: node scripts/recall-rerun-smoke.mjs --shell ${{ matrix.shell }}
