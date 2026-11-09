@@ -33,7 +33,8 @@
  * Zero dependencies, matching verify/verify-chain.mjs.
  *
  * Exit codes:
- *   0 — private (inert), or public and every claim true.
+ *   0 — private (inert), or public and every claim true except those declared in
+ *       EXPECTED_PENDING (today: only the archival DOI, minted at the deposit).
  *   1 — public (or forced) and at least one claim false.
  *   2 — harness failure (a file this gate reasons about is missing).
  */
@@ -177,7 +178,19 @@ try {
 // published, and in EXCLUSIONS' own other rows. Matching the phrase alone would
 // red on sentences that are still correct — and a gate that cries wolf gets
 // ignored on the day it is right.
-const AVAILABILITY_DOCS = ['README.md', 'EXCLUSIONS.md'];
+//
+// verify/README.md is the page the project site's "Run the chain verifier" card
+// opens, and it said "public release planned" long after bce-engine shipped; the
+// SANITIZED proof said "at its public release". Exact paths, not globs: path.join
+// + existsSync do not expand 'evidence/*.md', and a glob entry would be skipped
+// silently. The evidence/ logs are historical, so only the one file that speaks
+// about the engine's availability is listed.
+const AVAILABILITY_DOCS = [
+  'README.md',
+  'EXCLUSIONS.md',
+  'verify/README.md',
+  'evidence/c-auth-02-teeth-derisk-proof.SANITIZED.md',
+];
 const availabilityHits = [];
 for (const rel of AVAILABILITY_DOCS) {
   const p = path.join(repoRoot, rel);
@@ -186,7 +199,9 @@ for (const rel of AVAILABILITY_DOCS) {
     const generic =
       /access-restricted registry/i.test(l) ||
       /not\*{0,2}\s*publicly available/i.test(l) ||
-      /on request until the open-core/i.test(l);
+      /on request until the open-core/i.test(l) ||
+      /release planned/i.test(l) ||
+      (/engine/i.test(l) && /at its public release/i.test(l));
     // engine-scoped: the row must name the engine AND defer availability
     const engineRow = /engine itself/i.test(l) && /on request/i.test(l);
     if (generic || engineRow) availabilityHits.push([`${rel}:${i + 1}`, l]);
@@ -216,12 +231,37 @@ if (enginePublished) {
   console.log(`  (engine-availability: not yet due — npm serves ${ENGINE_PKG} -> ${engineVersion}; ${availabilityHits.length} claim(s) will come due at publish)`);
 }
 
-const broken = claims.filter((c) => !c.ok);
+// ---------------------------------------------------------------------------
+// DECLARED, EXPECTED-PENDING claims.
+//
+// The repository is public, and exactly one claim is still FALSE by design: the
+// archival DOI is minted at the posting-day deposit (README "Status" line). A gate
+// that is red on every run for a known, documented reason is a gate nobody watches:
+// its last runs (to 2026-10-31) were all red for this one item, and nobody noticed
+// when GitHub then switched the workflow off ("disabled_inactivity").
+//
+// So the DOI is DECLARED here: it is still evaluated and still printed as FALSE,
+// but it does not fail the run. Any OTHER false claim still exits 1. When the DOI
+// lands the claim reads TRUE and the gate warns that this declaration is stale and
+// should be deleted. Keep this list to items the README itself names as pending.
+// ---------------------------------------------------------------------------
+const EXPECTED_PENDING = {
+  'citation/archival-doi':
+    'declared expected-pending: the Zenodo version DOI is minted at the posting-day deposit (README Status line)',
+};
+
+const broken = claims.filter((c) => !c.ok && !EXPECTED_PENDING[c.id]);
+const declared = claims.filter((c) => !c.ok && EXPECTED_PENDING[c.id]);
+const staleDeclarations = claims.filter((c) => c.ok && EXPECTED_PENDING[c.id]);
 const label = forced ? 'PUBLIC (forced — self-test)' : isPublic ? 'PUBLIC' : 'private';
 console.log(`launch-readiness: repository is ${label}\n`);
 for (const c of claims) {
   const mark = c.ok ? 'TRUE   ' : isPublic ? 'FALSE  ' : 'pending';
   console.log(`  ${mark} ${c.id.padEnd(28)} ${c.detail}`);
+  if (!c.ok && EXPECTED_PENDING[c.id]) console.log(`          ${''.padEnd(28)} (${EXPECTED_PENDING[c.id]})`);
+}
+for (const c of staleDeclarations) {
+  console.log(`\n::warning::launch-readiness: ${c.id} is now TRUE — delete its EXPECTED_PENDING entry in scripts/launch-readiness-check.mjs.`);
 }
 
 if (!isPublic) {
@@ -231,7 +271,11 @@ if (!isPublic) {
 }
 
 if (broken.length === 0) {
-  console.log(`\nlaunch-readiness: PASS — the repository is public and says nothing untrue about itself.`);
+  if (declared.length) {
+    console.log(`\nlaunch-readiness: PASS — the repository is public; ${declared.length} declared expected-pending item(s) outstanding: ${declared.map((c) => c.id).join(', ')}.`);
+  } else {
+    console.log(`\nlaunch-readiness: PASS — the repository is public and says nothing untrue about itself.`);
+  }
   process.exit(0);
 }
 
