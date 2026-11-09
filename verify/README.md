@@ -18,7 +18,9 @@ node verify/verify-chain.mjs --expect-records 35 --expect-chains 4 evidence/born
 ```
 
 Expected: the summary ends with `35 records in 4 chains, 0 standalone records` and `… checks, 0 failures`, exit
-code `0`. Run from the wrong directory and it says `not found: … (run from the repository root)` and exits `2`.
+code `0`. Skip the `cd` (run it from the directory you cloned into) and node itself cannot find the script: it
+says `Cannot find module … verify-chain.mjs` and exits `1`. Run from the repository root with a target path that
+does not exist and the verifier says `not found: … (run from the repository root)` and exits `2`.
 
 ## Run it
 
