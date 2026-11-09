@@ -7,7 +7,7 @@ name: recall re-run smoke
 # outside this checkout, on all three OSes.
 #
 # fresh-user-smoke.yml covers the verifier block above it. This one is separate
-# because it is heavy (~390 packages, an engine build, the test run) and depends
+# because it is heavy (~290 packages, an engine build, the test run) and depends
 # on npm and on another repository, so it is NOT a required check.
 #
 # The commands are NOT written in this file. scripts/recall-rerun-smoke.mjs reads

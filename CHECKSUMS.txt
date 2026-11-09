@@ -1,13 +1,13 @@
 ccbe355d1b27d47c26a26864b255640bbe3664e35fbbd067bdf6061a97f98c83  ./.github/workflows/checksums-gate.yml
 ca1fa16c7a5bef4a6a450b057f4032e07454255ffdddd2477d547af9e7a129cb  ./.github/workflows/fresh-user-smoke.yml
 ca1b4293f00a6405f7b73ffe7ef6ba6a5bf722abeefe4b1e498ad885157b5f87  ./.github/workflows/launch-readiness-gate.yml
-26f3ca55ba2f99e7b018600a962eb793ffe2fa38a00105f5e99adcc5be715010  ./.github/workflows/recall-rerun-smoke.yml
+53f6a58783203d80fafa27c0e1b06e879bc96a4ee5a19b3034a45cbffd701fca  ./.github/workflows/recall-rerun-smoke.yml
 54d36c9d27af9fa2406c3e68fe3e19d5baeb30d707167f8997bceebe229b4fbb  ./.github/workflows/verifier-tests.yml
 9fe8a920ced196c301809660702ab740438f66f49ca989e5a26a95dcf141731d  ./CITATION.cff
 b9d8284551d2a91d921f9a68f9512d36dee0cb227272bfb1691ac537e96b5702  ./EXCLUSIONS.md
 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  ./LICENSE
 2b0eff64f3367758e0b76287f7c12d26ed21fb17675247e4a57528bcfaa23b7f  ./NOTICE
-54541cc7db19271c5c828cf4725f44f50e4ba61d2f1be1770ec5a9db9bd2e696  ./README.md
+ae90230fbcbc988ca308d7e6be93ab14be2b7193e7ec6fdfd98771f116ac59db  ./README.md
 042f20fbe29a6c8e5b26703a879dada8cc75db4eca3cea7e4dc2d64395e1bf12  ./corpus/MANIFEST.json
 b1f62a489b21caada5ab5f3f2b1404a340128e1370bd43bae9cb2399102037e0  ./corpus/PROVENANCE.md
 3459d42cf692b70ffe37e85426d83b387e9afc80a8ce90a39ab9e4fa3b13ab37  ./evidence/PROVENANCE.md
@@ -94,7 +94,7 @@ ae2f4e7e532b7cd6a3e760d440b9813bfbeea6300fb8048b9ab78c6764952f77  ./scripts/fres
 c5785e6bcfe41566b3817a4e7453078480efb93ec3d6d5af194e7e3c7faae710  ./scripts/fresh-user-smoke.test.mjs
 3d1e7aa3f5dabb32b1cd863c68b054cdcc119cc023f74fc6ee3ecb656a51b0b3  ./scripts/launch-readiness-check.mjs
 e7be8fd9d41ac472c210e399ec2a10de8131fde357965df8be3f21e329ab908b  ./scripts/launch-readiness-selftest.mjs
-ab4a2a0a4a67a8d28b65ef70f0c92a2096d458772ad765883e85233648cbb544  ./scripts/recall-rerun-smoke.mjs
+da865664f0f2f4a087623f254bc400bca6290dde825f3e0fbcf4d7c263b59349  ./scripts/recall-rerun-smoke.mjs
 13932d64afdadbac8093c52fc27c327bea4e7e3a185e7b89f10571175e474a13  ./scripts/recall-rerun-smoke.test.mjs
 252f6153ab171f0e4605436b3e99bf3ecb8125b8d927698053844fa0704a0d3e  ./transcripts/PROVENANCE.md
 058a1f9fc1bec5b5f7985f501191ab7e9b8bec2cdf54285f899ffc99aad96448  ./transcripts/behavioral-gate/green-30586345158/job-log-excerpt.txt

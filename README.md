@@ -67,7 +67,7 @@ also works in Windows PowerShell 5.1, which has no `&&`:
 ```bash
 git clone --depth 1 --branch v0.6.2 https://github.com/blueprint-conformance/bce.git
 cd bce
-npm ci   # installs ~390 packages, then builds the engine via its `prepare` script
+npm ci   # installs ~290 packages, then builds the engine via its `prepare` script
 npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-manifest.test.ts
 ```
 

@@ -22,7 +22,7 @@
 //   node scripts/recall-rerun-smoke.mjs --shell bash        (bash | zsh | pwsh | powershell | cmd)
 //   node scripts/recall-rerun-smoke.mjs --list              print what would run, run nothing
 //
-// This is heavy (npm ci of ~390 packages + an engine build + the test run). It
+// This is heavy (npm ci of ~290 packages + an engine build + the test run). It
 // is meant for CI runners, not a laptop.
 // =============================================================================
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
