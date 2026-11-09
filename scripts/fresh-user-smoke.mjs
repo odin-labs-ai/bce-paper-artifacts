@@ -243,7 +243,12 @@ function smoke(doc, shell) {
       if (p === 0 && sha && status === 0) {
         const dir = join(fresh, cloneDir(doc.commands[cloneAt]));
         console.log(`  (harness) moving the fresh clone to the commit under test, ${sha}`);
-        for (const args of [['fetch', '--quiet', '--depth', '1', 'origin', sha], ['checkout', '--quiet', '--detach', 'FETCH_HEAD']]) {
+        // `checkout` only rewrites files that differ between the two commits, so files
+        // the documented clone already wrote keep main's line-ending handling. Dropping
+        // the index and resetting rewrites every file under the commit's own
+        // .gitattributes: the tree is then what a fresh clone of `sha` gives.
+        for (const args of [['fetch', '--quiet', '--depth', '1', 'origin', sha], ['checkout', '--quiet', '--detach', 'FETCH_HEAD'],
+          ['rm', '-r', '-q', '--cached', '.'], ['reset', '-q', '--hard', 'FETCH_HEAD']]) {
           const g = spawnSync('git', ['-C', dir, ...args], { stdio: 'inherit' });
           if (g.status !== 0) { fail(`harness: git ${args[0]} ${sha} failed`); return failures; }
         }

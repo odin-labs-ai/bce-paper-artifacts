@@ -91,7 +91,7 @@ dc505059e2a12c72c95eec7373173b06d9c9061ad7ddebf7ec4a202469317775  ./fixtures/rou
 5282528e523745c9e5527ef8b11358420c45d838833a41032920ef5116da11d3  ./fixtures/route-surface/drift-unguarded-new-route/src/app/api/tenants/[id]/projects/route.ts
 092c2314968a8f907e7b2f6a0772ba75f722da1f7343d90e5822a909b7cdc90b  ./fixtures/served-behavior.engineering-blueprint.json
 220b688bc636c5b7f83653f3435b496b166c6d6496e27df4a7943f6b36868b80  ./scripts/checksums-gate-selftest.sh
-89361cc22e0db003a21f382d5ba7f051678e1d63832f56b3daa12cf00bc93282  ./scripts/fresh-user-smoke.mjs
+d32b85d2b02b6a4527620d7a56ec23ae5e94ee5a4fc3085f5443b9b0e8fdf9af  ./scripts/fresh-user-smoke.mjs
 5c51331e67f1312194767f789a80131a2fc360630dcde4d8882186ffbb5a7bf6  ./scripts/fresh-user-smoke.test.mjs
 3d1e7aa3f5dabb32b1cd863c68b054cdcc119cc023f74fc6ee3ecb656a51b0b3  ./scripts/launch-readiness-check.mjs
 e7be8fd9d41ac472c210e399ec2a10de8131fde357965df8be3f21e329ab908b  ./scripts/launch-readiness-selftest.mjs
