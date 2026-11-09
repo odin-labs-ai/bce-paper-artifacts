@@ -10,7 +10,8 @@ gate runs, sample hash-chained evidence records, and a zero-dependency chain ver
 
 **Status**: public, released alongside the preprint. An archival deposit (Zenodo, version DOI) is minted at
 the posting-day deposit; until that deposit lands, `CITATION.cff` carries no resolvable archival DOI and
-this repository's own launch-readiness gate reports that one outstanding item by design.
+this repository's own launch-readiness gate lists that one item as declared, expected-pending (it still prints
+it, and fails on any other false claim).
 
 ---
 
@@ -44,20 +45,29 @@ npx --yes --package=bce-engine@0.6.2 -- bce demo --recipe module-layering   # on
 
 ## Re-derivation commands
 
-Publicly runnable **today** (node ≥ 18, no install):
+Publicly runnable **today** (Node 18+, git, no install). Run the commands one per line; this works in bash, zsh,
+Git Bash, cmd and Windows PowerShell alike (the block has no comments and no `&&`, so every line pastes as-is):
 
 ```bash
-node verify/verify-chain.mjs evidence/born-public        # 35 records, 4 chains — must exit 0
-node verify/verify-chain.mjs evidence/production-samples # 4 fleet records — content hashes must verify
+git clone --depth 1 https://github.com/odin-labs-ai/bce-paper-artifacts.git
+cd bce-paper-artifacts
+node verify/verify-chain.mjs --expect-records 35 --expect-chains 4 evidence/born-public
+node verify/verify-chain.mjs evidence/production-samples
 ```
+
+Both verifier commands must exit 0. The first checks the counts itself: it exits 1 unless exactly 35 records in
+4 chains verify, and it prints `35 records in 4 chains` on the summary line. The second content-verifies the 4
+fleet records.
 
 The paper's availability section names two commands in the private monorepo
 (`pnpm --filter @odinlabs-ai/engineering-blueprint test recall-e2e-proof` and `… test corpus`). Their public
-descendants live in the engine repository, pinned here to a released tag (Node 22+):
+descendants live in the engine repository, pinned here to a released tag (Node 22+). One command per line, so it
+also works in Windows PowerShell 5.1, which has no `&&`:
 
 ```bash
-git clone --depth 1 --branch v0.6.2 https://github.com/blueprint-conformance/bce.git && cd bce
-npm ci
+git clone --depth 1 --branch v0.6.2 https://github.com/blueprint-conformance/bce.git
+cd bce
+npm ci   # installs ~390 packages, then builds the engine via its `prepare` script
 npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-manifest.test.ts
 ```
 

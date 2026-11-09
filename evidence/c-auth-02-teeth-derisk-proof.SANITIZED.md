@@ -42,4 +42,4 @@ Contrast — the current live toothless blueprint (`[project blueprint file with
 
 *Corpus note: the seeded corpus in this repository carries this exact defect shape as `rg-missing-tenant-guard`
 (`route-surface/drift-missing-guard`, constraint `d6-tenant-guard`, expected severity `critical`) — the unit-shape
-reproduction of the 75-violation finding above, runnable against the engine at its public release.*
+reproduction of the 75-violation finding above, runnable against the public engine (npm `bce-engine`; its v0.6.2 corpus carries the same `rg-missing-tenant-guard` row).*

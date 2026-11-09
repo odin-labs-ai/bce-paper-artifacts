@@ -1,0 +1,49 @@
+name: verifier-tests
+
+# ==============================================================================
+# Negative controls for verify/verify-chain.mjs, the command the README tells a
+# referee to run ("35 records, 4 chains — must exit 0").
+#
+# The verifier used to exit 0 on a chain with records cut off the end, on an empty
+# chain file and on a directory with no records at all ("0 checks, 0 failures").
+# verify/verify-chain.test.mjs proves each of those, plus a reordered chain, now
+# exits non-zero, and that the real evidence still exits 0 with the stated counts.
+#
+# No install: node:test only. Runs on the oldest Node the README promises (18) and
+# the current LTS (22). No schedule trigger, so GitHub's inactivity rule cannot
+# switch it off.
+# ==============================================================================
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    name: verify-chain negative controls (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Negative controls (truncated, empty, wrong dir, reordered must all exit non-zero)
+        run: node --test verify/verify-chain.test.mjs
+
+      - name: The README's command, with the counts it states
+        run: node verify/verify-chain.mjs --expect-records 35 --expect-chains 4 evidence/born-public
+
+      - name: Everything at once
+        run: node verify/verify-chain.mjs evidence

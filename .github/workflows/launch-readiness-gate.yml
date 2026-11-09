@@ -41,10 +41,13 @@ on:
   pull_request:
   push:
     branches: [main]
-  schedule:
-    # Daily. The flip is a repo-settings change that fires no workflow at all, so
-    # polling is the only way this gate learns the repository went public.
-    - cron: '41 7 * * *'
+  # No `schedule:` any more. It existed to notice the visibility flip (a settings
+  # change fires no workflow), and the flip has happened. Worse, it is what got
+  # this gate switched off: GitHub disables a scheduled workflow after 60 days
+  # without repository activity ("disabled_inactivity"), and a disabled workflow
+  # stops running on push and pull_request too, so from 2026-10-31 the gate guarded
+  # nothing while the README still cited it. Push + pull_request + manual dispatch
+  # cover every change to the claims this gate reads.
   workflow_dispatch:
 
 permissions:

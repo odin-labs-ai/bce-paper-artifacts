@@ -4,10 +4,11 @@
  *
  * Requires ONLY node (>= 18). No npm install, no engine, no network.
  *
- * Usage:
+ * Usage (from the repository root):
  *   node verify/verify-chain.mjs evidence/born-public
+ *   node verify/verify-chain.mjs --expect-records 35 --expect-chains 4 evidence/born-public
  *   node verify/verify-chain.mjs evidence/production-samples
- *   node verify/verify-chain.mjs <file.chain.jsonl | record.json | directory> [...more]
+ *   node verify/verify-chain.mjs [--expect-records N] [--expect-chains M] <file.chain.jsonl | record.json | directory> [...more]
  *
  * What it checks (mirrors the engine's canonicalization exactly):
  *   1. RECORD INTEGRITY — for every record: strip `id` + `hash`, canonicalize the body
@@ -19,14 +20,32 @@
  *   3. STANDALONE RECORDS — a single *.json record is verified for RECORD INTEGRITY; if its
  *      previousHash is non-genesis and the predecessor is not in scope, the link is reported
  *      as LINK-UNVERIFIED (predecessor-not-shipped) — stated, never silently passed.
+ *   4. CHAIN MANIFEST — when <name>.chain.jsonl sits beside <name>.chain-manifest.json, the
+ *      chain length must equal the manifest length and record[i].id must equal
+ *      manifest[i].recordId. Hashes and links alone cannot see records cut off the END of a
+ *      chain (every surviving record still re-hashes and links). A manifest whose chain is
+ *      missing is a failure too.
+ *   5. NON-EMPTY — an empty chain file fails, and a run that verified nothing (0 checks, e.g.
+ *      a wrong directory) fails. "0 checks, 0 failures" is not a pass.
+ *   6. EXPECTED COUNTS — --expect-records N / --expect-chains M fail the run unless exactly N
+ *      chained records in M chains were verified. The manifests are not authenticated, so a
+ *      pinned count is the stronger check against a chain truncated together with its manifest.
  *
- * Exit code: 0 = every content hash verified and every chain linked; 1 = any failure.
+ * Scope: tamper-evidence is relative to the committed bytes (CHECKSUMS.txt / the git commit
+ * SHA). The hashes are self-derived, so someone who edits a record AND recomputes every hash
+ * after it (and the manifest) is not caught by this script alone; pin the commit and check
+ * CHECKSUMS.txt for that.
+ *
+ * Exit code: 0 = every check passed; 1 = any failure (including "nothing verified");
+ * 2 = usage error, or a path that does not exist (run from the repository root).
  */
 import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 const GENESIS = '0'.repeat(64);
+const CHAIN_SUFFIX = '.chain.jsonl';
+const MANIFEST_SUFFIX = '.chain-manifest.json';
 
 function sha256(s) {
   return createHash('sha256').update(s).digest('hex');
@@ -58,6 +77,9 @@ function verifyRecordIntegrity(rec) {
 
 let failures = 0;
 let checked = 0;
+let chainCount = 0;
+let chainRecords = 0;
+let standaloneCount = 0;
 
 function report(ok, label, detail) {
   checked += 1;
@@ -69,24 +91,80 @@ function report(ok, label, detail) {
   }
 }
 
+/** Compare a chain's record ids, in order, with its sibling <name>.chain-manifest.json. */
+function checkChainManifest(file, ids) {
+  const manifestFile = file.slice(0, -CHAIN_SUFFIX.length) + MANIFEST_SUFFIX;
+  if (!fs.existsSync(manifestFile)) return;
+  const name = path.basename(manifestFile);
+  let manifest;
+  try {
+    manifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+  } catch (e) {
+    report(false, `manifest ${name}`, `not valid JSON: ${e.message}`);
+    return;
+  }
+  if (!Array.isArray(manifest)) {
+    report(false, `manifest ${name}`, 'expected a JSON array of {index, recordId, ...}');
+    return;
+  }
+  const lenOk = manifest.length === ids.length;
+  report(
+    lenOk,
+    'manifest length',
+    lenOk ? `${ids.length} records, as listed in ${name}` : `chain has ${ids.length} records, ${name} lists ${manifest.length}`
+  );
+  const mismatches = [];
+  for (let i = 0; i < Math.max(manifest.length, ids.length); i++) {
+    const want = manifest[i]?.recordId;
+    if (want !== ids[i]) mismatches.push(`[${i}] chain ${ids[i] ?? '(missing)'} != manifest ${want ?? '(missing)'}`);
+  }
+  report(
+    mismatches.length === 0,
+    'manifest record ids, in order',
+    mismatches.length
+      ? `${mismatches.length} mismatch(es): ${mismatches.slice(0, 3).join('; ')}${mismatches.length > 3 ? '; …' : ''}`
+      : undefined
+  );
+}
+
 function verifyChainFile(file) {
   console.log(`chain: ${file}`);
+  chainCount += 1;
   const lines = fs.readFileSync(file, 'utf8').split('\n').filter((l) => l.trim().length > 0);
+  if (lines.length === 0) {
+    report(false, 'chain non-empty', 'chain file has 0 records');
+    checkChainManifest(file, []);
+    return;
+  }
+  const ids = [];
   let prev = GENESIS;
+  let anchored = false;
   lines.forEach((line, i) => {
-    const rec = JSON.parse(line);
+    let rec;
+    try {
+      rec = JSON.parse(line);
+    } catch (e) {
+      report(false, `[${i}] parse`, `not valid JSON: ${e.message}`);
+      ids.push(undefined);
+      prev = undefined;
+      return;
+    }
+    chainRecords += 1;
+    ids.push(rec.id);
     const integrity = verifyRecordIntegrity(rec);
     report(integrity === null, `[${i}] ${rec.id ?? '(no id)'} integrity`, integrity ?? undefined);
     const linked = rec.previousHash === prev;
     report(linked, `[${i}] link`, linked ? undefined : `previousHash ${rec.previousHash} != prior hash ${prev}`);
+    if (i === 0) anchored = linked;
     prev = rec.hash;
   });
-  console.log(`  chain length ${lines.length}, anchored at genesis sentinel`);
+  console.log(`  chain length ${lines.length}, ${anchored ? 'anchored at genesis sentinel' : 'NOT anchored at the genesis sentinel'}`);
+  checkChainManifest(file, ids);
 }
 
-function verifyStandaloneRecord(file) {
+function verifyStandaloneRecord(file, rec) {
   console.log(`record: ${file}`);
-  const rec = JSON.parse(fs.readFileSync(file, 'utf8'));
+  standaloneCount += 1;
   const integrity = verifyRecordIntegrity(rec);
   report(integrity === null, `${rec.id ?? path.basename(file)} integrity`, integrity ?? undefined);
   if (rec.previousHash === GENESIS) {
@@ -106,23 +184,73 @@ function walk(target) {
     for (const entry of fs.readdirSync(target).sort()) walk(path.join(target, entry));
     return;
   }
-  if (target.endsWith('.chain.jsonl')) return verifyChainFile(target);
-  if (target.endsWith('.json') && !target.endsWith('-manifest.json')) {
-    try {
-      const obj = JSON.parse(fs.readFileSync(target, 'utf8'));
-      if (looksLikeEvidenceRecord(obj)) return verifyStandaloneRecord(target);
-    } catch {
-      /* not a record — skip */
+  if (target.endsWith(CHAIN_SUFFIX)) return verifyChainFile(target);
+  if (target.endsWith(MANIFEST_SUFFIX)) {
+    // A manifest is checked from its chain. A manifest whose chain is gone is a failure.
+    const chainFile = target.slice(0, -MANIFEST_SUFFIX.length) + CHAIN_SUFFIX;
+    if (!fs.existsSync(chainFile)) {
+      console.log(`manifest: ${target}`);
+      report(false, 'chain present', `${path.basename(target)} lists a chain, but ${path.basename(chainFile)} is missing`);
     }
+    return;
+  }
+  if (target.endsWith('.json') && !target.endsWith('-manifest.json')) {
+    let obj;
+    try {
+      obj = JSON.parse(fs.readFileSync(target, 'utf8'));
+    } catch {
+      return; /* not JSON — not a record, skip */
+    }
+    if (looksLikeEvidenceRecord(obj)) verifyStandaloneRecord(target, obj);
   }
 }
 
-const targets = process.argv.slice(2);
+const USAGE =
+  'usage: node verify/verify-chain.mjs [--expect-records N] [--expect-chains M] <chain.jsonl | record.json | directory> [...more]';
+const targets = [];
+const expect = {};
+const argv = process.argv.slice(2);
+for (let i = 0; i < argv.length; i++) {
+  const a = argv[i];
+  const m = /^--expect-(records|chains)(?:=(.*))?$/.exec(a);
+  if (m) {
+    const raw = m[2] ?? argv[++i];
+    if (raw === undefined || !/^\d+$/.test(raw)) {
+      console.error(`${m[0].split('=')[0]} needs a non-negative integer\n${USAGE}`);
+      process.exit(2);
+    }
+    expect[m[1]] = Number(raw);
+  } else if (a.startsWith('--')) {
+    console.error(`unknown option ${a}\n${USAGE}`);
+    process.exit(2);
+  } else {
+    targets.push(a);
+  }
+}
 if (targets.length === 0) {
-  console.error('usage: node verify/verify-chain.mjs <chain.jsonl | record.json | directory> [...more]');
-  process.exit(1);
+  console.error(USAGE);
+  process.exit(2);
+}
+for (const t of targets) {
+  if (!fs.existsSync(t)) {
+    console.error(`not found: ${t} (run from the repository root, e.g. node verify/verify-chain.mjs evidence/born-public)`);
+    process.exit(2);
+  }
 }
 for (const t of targets) walk(t);
 
-console.log(`\n${checked} checks, ${failures} failures`);
+console.log('');
+if (checked === 0) {
+  failures += 1;
+  console.error(`  FAIL  nothing verified — no *.chain.jsonl or evidence record found under: ${targets.join(', ')}`);
+}
+if (expect.records !== undefined) {
+  report(chainRecords === expect.records, 'expected record count', `${chainRecords} chained record(s) verified, expected ${expect.records}`);
+}
+if (expect.chains !== undefined) {
+  report(chainCount === expect.chains, 'expected chain count', `${chainCount} chain(s) verified, expected ${expect.chains}`);
+}
+
+console.log(`${chainRecords} records in ${chainCount} chains, ${standaloneCount} standalone records`);
+console.log(`${checked} checks, ${failures} failures`);
 process.exit(failures === 0 ? 0 : 1);

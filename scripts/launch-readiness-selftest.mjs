@@ -60,9 +60,18 @@ const CASES = [
   },
   {
     id: 'docs/engine-availability', file: 'README.md',
-    strip: /access-restricted registry|not\*{0,2}\s*publicly available|on request until the open-core|engine itself.*on request/i,
-    also: ['EXCLUSIONS.md'],
+    strip: /access-restricted registry|not\*{0,2}\s*publicly available|on request until the open-core|engine itself.*on request|release planned|engine.*at its public release/i,
+    also: ['EXCLUSIONS.md', 'verify/README.md', 'evidence/c-auth-02-teeth-derisk-proof.SANITIZED.md'],
     add: '\nThe engine is **not** publicly available today.\n',
+    env: { ENGINE_PKG_OVERRIDE: 'typescript' },
+  },
+  {
+    // The verifier page the site card opens. Proves the doc set really includes it
+    // and the "release planned" pattern fires (a typo'd path is skipped silently).
+    id: 'docs/engine-availability', file: 'verify/README.md',
+    strip: /access-restricted registry|not\*{0,2}\s*publicly available|on request until the open-core|engine itself.*on request|release planned|engine.*at its public release/i,
+    also: ['README.md', 'EXCLUSIONS.md', 'evidence/c-auth-02-teeth-derisk-proof.SANITIZED.md'],
+    add: '\nfull re-execution requires the engine package (public release planned).\n',
     env: { ENGINE_PKG_OVERRIDE: 'typescript' },
   },
 ];
@@ -136,6 +145,31 @@ for (const c of CASES) {
   }
   console.log(`  OK    ${c.id} — quiet when stripped, fired on the plant`);
   discriminating++;
+}
+
+// EXPECTED_PENDING must not become a hole. With every other claim made TRUE and
+// only the declared DOI outstanding, forced-public must exit 0 and still print the
+// DOI as FALSE. Plant ONE undeclared false claim beside it and it must exit 1.
+{
+  const dir = path.join(tmpBase, 'declared_pending');
+  cpSync(clean, dir, { recursive: true });
+  const stripAll = /access-restricted registry|not\*{0,2}\s*publicly available|on request until the open-core|engine itself.*on request|release planned|engine.*at its public release|late\s+Oct(ober)?\.?\s*2026|\*\*Status\*\*:\s*private/i;
+  for (const rel of ['README.md', 'EXCLUSIONS.md', 'verify/README.md', 'evidence/c-auth-02-teeth-derisk-proof.SANITIZED.md']) {
+    stripLines(path.join(dir, rel), stripAll);
+  }
+  const env = { ENGINE_PKG_OVERRIDE: 'typescript' };
+  const only = runIn(dir, env);
+  const okOnly = only.code === 0 && brokenIn(only.out, 'citation/archival-doi');
+  writeFileSync(path.join(dir, 'README.md'), readFileSync(path.join(dir, 'README.md'), 'utf8') + CASES[0].add);
+  const plus = runIn(dir, env);
+  const okPlus = plus.code === 1 && brokenIn(plus.out, 'readme/status-private');
+  if (okOnly && okPlus) {
+    console.log('  OK    expected-pending — DOI alone: exit 0 (still printed FALSE); DOI + an undeclared claim: exit 1');
+  } else {
+    console.log(`  FAIL  expected-pending — DOI alone exited ${only.code} (want 0, DOI printed FALSE); with an undeclared claim exited ${plus.code} (want 1)`);
+    console.log(only.out.split('\n').slice(0, 20).map((l) => `          ${l}`).join('\n'));
+    failures++;
+  }
 }
 
 console.log(`\n${discriminating} of ${CASES.length} case(s) fully discriminating.`);
