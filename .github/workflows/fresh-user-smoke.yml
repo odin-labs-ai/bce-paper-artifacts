@@ -1,0 +1,71 @@
+name: fresh-user smoke
+
+# ==============================================================================
+# Run the quickstarts in README.md ("Re-derivation commands") and verify/README.md
+# ("Quickstart") the way a new reader would: in an empty directory outside this
+# checkout, with the documented `git clone`, `cd` and `node verify/...` lines,
+# in the shells the docs say they work in, on all three OSes.
+#
+# The commands are NOT written in this file. scripts/fresh-user-smoke.mjs reads
+# them out of the docs' fenced blocks at run time, and reads the expected exit
+# code and record/chain counts out of the prose beside them. Edit the README and
+# this job runs the edited text; stop stating a checkable expectation and it fails.
+#
+# The docs claim "bash, zsh, Git Bash, cmd and Windows PowerShell alike", so each
+# OS runs every one of those shells it has: bash (+ zsh on macOS), and on Windows
+# pwsh, Windows PowerShell 5.1, cmd and Git Bash.
+#
+# On a PR the fresh clone is moved to the PR head (a logged harness step right
+# after the documented clone), so the PR's own docs and tree are what gets smoked.
+# Node 18 is the minimum the docs promise.
+#
+# The weekly schedule catches drift that no commit here causes (runner images,
+# git, GitHub). It is a smoke, not a required gate; GitHub disables schedules on
+# inactive repos, which is fine for this purpose.
+# ==============================================================================
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: fresh-user smoke (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            shells: bash
+          - os: macos-latest
+            shells: bash,zsh
+          - os: windows-latest
+            shells: pwsh,powershell,cmd,bash
+    steps:
+      # Only the harness script comes from this checkout; the commands under test
+      # run in a separate fresh clone made by the documented `git clone` line.
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Docs-drift unit checks (extraction, no &&, no comments)
+        run: node --test scripts/fresh-user-smoke.test.mjs
+
+      - name: The commands as extracted from the docs
+        run: node scripts/fresh-user-smoke.mjs --list
+
+      - name: Run the documented quickstarts literally (${{ matrix.shells }})
+        env:
+          SMOKE_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/fresh-user-smoke.mjs --shell ${{ matrix.shells }}

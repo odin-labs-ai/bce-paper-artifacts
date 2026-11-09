@@ -1,4 +1,5 @@
 ccbe355d1b27d47c26a26864b255640bbe3664e35fbbd067bdf6061a97f98c83  ./.github/workflows/checksums-gate.yml
+ca1fa16c7a5bef4a6a450b057f4032e07454255ffdddd2477d547af9e7a129cb  ./.github/workflows/fresh-user-smoke.yml
 ca1b4293f00a6405f7b73ffe7ef6ba6a5bf722abeefe4b1e498ad885157b5f87  ./.github/workflows/launch-readiness-gate.yml
 54d36c9d27af9fa2406c3e68fe3e19d5baeb30d707167f8997bceebe229b4fbb  ./.github/workflows/verifier-tests.yml
 9fe8a920ced196c301809660702ab740438f66f49ca989e5a26a95dcf141731d  ./CITATION.cff
@@ -88,6 +89,8 @@ dc505059e2a12c72c95eec7373173b06d9c9061ad7ddebf7ec4a202469317775  ./fixtures/rou
 5282528e523745c9e5527ef8b11358420c45d838833a41032920ef5116da11d3  ./fixtures/route-surface/drift-unguarded-new-route/src/app/api/tenants/[id]/projects/route.ts
 092c2314968a8f907e7b2f6a0772ba75f722da1f7343d90e5822a909b7cdc90b  ./fixtures/served-behavior.engineering-blueprint.json
 220b688bc636c5b7f83653f3435b496b166c6d6496e27df4a7943f6b36868b80  ./scripts/checksums-gate-selftest.sh
+0abc6cf246f7cec13b6ac215bfb4663b838c84f18043cd49c4c24abbfffd7352  ./scripts/fresh-user-smoke.mjs
+c5785e6bcfe41566b3817a4e7453078480efb93ec3d6d5af194e7e3c7faae710  ./scripts/fresh-user-smoke.test.mjs
 3d1e7aa3f5dabb32b1cd863c68b054cdcc119cc023f74fc6ee3ecb656a51b0b3  ./scripts/launch-readiness-check.mjs
 e7be8fd9d41ac472c210e399ec2a10de8131fde357965df8be3f21e329ab908b  ./scripts/launch-readiness-selftest.mjs
 252f6153ab171f0e4605436b3e99bf3ecb8125b8d927698053844fa0704a0d3e  ./transcripts/PROVENANCE.md
@@ -120,6 +123,6 @@ f74d62d3186465a9bad59c4d4ea7745ec32231becd2ea0fe4a9d62d45524f41a  ./transcripts/
 2c3da71cd23c71946925f14ae687cb782cf6c7a1b922716cb7a8ae00f558ed61  ./transcripts/portfolio-sweep/run-30722371060/run.json
 61533f876e85673fa13e175db3250b26a5a5140d6519bcfacac5f4c6938f167a  ./transcripts/recall-e2e/pr345-ci-engineering-blueprint-test-block.txt
 e4b3a02d42d3f4e7e1da8827773cc6693288abab9b40fc4455ee08e97df73b17  ./transcripts/recall-e2e/run.json
-30c4b449c24ca59d2d9213725be99cd5f18d3ac53cf25af4fae726a17089f358  ./verify/README.md
+e6227a98e964007d44b00ded365b392408e9699fc07a9182e42f08d9256efede  ./verify/README.md
 caa6cbbc808db05d93b6b59bddff4d85eea82579edb53e9317d566f245584f33  ./verify/verify-chain.mjs
 7720e7c50686e87783a2c71859cb45976ab9b8e25a210ee73f65b5400f225b7a  ./verify/verify-chain.test.mjs
