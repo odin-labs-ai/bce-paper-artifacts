@@ -46,17 +46,18 @@ npx --yes --package=bce-engine@0.6.2 -- bce demo --recipe module-layering   # on
 ## Re-derivation commands
 
 Publicly runnable **today** (Node 18+, git, no install). Run the commands one per line; this works in bash, zsh,
-Git Bash, cmd and Windows PowerShell alike:
+Git Bash, cmd and Windows PowerShell alike (the block has no comments and no `&&`, so every line pastes as-is):
 
 ```bash
 git clone --depth 1 https://github.com/odin-labs-ai/bce-paper-artifacts.git
 cd bce-paper-artifacts
-node verify/verify-chain.mjs --expect-records 35 --expect-chains 4 evidence/born-public   # must exit 0
-node verify/verify-chain.mjs evidence/production-samples # 4 fleet records — content hashes must verify
+node verify/verify-chain.mjs --expect-records 35 --expect-chains 4 evidence/born-public
+node verify/verify-chain.mjs evidence/production-samples
 ```
 
-The first verifier command checks the counts itself: it exits 1 unless exactly 35 records in 4 chains verify,
-and it prints `35 records in 4 chains` on the summary line.
+Both verifier commands must exit 0. The first checks the counts itself: it exits 1 unless exactly 35 records in
+4 chains verify, and it prints `35 records in 4 chains` on the summary line. The second content-verifies the 4
+fleet records.
 
 The paper's availability section names two commands in the private monorepo
 (`pnpm --filter @odinlabs-ai/engineering-blueprint test recall-e2e-proof` and `… test corpus`). Their public

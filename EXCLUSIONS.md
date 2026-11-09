@@ -59,6 +59,11 @@ Zero-tolerance classes (tenant/person names, production hosts/IPs, credential pa
 exemptions**; org-internal-flavor classes were grepped over the non-transcript zone with the §3 disclosures as
 the only allowed hits. The recorded audit transcript follows (also the gate for every future re-push):
 
+> The transcript is the verbatim 2026-08-02 record and is not rewritten. Its H6 line (`74 checks, 0 failures`)
+> reflects the verifier at that date. The verifier has since gained chain-manifest length and record-id-order
+> checks, so `node verify/verify-chain.mjs evidence` over the same, unchanged evidence bytes now prints
+> `35 records in 4 chains, 4 standalone records` and `82 checks, 0 failures`.
+
 ```
 LEAK AUDIT — bce-paper-artifacts — 2026-08-02T20:04:43Z
 tree: 118 files. All greps use grep -a (binary-safe).

@@ -42,8 +42,10 @@ a `score` and re-run — this is why the artifact's redaction rule is whole-reco
 
 The tamper-evidence is relative to the committed bytes. The hashes are self-derived, so someone who edits a record
 and then recomputes every hash after it (and the manifest) produces a chain this script accepts. Pin the commit SHA
-and check `CHECKSUMS.txt` (`shasum -a 256 -c CHECKSUMS.txt`) to rule that out; `--expect-records` additionally
-pins the record count.
+and check `CHECKSUMS.txt` to rule that out: `shasum -a 256 -c CHECKSUMS.txt` (macOS, Linux) or
+`sha256sum -c CHECKSUMS.txt` (Linux, Git Bash on Windows). Windows PowerShell and cmd have no `-c` checker; use
+Git Bash there, or in PowerShell compare each line against `(Get-FileHash -Algorithm SHA256 <path>).Hash`
+(case-insensitive). `--expect-records` additionally pins the record count.
 
 ## What each mode verifies
 
