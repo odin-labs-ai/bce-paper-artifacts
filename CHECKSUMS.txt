@@ -1,5 +1,6 @@
 c96893ae9c5309e5aaa5359b1515b3069e19611e0539b510557b6d176204ec98  ./.gitattributes
 ccbe355d1b27d47c26a26864b255640bbe3664e35fbbd067bdf6061a97f98c83  ./.github/workflows/checksums-gate.yml
+1b6d4a60ee08f09c31391fce22ce9e3c5a6c4886ddd30e3401f6f5dc57316908  ./.github/workflows/engine-version-freshness.yml
 1d00be34ffe41ad25734d3878e08311af02eb2b016f6ab7d7c1dfcb904958717  ./.github/workflows/fresh-user-smoke.yml
 ca1b4293f00a6405f7b73ffe7ef6ba6a5bf722abeefe4b1e498ad885157b5f87  ./.github/workflows/launch-readiness-gate.yml
 af7211973a06e30b39612a55b5f1d0cfe3eb342b6246167db81224aae092399e  ./.github/workflows/recall-rerun-smoke.yml
@@ -91,6 +92,8 @@ dc505059e2a12c72c95eec7373173b06d9c9061ad7ddebf7ec4a202469317775  ./fixtures/rou
 5282528e523745c9e5527ef8b11358420c45d838833a41032920ef5116da11d3  ./fixtures/route-surface/drift-unguarded-new-route/src/app/api/tenants/[id]/projects/route.ts
 092c2314968a8f907e7b2f6a0772ba75f722da1f7343d90e5822a909b7cdc90b  ./fixtures/served-behavior.engineering-blueprint.json
 220b688bc636c5b7f83653f3435b496b166c6d6496e27df4a7943f6b36868b80  ./scripts/checksums-gate-selftest.sh
+f151fccee5c415c673afea4df9f823767656994bcbdb0bdc15f42f0040b8ea3f  ./scripts/engine-version-freshness.mjs
+92b2fbed8503c1a76ee19326b7305073c23e074ee2d8fd51705c6e96627674d0  ./scripts/engine-version-freshness.test.mjs
 d32b85d2b02b6a4527620d7a56ec23ae5e94ee5a4fc3085f5443b9b0e8fdf9af  ./scripts/fresh-user-smoke.mjs
 5c51331e67f1312194767f789a80131a2fc360630dcde4d8882186ffbb5a7bf6  ./scripts/fresh-user-smoke.test.mjs
 3d1e7aa3f5dabb32b1cd863c68b054cdcc119cc023f74fc6ee3ecb656a51b0b3  ./scripts/launch-readiness-check.mjs

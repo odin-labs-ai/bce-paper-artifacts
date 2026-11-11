@@ -1,0 +1,49 @@
+name: engine version freshness
+
+# ==============================================================================
+# README.md tells a reader which bce-engine to use in three places: the
+# `npx --package=bce-engine@X` demo command, the `git clone --branch vX` line of
+# the pinned recall re-run, and the CORPUS-MAP link at tag vX. All three must
+# name the release bce activated: bce main's .engine-pin.json "pin". When npm
+# latest for bce-engine differs from that pin, bce is mid-release and the run
+# passes with a notice. See scripts/engine-version-freshness.mjs.
+#
+# When bce activated 0.6.3 the README said 0.6.2 for a day (fixed in #8).
+#
+# Not a required gate. Daily, because the engine moves without a commit here;
+# by hand; and on a PR that touches the README or this check. Dated, historical
+# mentions (evidence/*.SANITIZED.md and the rest of evidence/) are not read.
+# No install, no token: public data over HTTPS only.
+# ==============================================================================
+
+on:
+  schedule:
+    - cron: '41 7 * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - README.md
+      - scripts/engine-version-freshness.mjs
+      - scripts/engine-version-freshness.test.mjs
+      - .github/workflows/engine-version-freshness.yml
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    name: README names the activated bce-engine
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Negative controls (a lagging README fails, a matching one passes)
+        run: node --test scripts/engine-version-freshness.test.mjs
+
+      - name: The README's engine version against bce's activated pin
+        run: node scripts/engine-version-freshness.mjs
