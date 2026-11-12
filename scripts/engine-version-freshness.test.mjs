@@ -1,15 +1,15 @@
 // Offline checks for scripts/engine-version-freshness.mjs: a README that lags the
 // activated engine fails naming the file, the version found and the version
-// expected; a matching one passes; a mid-release engine passes with a notice; the
-// historical mentions are never judged. No network: the pin and npm answers below
-// are recorded shapes.
+// expected; a matching one passes; mid-release accepts either answer and nothing
+// older; a network answer is retried once; the historical mentions are never
+// judged. No network: the pin and npm answers below are recorded shapes.
 //   node --test scripts/engine-version-freshness.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { freshnessProblems, NPM_LATEST_URL, PIN_URL, PLACES, readPlaces, run } from './engine-version-freshness.mjs';
+import { freshnessProblems, getJson, NPM_LATEST_URL, PIN_URL, PLACES, readPlaces, run } from './engine-version-freshness.mjs';
 
 // The README's three reader-facing places, plus the lineage paragraph's old
 // versions, which must never be judged.
@@ -75,10 +75,26 @@ test('one lagging place out of three is enough to fail', async () => {
   assert.doesNotMatch(r.err, /demo command|CORPUS-MAP/);
 });
 
-test('mid-release (npm latest differs from the pin) passes with a notice, even over a lagging README', async () => {
+test('mid-release (npm latest differs from the pin) passes with a notice when the README states either answer', async () => {
+  for (const v of ['0.6.3', '0.6.4']) {
+    const r = await check(readme(v), { pin: '0.6.4', latest: '0.6.3' });
+    assert.equal(r.code, 0, r.err);
+    assert.match(r.out, /::notice .*mid-release: main pins 0\.6\.4, npm latest is 0\.6\.3/);
+  }
+});
+
+test('mid-release never hides a README that lags both the pin and npm latest', async () => {
   const r = await check(readme('0.6.2'), { pin: '0.6.4', latest: '0.6.3' });
-  assert.equal(r.code, 0);
-  assert.match(r.out, /::notice .*mid-release: main pins 0\.6\.4, npm latest is 0\.6\.3/);
+  assert.equal(r.code, 1);
+  assert.match(r.err, /demo command .*: found 0\.6\.2, expected 0\.6\.4 or 0\.6\.3/);
+  assert.match(r.err, /engine clone line .*: found 0\.6\.2, expected 0\.6\.4 or 0\.6\.3/);
+  assert.match(r.err, /CORPUS-MAP link .*: found 0\.6\.2, expected 0\.6\.4 or 0\.6\.3/);
+});
+
+test('mid-release never hides a place the check can no longer find', async () => {
+  const r = await check(readme('0.6.4').replace(/^npx .*$/m, 'npx bce demo'), { pin: '0.6.4', latest: '0.6.3' });
+  assert.equal(r.code, 1);
+  assert.match(r.err, /demo command .*: no bce-engine version found/);
 });
 
 test('a place the check can no longer find fails instead of passing on nothing', async () => {
@@ -99,4 +115,16 @@ test('the real README states exactly one engine version at each place, and it is
   assert.equal(found.length, PLACES.length);
   for (const { where, versions } of found) assert.equal(versions.length, 1, `${where}: ${versions}`);
   assert.equal(new Set(found.flatMap((f) => f.versions)).size, 1, JSON.stringify(found));
+});
+
+test('a network answer that fails once is retried once; failing twice still fails loudly, naming both tries', async () => {
+  let calls = 0;
+  const flaky = async () => (++calls === 1 ? { ok: false, status: 503, json: async () => ({}) } : { ok: true, status: 200, json: async () => ({ pin: '0.6.4' }) });
+  assert.deepEqual(await getJson(flaky, PIN_URL, 0), { pin: '0.6.4' });
+  assert.equal(calls, 2);
+  calls = 0;
+  const down = async () => { calls++; throw new Error('ECONNRESET'); };
+  await assert.rejects(getJson(down, PIN_URL, 0), /ECONNRESET \(and on the first try: ECONNRESET\)/);
+  assert.equal(calls, 2);
+  await assert.rejects(run({ root: '.', fetchImpl: down, retryMs: 0, out: () => {}, err: () => {} }), /ECONNRESET/);
 });
