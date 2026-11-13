@@ -33,15 +33,15 @@ import { fileURLToPath } from 'node:url';
 
 export const PIN_URL = 'https://raw.githubusercontent.com/blueprint-conformance/bce/main/.engine-pin.json';
 export const NPM_LATEST_URL = 'https://registry.npmjs.org/bce-engine/latest';
-const SEMVER = '[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?';
+const SEMVER = '[0-9]+[.][0-9]+[.][0-9]+(?:-[0-9A-Za-z.-]+)?';
 const IS_SEMVER = new RegExp(`^${SEMVER}$`);
 
 // The places a reader reads the version to use. Each must yield at least one
 // version, and every version found must be an accepted one.
 export const PLACES = [
   { file: 'README.md', where: 'demo command (npx --package=bce-engine@X)', pattern: new RegExp(`npx --yes --package=bce-engine@(${SEMVER}) -- bce demo`, 'g') },
-  { file: 'README.md', where: 'engine clone line (git clone --branch vX)', pattern: new RegExp(`git clone [^\n]*--branch v(${SEMVER}) https://github\.com/blueprint-conformance/bce\.git`, 'g') },
-  { file: 'README.md', where: 'CORPUS-MAP link (bce/blob/vX)', pattern: new RegExp(`https://github\.com/blueprint-conformance/bce/blob/v(${SEMVER})/corpus/CORPUS-MAP\.md`, 'g') },
+  { file: 'README.md', where: 'engine clone line (git clone --branch vX)', pattern: new RegExp(`git clone [^\n]*--branch v(${SEMVER}) https://github[.]com/blueprint-conformance/bce[.]git`, 'g') },
+  { file: 'README.md', where: 'CORPUS-MAP link (bce/blob/vX)', pattern: new RegExp(`https://github[.]com/blueprint-conformance/bce/blob/v(${SEMVER})/corpus/CORPUS-MAP[.]md`, 'g') },
 ];
 
 /** Every version each place states: [{ file, where, versions }]. `read(file)` returns the file's text. */

@@ -128,3 +128,9 @@ test('a network answer that fails once is retried once; failing twice still fail
   assert.equal(calls, 2);
   await assert.rejects(run({ root: '.', fetchImpl: down, retryMs: 0, out: () => {}, err: () => {} }), /ECONNRESET/);
 });
+
+test('a version is digits and dots: a look-alike such as 0a6b4 is not read as a version', async () => {
+  const r = await check(readme('0.6.4').replace('bce-engine@0.6.4', 'bce-engine@0a6b4'), { pin: '0.6.4', latest: '0.6.4' });
+  assert.equal(r.code, 1);
+  assert.match(r.err, /demo command .*: no bce-engine version found/);
+});
