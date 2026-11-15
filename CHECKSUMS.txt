@@ -1,5 +1,6 @@
 c96893ae9c5309e5aaa5359b1515b3069e19611e0539b510557b6d176204ec98  ./.gitattributes
 ccbe355d1b27d47c26a26864b255640bbe3664e35fbbd067bdf6061a97f98c83  ./.github/workflows/checksums-gate.yml
+626ef3db9f7b405d6b791de34ea06a834ae15ace1756e4d3d5e2eec7c8d165dd  ./.github/workflows/engine-version-freshness.yml
 1d00be34ffe41ad25734d3878e08311af02eb2b016f6ab7d7c1dfcb904958717  ./.github/workflows/fresh-user-smoke.yml
 ca1b4293f00a6405f7b73ffe7ef6ba6a5bf722abeefe4b1e498ad885157b5f87  ./.github/workflows/launch-readiness-gate.yml
 af7211973a06e30b39612a55b5f1d0cfe3eb342b6246167db81224aae092399e  ./.github/workflows/recall-rerun-smoke.yml
@@ -8,7 +9,7 @@ af7211973a06e30b39612a55b5f1d0cfe3eb342b6246167db81224aae092399e  ./.github/work
 b9d8284551d2a91d921f9a68f9512d36dee0cb227272bfb1691ac537e96b5702  ./EXCLUSIONS.md
 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  ./LICENSE
 2b0eff64f3367758e0b76287f7c12d26ed21fb17675247e4a57528bcfaa23b7f  ./NOTICE
-7009e793d6ddb92ed5b11de7a7721093d42d58ce325f2fd81dac37ad8d86774e  ./README.md
+2ee2f3bae784eb56faa0312985e862dac5004d6ae9122a8c5d918585f1f1f5bf  ./README.md
 042f20fbe29a6c8e5b26703a879dada8cc75db4eca3cea7e4dc2d64395e1bf12  ./corpus/MANIFEST.json
 b1f62a489b21caada5ab5f3f2b1404a340128e1370bd43bae9cb2399102037e0  ./corpus/PROVENANCE.md
 3459d42cf692b70ffe37e85426d83b387e9afc80a8ce90a39ab9e4fa3b13ab37  ./evidence/PROVENANCE.md
@@ -91,6 +92,8 @@ dc505059e2a12c72c95eec7373173b06d9c9061ad7ddebf7ec4a202469317775  ./fixtures/rou
 5282528e523745c9e5527ef8b11358420c45d838833a41032920ef5116da11d3  ./fixtures/route-surface/drift-unguarded-new-route/src/app/api/tenants/[id]/projects/route.ts
 092c2314968a8f907e7b2f6a0772ba75f722da1f7343d90e5822a909b7cdc90b  ./fixtures/served-behavior.engineering-blueprint.json
 220b688bc636c5b7f83653f3435b496b166c6d6496e27df4a7943f6b36868b80  ./scripts/checksums-gate-selftest.sh
+66fa6ac14130aad0fe97759d777e42c7793575e7c38b838729db87eb64142f5a  ./scripts/engine-version-freshness.mjs
+2329d4be4e194d3554c7c59632fb15d4ec2a2c5ad21e8ef1a4bc59c33e6d42a8  ./scripts/engine-version-freshness.test.mjs
 d32b85d2b02b6a4527620d7a56ec23ae5e94ee5a4fc3085f5443b9b0e8fdf9af  ./scripts/fresh-user-smoke.mjs
 5c51331e67f1312194767f789a80131a2fc360630dcde4d8882186ffbb5a7bf6  ./scripts/fresh-user-smoke.test.mjs
 3d1e7aa3f5dabb32b1cd863c68b054cdcc119cc023f74fc6ee3ecb656a51b0b3  ./scripts/launch-readiness-check.mjs

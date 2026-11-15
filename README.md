@@ -28,7 +28,7 @@ built engine code.
 **Try the engine itself** (Node 22+), in any directory:
 
 ```bash
-npx --yes --package=bce-engine@0.6.3 -- bce demo --recipe module-layering   # one clean and one planted-drift fixture: GREEN, then RED
+npx --yes --package=bce-engine@0.6.4 -- bce demo --recipe module-layering   # one clean and one planted-drift fixture: GREEN, then RED
 ```
 
 ## Capability scope — what re-derives with this repo alone vs with the public engine
@@ -67,13 +67,13 @@ running scripts is disabled on this system` (the default policy on Windows 10/11
 `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or type `npm.cmd` / `npx.cmd` instead of `npm` / `npx`:
 
 ```bash
-git clone --depth 1 --branch v0.6.3 https://github.com/blueprint-conformance/bce.git
+git clone --depth 1 --branch v0.6.4 https://github.com/blueprint-conformance/bce.git
 cd bce
 npm ci
 npx vitest run tests/recall-e2e-proof.test.ts tests/corpus.test.ts tests/corpus-manifest.test.ts
 ```
 
-`npm ci` installs from the engine's lockfile, which locks 391 packages, 376 of them development-only. npm skips
+`npm ci` installs from the engine's lockfile, which locks 388 packages, 373 of them development-only. npm skips
 the platform-specific builds that do not match your machine, so the count it reports is lower. It then builds the
 engine through its `prepare` script.
 
@@ -81,7 +81,7 @@ Every line must exit 0, and vitest's summary line reads `Test Files 3 passed (3)
 
 This re-executes the recall **protocol** over the public engine's genericized corpus, not a byte-identical
 replay of the paper's run: suite-v2 rows 1–25 map to the frozen corpus in `corpus/` here, and rows 26–35 postdate
-the paper. The engine's [`corpus/CORPUS-MAP.md`](https://github.com/blueprint-conformance/bce/blob/v0.6.3/corpus/CORPUS-MAP.md)
+the paper. The engine's [`corpus/CORPUS-MAP.md`](https://github.com/blueprint-conformance/bce/blob/v0.6.4/corpus/CORPUS-MAP.md)
 states exactly what is identical, what was genericized, and the claim the mapping supports.
 
 ## Layout
